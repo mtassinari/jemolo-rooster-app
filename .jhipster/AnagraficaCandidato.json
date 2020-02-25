@@ -1,0 +1,172 @@
+{
+    "name": "AnagraficaCandidato",
+    "fields": [
+        {
+            "fieldName": "cognome",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "nome",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "luogoNascita",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "dataNascita",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "codiceFiscale",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "pattern"
+            ],
+            "fieldValidateRulesPattern": "^[a-zA-Z]{6}[0-9]{2}[abcdehlmprstABCDEHLMPRST]{1}[0-9]{2}([a-zA-Z]{1}[0-9]{3})[a-zA-Z]{1}$"
+        },
+        {
+            "fieldName": "professione",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "partitaIva",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "unique",
+                "pattern"
+            ],
+            "fieldValidateRulesPattern": "^[0-9]{11}$"
+        },
+        {
+            "fieldName": "numeroTelefonoFisso",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "numeroTelefonoCellulare",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "eMail",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "unique",
+                "pattern"
+            ],
+            "fieldValidateRulesPattern": "^[A-z0-9.+_-]+@[A-z0-9._-]+.[A-z]{2,6}$"
+        },
+        {
+            "fieldName": "indirizzoPec",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "unique",
+                "pattern"
+            ],
+            "fieldValidateRulesPattern": "^[A-z0-9.+_-]+@[A-z0-9._-]+.[A-z]{2,6}$"
+        },
+        {
+            "fieldName": "indirizzoResidenza",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "capResidenza",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "comuneResidenza",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "provinciaResidenza",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "note",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "candidato",
+            "otherEntityRelationshipName": "anagraficaCandidato",
+            "relationshipValidateRules": "required",
+            "relationshipName": "candidato",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "competenzeLng",
+            "otherEntityRelationshipName": "anagrafica",
+            "relationshipName": "competenzeLng"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "titoloStudio",
+            "otherEntityRelationshipName": "anagrafica",
+            "relationshipName": "titoloStudio"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "curriculum",
+            "otherEntityRelationshipName": "anagrafica",
+            "relationshipName": "curriculum"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "competenza",
+            "otherEntityRelationshipName": "anagrafica",
+            "relationshipName": "competenza"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "dichiarazioniObligatorie",
+            "otherEntityRelationshipName": "anagrafica",
+            "relationshipName": "dichiarazioni"
+        }
+    ],
+    "changelogDate": "20200211120900",
+    "javadoc": "Entity AnagraficaCandidato\\n@author Marco Tassinari",
+    "entityTableName": "anagrafica_candidato",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

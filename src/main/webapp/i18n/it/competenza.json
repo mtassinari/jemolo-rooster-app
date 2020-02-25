@@ -1,0 +1,24 @@
+{
+  "jemoloRoosterApp": {
+    "competenza": {
+      "home": {
+        "title": "Competenzas",
+        "createLabel": "Genera un nuovo Competenza",
+        "createOrEditLabel": "Genera o modifica un Competenza",
+        "notFound": "No Competenzas found"
+      },
+      "created": "&Egrave; stato generato un nuovo Competenza con identificatore {{ param }}",
+      "updated": "&Egrave; stato aggiornato Competenza identificato da {{ param }}",
+      "deleted": "&Egrave; stato eliminato Competenza con identificatore {{ param }}",
+      "delete": {
+        "question": "Sei sicuro di volere eliminare Competenza {{ id }}?"
+      },
+      "detail": {
+        "title": "Competenza"
+      },
+      "anni": "Anni",
+      "anagrafica": "Anagrafica",
+      "ambitoComp": "Ambito Comp"
+    }
+  }
+}

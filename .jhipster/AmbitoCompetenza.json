@@ -1,0 +1,48 @@
+{
+    "name": "AmbitoCompetenza",
+    "fields": [
+        {
+            "fieldName": "descrizione",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "tipo",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "competenza",
+            "otherEntityRelationshipName": "ambitoComp",
+            "relationshipName": "competenza"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "ambitoCompetenza",
+            "otherEntityRelationshipName": "ambito",
+            "relationshipName": "sottoambito"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "ambitoCompetenza",
+            "otherEntityRelationshipName": "sottoambito",
+            "relationshipName": "ambito",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200211121300",
+    "javadoc": "Entity AreaCompetenza\\n@author Marco Tassinari",
+    "entityTableName": "ambito_competenza",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

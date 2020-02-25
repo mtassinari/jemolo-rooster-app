@@ -1,0 +1,107 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="jemoloRoosterApp.anagraficaCandidato.home.title">Anagrafica Candidatoes</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-anagrafica-candidato" [routerLink]="['/anagrafica-candidato/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="jemoloRoosterApp.anagraficaCandidato.home.createLabel">
+            Create a new Anagrafica Candidato
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="anagraficaCandidatoes?.length === 0">
+        <span jhiTranslate="jemoloRoosterApp.anagraficaCandidato.home.notFound">No anagraficaCandidatoes found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="anagraficaCandidatoes?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="cognome"><span jhiTranslate="jemoloRoosterApp.anagraficaCandidato.cognome">Cognome</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="nome"><span jhiTranslate="jemoloRoosterApp.anagraficaCandidato.nome">Nome</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="luogoNascita"><span jhiTranslate="jemoloRoosterApp.anagraficaCandidato.luogoNascita">Luogo Nascita</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="dataNascita"><span jhiTranslate="jemoloRoosterApp.anagraficaCandidato.dataNascita">Data Nascita</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="codiceFiscale"><span jhiTranslate="jemoloRoosterApp.anagraficaCandidato.codiceFiscale">Codice Fiscale</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="professione"><span jhiTranslate="jemoloRoosterApp.anagraficaCandidato.professione">Professione</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="partitaIva"><span jhiTranslate="jemoloRoosterApp.anagraficaCandidato.partitaIva">Partita Iva</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="numeroTelefonoFisso"><span jhiTranslate="jemoloRoosterApp.anagraficaCandidato.numeroTelefonoFisso">Numero Telefono Fisso</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="numeroTelefonoCellulare"><span jhiTranslate="jemoloRoosterApp.anagraficaCandidato.numeroTelefonoCellulare">Numero Telefono Cellulare</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="eMail"><span jhiTranslate="jemoloRoosterApp.anagraficaCandidato.eMail">E Mail</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="indirizzoPec"><span jhiTranslate="jemoloRoosterApp.anagraficaCandidato.indirizzoPec">Indirizzo Pec</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="indirizzoResidenza"><span jhiTranslate="jemoloRoosterApp.anagraficaCandidato.indirizzoResidenza">Indirizzo Residenza</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="capResidenza"><span jhiTranslate="jemoloRoosterApp.anagraficaCandidato.capResidenza">Cap Residenza</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="comuneResidenza"><span jhiTranslate="jemoloRoosterApp.anagraficaCandidato.comuneResidenza">Comune Residenza</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="provinciaResidenza"><span jhiTranslate="jemoloRoosterApp.anagraficaCandidato.provinciaResidenza">Provincia Residenza</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="note"><span jhiTranslate="jemoloRoosterApp.anagraficaCandidato.note">Note</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="candidatoId"><span jhiTranslate="jemoloRoosterApp.anagraficaCandidato.candidato">Candidato</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let anagraficaCandidato of anagraficaCandidatoes ;trackBy: trackId">
+                    <td><a [routerLink]="['/anagrafica-candidato', anagraficaCandidato.id, 'view']">{{ anagraficaCandidato.id }}</a></td>
+                    <td>{{ anagraficaCandidato.cognome }}</td>
+                    <td>{{ anagraficaCandidato.nome }}</td>
+                    <td>{{ anagraficaCandidato.luogoNascita }}</td>
+                    <td>{{ anagraficaCandidato.dataNascita | date:'mediumDate' }}</td>
+                    <td>{{ anagraficaCandidato.codiceFiscale }}</td>
+                    <td>{{ anagraficaCandidato.professione }}</td>
+                    <td>{{ anagraficaCandidato.partitaIva }}</td>
+                    <td>{{ anagraficaCandidato.numeroTelefonoFisso }}</td>
+                    <td>{{ anagraficaCandidato.numeroTelefonoCellulare }}</td>
+                    <td>{{ anagraficaCandidato.eMail }}</td>
+                    <td>{{ anagraficaCandidato.indirizzoPec }}</td>
+                    <td>{{ anagraficaCandidato.indirizzoResidenza }}</td>
+                    <td>{{ anagraficaCandidato.capResidenza }}</td>
+                    <td>{{ anagraficaCandidato.comuneResidenza }}</td>
+                    <td>{{ anagraficaCandidato.provinciaResidenza }}</td>
+                    <td>{{ anagraficaCandidato.note }}</td>
+                    <td>
+                        <div *ngIf="anagraficaCandidato.candidatoId">
+                            <a [routerLink]="['/candidato', anagraficaCandidato.candidatoId , 'view']" >{{ anagraficaCandidato.candidatoId }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/anagrafica-candidato', anagraficaCandidato.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/anagrafica-candidato', anagraficaCandidato.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(anagraficaCandidato)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="anagraficaCandidatoes?.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

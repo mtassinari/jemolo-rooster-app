@@ -1,0 +1,167 @@
+// entity definitions here
+/**
+ * Entity Candidato
+ * @author Marco Tassinari
+ */
+entity Candidato { 
+    nome String required
+    cognome String required
+    codiceFiscale String required pattern(/^[a-zA-Z]{6}[0-9]{2}[abcdehlmprstABCDEHLMPRST]{1}[0-9]{2}([a-zA-Z]{1}[0-9]{3})[a-zA-Z]{1}$/)
+    eMail String required unique pattern(/^[A-z0-9.+_-]+@[A-z0-9._-]+.[A-z]{2,6}$/)
+ }
+
+/**
+ * Entity AnagraficaCandidato
+ * @author Marco Tassinari
+ */
+entity AnagraficaCandidato {
+	cognome String required
+    nome String required
+    luogoNascita String required
+    dataNascita LocalDate required
+    codiceFiscale String required pattern(/^[a-zA-Z]{6}[0-9]{2}[abcdehlmprstABCDEHLMPRST]{1}[0-9]{2}([a-zA-Z]{1}[0-9]{3})[a-zA-Z]{1}$/)
+    professione String required
+    partitaIva String unique pattern(/^[0-9]{11}$/)
+    numeroTelefonoFisso String
+    numeroTelefonoCellulare String required
+    eMail String required unique pattern(/^[A-z0-9.+_-]+@[A-z0-9._-]+.[A-z]{2,6}$/)
+    indirizzoPec String unique pattern(/^[A-z0-9.+_-]+@[A-z0-9._-]+.[A-z]{2,6}$/)
+    indirizzoResidenza String required
+    capResidenza String required
+    comuneResidenza String required
+    provinciaResidenza String required
+    note String	
+}
+
+/**
+* Entity Curriculum
+* @author Marco Tassinari
+*/
+entity Curriculum {
+	cv String required
+    size Long required
+    urlAllegato String required
+    mimeType String
+    note String
+}
+
+/**
+* Entity Allegato
+* @author Marco Tassinari
+*/
+entity Allegato {
+	data Blob required
+}
+
+/**
+ * Entity Competenza
+ * @author Marco Tassinari
+ */
+entity Competenza { 
+    anni Integer required
+}
+
+/**
+ * Entity AreaCompetenza
+ * @author Marco Tassinari
+ */
+entity AmbitoCompetenza {
+	descrizione String required
+    tipo String
+}
+
+/**
+ * Entity TitoloStudio
+ * @author Marco Tassinari
+ */
+entity TitoloStudio {
+  tipologia String required
+  descrizione String required
+  conseguimento String required
+  anno String required
+  voto String required
+}
+/**
+ * Entity StatoRegistrazione
+ * @author Marco Tassinari
+ */
+entity StatoRegistrazione {
+	stato String unique required
+}
+/**
+ * Entity CompetenzeLinguistiche
+ * @author Marco Tassinari
+ */
+entity CompetenzeLng {
+	livello Integer required
+}
+
+entity Lingua {
+	lingua String required
+}
+
+entity DichiarazioniObligatorie {
+	stato Boolean required
+    dichiarazione String required
+}
+
+entity Dichiarazioni {
+	descrizione String required
+}
+
+dto Candidato, Competenza, AmbitoCompetenza, AnagraficaCandidato, TitoloStudio, Curriculum, CompetenzeLng, Lingua, 
+StatoRegistrazione, Allegato, Dichiarazioni, DichiarazioniObligatorie with mapstruct
+paginate Candidato, AnagraficaCandidato, CompetenzeLng, Competenza, Curriculum with pagination
+service DichiarazioniObligatorie, Dichiarazioni, Candidato, Competenza, AnagraficaCandidato, 
+TitoloStudio, Curriculum with serviceImpl
+
+relationship OneToMany {
+    Lingua{competenzeLinguistiche} to CompetenzeLng{lingua required} 
+}
+
+relationship OneToMany {
+	AnagraficaCandidato{competenzeLng} to CompetenzeLng{anagrafica required}
+}
+
+relationship OneToMany {
+	StatoRegistrazione to Candidato
+}
+
+relationship OneToMany {
+    AnagraficaCandidato{titoloStudio} to TitoloStudio{anagrafica required}
+}
+
+relationship OneToMany {
+    AnagraficaCandidato{curriculum} to Curriculum{anagrafica required}
+}
+
+relationship OneToOne {
+	AnagraficaCandidato{candidato required } to 
+    Candidato{anagraficaCandidato}
+}
+
+relationship OneToMany {
+    AnagraficaCandidato{competenza} to Competenza{anagrafica required}
+}
+
+relationship OneToMany {
+	AmbitoCompetenza{competenza} to
+	Competenza{ambitoComp required}
+}
+
+relationship OneToMany {
+	AmbitoCompetenza{sottoambito} to 
+    AmbitoCompetenza{ambito}
+}
+
+relationship OneToOne {
+    Curriculum{attach required} to Allegato{curriculum(id) required}
+}
+
+relationship OneToMany {
+	AnagraficaCandidato{dichiarazioni} to DichiarazioniObligatorie{anagrafica required}
+}
+
+relationship OneToMany {
+	Dichiarazioni to DichiarazioniObligatorie{dichiarazioni required}
+}

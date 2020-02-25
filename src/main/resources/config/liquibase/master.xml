@@ -14,6 +14,26 @@
     <property name="uuidType" value="uuid" dbms="h2, postgresql"/>
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200211120800_added_entity_Candidato.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200211120900_added_entity_AnagraficaCandidato.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200211121000_added_entity_Curriculum.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200211121100_added_entity_Allegato.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200211121200_added_entity_Competenza.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200211121300_added_entity_AmbitoCompetenza.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200211121400_added_entity_TitoloStudio.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200211121500_added_entity_StatoRegistrazione.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200211121600_added_entity_CompetenzeLng.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200211121700_added_entity_Lingua.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200211121800_added_entity_DichiarazioniObligatorie.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200212071400_added_entity_Dichiarazioni.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20200211120800_added_entity_constraints_Candidato.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200211120900_added_entity_constraints_AnagraficaCandidato.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200211121000_added_entity_constraints_Curriculum.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200211121200_added_entity_constraints_Competenza.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200211121300_added_entity_constraints_AmbitoCompetenza.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200211121400_added_entity_constraints_TitoloStudio.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200211121600_added_entity_constraints_CompetenzeLng.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200211121800_added_entity_constraints_DichiarazioniObligatorie.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

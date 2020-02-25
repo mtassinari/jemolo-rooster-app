@@ -1,0 +1,30 @@
+{
+    "name": "Lingua",
+    "fields": [
+        {
+            "fieldName": "lingua",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "competenzeLng",
+            "otherEntityRelationshipName": "lingua",
+            "relationshipName": "competenzeLinguistiche"
+        }
+    ],
+    "changelogDate": "20200211121700",
+    "entityTableName": "lingua",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

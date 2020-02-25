@@ -1,0 +1,24 @@
+{
+  "jemoloRoosterApp": {
+    "competenzeLng": {
+      "home": {
+        "title": "CompetenzeLngs",
+        "createLabel": "Genera un nuovo Competenze Lng",
+        "createOrEditLabel": "Genera o modifica un Competenze Lng",
+        "notFound": "No Competenze Lngs found"
+      },
+      "created": "&Egrave; stato generato un nuovo Competenze Lng con identificatore {{ param }}",
+      "updated": "&Egrave; stato aggiornato Competenze Lng identificato da {{ param }}",
+      "deleted": "&Egrave; stato eliminato Competenze Lng con identificatore {{ param }}",
+      "delete": {
+        "question": "Sei sicuro di volere eliminare Competenze Lng {{ id }}?"
+      },
+      "detail": {
+        "title": "Competenze Lng"
+      },
+      "livello": "Livello",
+      "lingua": "Lingua",
+      "anagrafica": "Anagrafica"
+    }
+  }
+}

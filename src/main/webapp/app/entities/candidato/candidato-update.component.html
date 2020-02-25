@@ -1,0 +1,90 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-candidato-heading" jhiTranslate="jemoloRoosterApp.candidato.home.createOrEditLabel">Create or edit a Candidato</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jemoloRoosterApp.candidato.nome" for="field_nome">Nome</label>
+                    <input type="text" class="form-control" name="nome" id="field_nome"
+                           formControlName="nome"/>
+                    <div *ngIf="editForm.get('nome')!.invalid && (editForm.get('nome')!.dirty || editForm.get('nome')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('nome')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jemoloRoosterApp.candidato.cognome" for="field_cognome">Cognome</label>
+                    <input type="text" class="form-control" name="cognome" id="field_cognome"
+                           formControlName="cognome"/>
+                    <div *ngIf="editForm.get('cognome')!.invalid && (editForm.get('cognome')!.dirty || editForm.get('cognome')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('cognome')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jemoloRoosterApp.candidato.codiceFiscale" for="field_codiceFiscale">Codice Fiscale</label>
+                    <input type="text" class="form-control" name="codiceFiscale" id="field_codiceFiscale"
+                           formControlName="codiceFiscale"/>
+                    <div *ngIf="editForm.get('codiceFiscale')!.invalid && (editForm.get('codiceFiscale')!.dirty || editForm.get('codiceFiscale')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('codiceFiscale')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('codiceFiscale')?.errors?.pattern" jhiTranslate="entity.validation.pattern" [translateValues]="{ pattern: 'Codice Fiscale' }">
+                            This field should follow pattern for "Codice Fiscale".
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jemoloRoosterApp.candidato.eMail" for="field_eMail">E Mail</label>
+                    <input type="text" class="form-control" name="eMail" id="field_eMail"
+                           formControlName="eMail"/>
+                    <div *ngIf="editForm.get('eMail')!.invalid && (editForm.get('eMail')!.dirty || editForm.get('eMail')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('eMail')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('eMail')?.errors?.pattern" jhiTranslate="entity.validation.pattern" [translateValues]="{ pattern: 'E Mail' }">
+                            This field should follow pattern for "E Mail".
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jemoloRoosterApp.candidato.statoRegistrazione" for="field_statoRegistrazione">Stato Registrazione</label>
+                    <select class="form-control" id="field_statoRegistrazione" name="statoRegistrazione" formControlName="statoRegistrazioneId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="statoRegistrazioneOption.id" *ngFor="let statoRegistrazioneOption of statoregistraziones; trackBy: trackById">{{ statoRegistrazioneOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

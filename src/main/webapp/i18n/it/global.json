@@ -7,6 +7,18 @@
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Entità",
+        "candidato": "Candidato",
+        "anagraficaCandidato": "Anagrafica Candidato",
+        "curriculum": "Curriculum",
+        "allegato": "Allegato",
+        "competenza": "Competenza",
+        "ambitoCompetenza": "Ambito Competenza",
+        "titoloStudio": "Titolo Studio",
+        "statoRegistrazione": "Stato Registrazione",
+        "competenzeLng": "Competenze Lng",
+        "lingua": "Lingua",
+        "dichiarazioniObligatorie": "Dichiarazioni Obligatorie",
+        "dichiarazioni": "Dichiarazioni",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {
