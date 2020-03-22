@@ -3,6 +3,8 @@ package it.laziocrea.jemoloapp.web.rest;
 import it.laziocrea.jemoloapp.service.AnagraficaCandidatoService;
 import it.laziocrea.jemoloapp.web.rest.errors.BadRequestAlertException;
 import it.laziocrea.jemoloapp.service.dto.AnagraficaCandidatoDTO;
+import it.laziocrea.jemoloapp.service.dto.AnagraficaCandidatoCriteria;
+import it.laziocrea.jemoloapp.service.AnagraficaCandidatoQueryService;
 
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.PaginationUtil;
@@ -40,8 +42,11 @@ public class AnagraficaCandidatoResource {
 
     private final AnagraficaCandidatoService anagraficaCandidatoService;
 
-    public AnagraficaCandidatoResource(AnagraficaCandidatoService anagraficaCandidatoService) {
+    private final AnagraficaCandidatoQueryService anagraficaCandidatoQueryService;
+
+    public AnagraficaCandidatoResource(AnagraficaCandidatoService anagraficaCandidatoService, AnagraficaCandidatoQueryService anagraficaCandidatoQueryService) {
         this.anagraficaCandidatoService = anagraficaCandidatoService;
+        this.anagraficaCandidatoQueryService = anagraficaCandidatoQueryService;
     }
 
     /**
@@ -88,14 +93,27 @@ public class AnagraficaCandidatoResource {
      * {@code GET  /anagrafica-candidatoes} : get all the anagraficaCandidatoes.
      *
      * @param pageable the pagination information.
+     * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of anagraficaCandidatoes in body.
      */
     @GetMapping("/anagrafica-candidatoes")
-    public ResponseEntity<List<AnagraficaCandidatoDTO>> getAllAnagraficaCandidatoes(Pageable pageable) {
-        log.debug("REST request to get a page of AnagraficaCandidatoes");
-        Page<AnagraficaCandidatoDTO> page = anagraficaCandidatoService.findAll(pageable);
+    public ResponseEntity<List<AnagraficaCandidatoDTO>> getAllAnagraficaCandidatoes(AnagraficaCandidatoCriteria criteria, Pageable pageable) {
+        log.debug("REST request to get AnagraficaCandidatoes by criteria: {}", criteria);
+        Page<AnagraficaCandidatoDTO> page = anagraficaCandidatoQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    /**
+     * {@code GET  /anagrafica-candidatoes/count} : count all the anagraficaCandidatoes.
+     *
+     * @param criteria the criteria which the requested entities should match.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+     */
+    @GetMapping("/anagrafica-candidatoes/count")
+    public ResponseEntity<Long> countAnagraficaCandidatoes(AnagraficaCandidatoCriteria criteria) {
+        log.debug("REST request to count AnagraficaCandidatoes by criteria: {}", criteria);
+        return ResponseEntity.ok().body(anagraficaCandidatoQueryService.countByCriteria(criteria));
     }
 
     /**

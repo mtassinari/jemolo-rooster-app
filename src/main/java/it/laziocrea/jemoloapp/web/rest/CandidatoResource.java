@@ -3,6 +3,8 @@ package it.laziocrea.jemoloapp.web.rest;
 import it.laziocrea.jemoloapp.service.CandidatoService;
 import it.laziocrea.jemoloapp.web.rest.errors.BadRequestAlertException;
 import it.laziocrea.jemoloapp.service.dto.CandidatoDTO;
+import it.laziocrea.jemoloapp.service.dto.CandidatoCriteria;
+import it.laziocrea.jemoloapp.service.CandidatoQueryService;
 
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.PaginationUtil;
@@ -41,8 +43,11 @@ public class CandidatoResource {
 
     private final CandidatoService candidatoService;
 
-    public CandidatoResource(CandidatoService candidatoService) {
+    private final CandidatoQueryService candidatoQueryService;
+
+    public CandidatoResource(CandidatoService candidatoService, CandidatoQueryService candidatoQueryService) {
         this.candidatoService = candidatoService;
+        this.candidatoQueryService = candidatoQueryService;
     }
 
     /**
@@ -89,20 +94,27 @@ public class CandidatoResource {
      * {@code GET  /candidatoes} : get all the candidatoes.
      *
      * @param pageable the pagination information.
-     * @param filter the filter of the request.
+     * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of candidatoes in body.
      */
     @GetMapping("/candidatoes")
-    public ResponseEntity<List<CandidatoDTO>> getAllCandidatoes(Pageable pageable, @RequestParam(required = false) String filter) {
-        if ("anagraficacandidato-is-null".equals(filter)) {
-            log.debug("REST request to get all Candidatos where anagraficaCandidato is null");
-            return new ResponseEntity<>(candidatoService.findAllWhereAnagraficaCandidatoIsNull(),
-                    HttpStatus.OK);
-        }
-        log.debug("REST request to get a page of Candidatoes");
-        Page<CandidatoDTO> page = candidatoService.findAll(pageable);
+    public ResponseEntity<List<CandidatoDTO>> getAllCandidatoes(CandidatoCriteria criteria, Pageable pageable) {
+        log.debug("REST request to get Candidatoes by criteria: {}", criteria);
+        Page<CandidatoDTO> page = candidatoQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    /**
+     * {@code GET  /candidatoes/count} : count all the candidatoes.
+     *
+     * @param criteria the criteria which the requested entities should match.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+     */
+    @GetMapping("/candidatoes/count")
+    public ResponseEntity<Long> countCandidatoes(CandidatoCriteria criteria) {
+        log.debug("REST request to count Candidatoes by criteria: {}", criteria);
+        return ResponseEntity.ok().body(candidatoQueryService.countByCriteria(criteria));
     }
 
     /**

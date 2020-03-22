@@ -2,11 +2,15 @@ package it.laziocrea.jemoloapp.web.rest;
 
 import it.laziocrea.jemoloapp.JemoloRoosterApp;
 import it.laziocrea.jemoloapp.domain.Candidato;
+import it.laziocrea.jemoloapp.domain.AnagraficaCandidato;
+import it.laziocrea.jemoloapp.domain.StatoRegistrazione;
 import it.laziocrea.jemoloapp.repository.CandidatoRepository;
 import it.laziocrea.jemoloapp.service.CandidatoService;
 import it.laziocrea.jemoloapp.service.dto.CandidatoDTO;
 import it.laziocrea.jemoloapp.service.mapper.CandidatoMapper;
 import it.laziocrea.jemoloapp.web.rest.errors.ExceptionTranslator;
+import it.laziocrea.jemoloapp.service.dto.CandidatoCriteria;
+import it.laziocrea.jemoloapp.service.CandidatoQueryService;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -58,6 +62,9 @@ public class CandidatoResourceIT {
     private CandidatoService candidatoService;
 
     @Autowired
+    private CandidatoQueryService candidatoQueryService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -79,7 +86,7 @@ public class CandidatoResourceIT {
     @BeforeEach
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final CandidatoResource candidatoResource = new CandidatoResource(candidatoService);
+        final CandidatoResource candidatoResource = new CandidatoResource(candidatoService, candidatoQueryService);
         this.restCandidatoMockMvc = MockMvcBuilders.standaloneSetup(candidatoResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -274,6 +281,416 @@ public class CandidatoResourceIT {
             .andExpect(jsonPath("$.codiceFiscale").value(DEFAULT_CODICE_FISCALE))
             .andExpect(jsonPath("$.eMail").value(DEFAULT_E_MAIL));
     }
+
+
+    @Test
+    @Transactional
+    public void getCandidatoesByIdFiltering() throws Exception {
+        // Initialize the database
+        candidatoRepository.saveAndFlush(candidato);
+
+        Long id = candidato.getId();
+
+        defaultCandidatoShouldBeFound("id.equals=" + id);
+        defaultCandidatoShouldNotBeFound("id.notEquals=" + id);
+
+        defaultCandidatoShouldBeFound("id.greaterThanOrEqual=" + id);
+        defaultCandidatoShouldNotBeFound("id.greaterThan=" + id);
+
+        defaultCandidatoShouldBeFound("id.lessThanOrEqual=" + id);
+        defaultCandidatoShouldNotBeFound("id.lessThan=" + id);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllCandidatoesByNomeIsEqualToSomething() throws Exception {
+        // Initialize the database
+        candidatoRepository.saveAndFlush(candidato);
+
+        // Get all the candidatoList where nome equals to DEFAULT_NOME
+        defaultCandidatoShouldBeFound("nome.equals=" + DEFAULT_NOME);
+
+        // Get all the candidatoList where nome equals to UPDATED_NOME
+        defaultCandidatoShouldNotBeFound("nome.equals=" + UPDATED_NOME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCandidatoesByNomeIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        candidatoRepository.saveAndFlush(candidato);
+
+        // Get all the candidatoList where nome not equals to DEFAULT_NOME
+        defaultCandidatoShouldNotBeFound("nome.notEquals=" + DEFAULT_NOME);
+
+        // Get all the candidatoList where nome not equals to UPDATED_NOME
+        defaultCandidatoShouldBeFound("nome.notEquals=" + UPDATED_NOME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCandidatoesByNomeIsInShouldWork() throws Exception {
+        // Initialize the database
+        candidatoRepository.saveAndFlush(candidato);
+
+        // Get all the candidatoList where nome in DEFAULT_NOME or UPDATED_NOME
+        defaultCandidatoShouldBeFound("nome.in=" + DEFAULT_NOME + "," + UPDATED_NOME);
+
+        // Get all the candidatoList where nome equals to UPDATED_NOME
+        defaultCandidatoShouldNotBeFound("nome.in=" + UPDATED_NOME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCandidatoesByNomeIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        candidatoRepository.saveAndFlush(candidato);
+
+        // Get all the candidatoList where nome is not null
+        defaultCandidatoShouldBeFound("nome.specified=true");
+
+        // Get all the candidatoList where nome is null
+        defaultCandidatoShouldNotBeFound("nome.specified=false");
+    }
+                @Test
+    @Transactional
+    public void getAllCandidatoesByNomeContainsSomething() throws Exception {
+        // Initialize the database
+        candidatoRepository.saveAndFlush(candidato);
+
+        // Get all the candidatoList where nome contains DEFAULT_NOME
+        defaultCandidatoShouldBeFound("nome.contains=" + DEFAULT_NOME);
+
+        // Get all the candidatoList where nome contains UPDATED_NOME
+        defaultCandidatoShouldNotBeFound("nome.contains=" + UPDATED_NOME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCandidatoesByNomeNotContainsSomething() throws Exception {
+        // Initialize the database
+        candidatoRepository.saveAndFlush(candidato);
+
+        // Get all the candidatoList where nome does not contain DEFAULT_NOME
+        defaultCandidatoShouldNotBeFound("nome.doesNotContain=" + DEFAULT_NOME);
+
+        // Get all the candidatoList where nome does not contain UPDATED_NOME
+        defaultCandidatoShouldBeFound("nome.doesNotContain=" + UPDATED_NOME);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllCandidatoesByCognomeIsEqualToSomething() throws Exception {
+        // Initialize the database
+        candidatoRepository.saveAndFlush(candidato);
+
+        // Get all the candidatoList where cognome equals to DEFAULT_COGNOME
+        defaultCandidatoShouldBeFound("cognome.equals=" + DEFAULT_COGNOME);
+
+        // Get all the candidatoList where cognome equals to UPDATED_COGNOME
+        defaultCandidatoShouldNotBeFound("cognome.equals=" + UPDATED_COGNOME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCandidatoesByCognomeIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        candidatoRepository.saveAndFlush(candidato);
+
+        // Get all the candidatoList where cognome not equals to DEFAULT_COGNOME
+        defaultCandidatoShouldNotBeFound("cognome.notEquals=" + DEFAULT_COGNOME);
+
+        // Get all the candidatoList where cognome not equals to UPDATED_COGNOME
+        defaultCandidatoShouldBeFound("cognome.notEquals=" + UPDATED_COGNOME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCandidatoesByCognomeIsInShouldWork() throws Exception {
+        // Initialize the database
+        candidatoRepository.saveAndFlush(candidato);
+
+        // Get all the candidatoList where cognome in DEFAULT_COGNOME or UPDATED_COGNOME
+        defaultCandidatoShouldBeFound("cognome.in=" + DEFAULT_COGNOME + "," + UPDATED_COGNOME);
+
+        // Get all the candidatoList where cognome equals to UPDATED_COGNOME
+        defaultCandidatoShouldNotBeFound("cognome.in=" + UPDATED_COGNOME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCandidatoesByCognomeIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        candidatoRepository.saveAndFlush(candidato);
+
+        // Get all the candidatoList where cognome is not null
+        defaultCandidatoShouldBeFound("cognome.specified=true");
+
+        // Get all the candidatoList where cognome is null
+        defaultCandidatoShouldNotBeFound("cognome.specified=false");
+    }
+                @Test
+    @Transactional
+    public void getAllCandidatoesByCognomeContainsSomething() throws Exception {
+        // Initialize the database
+        candidatoRepository.saveAndFlush(candidato);
+
+        // Get all the candidatoList where cognome contains DEFAULT_COGNOME
+        defaultCandidatoShouldBeFound("cognome.contains=" + DEFAULT_COGNOME);
+
+        // Get all the candidatoList where cognome contains UPDATED_COGNOME
+        defaultCandidatoShouldNotBeFound("cognome.contains=" + UPDATED_COGNOME);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCandidatoesByCognomeNotContainsSomething() throws Exception {
+        // Initialize the database
+        candidatoRepository.saveAndFlush(candidato);
+
+        // Get all the candidatoList where cognome does not contain DEFAULT_COGNOME
+        defaultCandidatoShouldNotBeFound("cognome.doesNotContain=" + DEFAULT_COGNOME);
+
+        // Get all the candidatoList where cognome does not contain UPDATED_COGNOME
+        defaultCandidatoShouldBeFound("cognome.doesNotContain=" + UPDATED_COGNOME);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllCandidatoesByCodiceFiscaleIsEqualToSomething() throws Exception {
+        // Initialize the database
+        candidatoRepository.saveAndFlush(candidato);
+
+        // Get all the candidatoList where codiceFiscale equals to DEFAULT_CODICE_FISCALE
+        defaultCandidatoShouldBeFound("codiceFiscale.equals=" + DEFAULT_CODICE_FISCALE);
+
+        // Get all the candidatoList where codiceFiscale equals to UPDATED_CODICE_FISCALE
+        defaultCandidatoShouldNotBeFound("codiceFiscale.equals=" + UPDATED_CODICE_FISCALE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCandidatoesByCodiceFiscaleIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        candidatoRepository.saveAndFlush(candidato);
+
+        // Get all the candidatoList where codiceFiscale not equals to DEFAULT_CODICE_FISCALE
+        defaultCandidatoShouldNotBeFound("codiceFiscale.notEquals=" + DEFAULT_CODICE_FISCALE);
+
+        // Get all the candidatoList where codiceFiscale not equals to UPDATED_CODICE_FISCALE
+        defaultCandidatoShouldBeFound("codiceFiscale.notEquals=" + UPDATED_CODICE_FISCALE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCandidatoesByCodiceFiscaleIsInShouldWork() throws Exception {
+        // Initialize the database
+        candidatoRepository.saveAndFlush(candidato);
+
+        // Get all the candidatoList where codiceFiscale in DEFAULT_CODICE_FISCALE or UPDATED_CODICE_FISCALE
+        defaultCandidatoShouldBeFound("codiceFiscale.in=" + DEFAULT_CODICE_FISCALE + "," + UPDATED_CODICE_FISCALE);
+
+        // Get all the candidatoList where codiceFiscale equals to UPDATED_CODICE_FISCALE
+        defaultCandidatoShouldNotBeFound("codiceFiscale.in=" + UPDATED_CODICE_FISCALE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCandidatoesByCodiceFiscaleIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        candidatoRepository.saveAndFlush(candidato);
+
+        // Get all the candidatoList where codiceFiscale is not null
+        defaultCandidatoShouldBeFound("codiceFiscale.specified=true");
+
+        // Get all the candidatoList where codiceFiscale is null
+        defaultCandidatoShouldNotBeFound("codiceFiscale.specified=false");
+    }
+                @Test
+    @Transactional
+    public void getAllCandidatoesByCodiceFiscaleContainsSomething() throws Exception {
+        // Initialize the database
+        candidatoRepository.saveAndFlush(candidato);
+
+        // Get all the candidatoList where codiceFiscale contains DEFAULT_CODICE_FISCALE
+        defaultCandidatoShouldBeFound("codiceFiscale.contains=" + DEFAULT_CODICE_FISCALE);
+
+        // Get all the candidatoList where codiceFiscale contains UPDATED_CODICE_FISCALE
+        defaultCandidatoShouldNotBeFound("codiceFiscale.contains=" + UPDATED_CODICE_FISCALE);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCandidatoesByCodiceFiscaleNotContainsSomething() throws Exception {
+        // Initialize the database
+        candidatoRepository.saveAndFlush(candidato);
+
+        // Get all the candidatoList where codiceFiscale does not contain DEFAULT_CODICE_FISCALE
+        defaultCandidatoShouldNotBeFound("codiceFiscale.doesNotContain=" + DEFAULT_CODICE_FISCALE);
+
+        // Get all the candidatoList where codiceFiscale does not contain UPDATED_CODICE_FISCALE
+        defaultCandidatoShouldBeFound("codiceFiscale.doesNotContain=" + UPDATED_CODICE_FISCALE);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllCandidatoesByeMailIsEqualToSomething() throws Exception {
+        // Initialize the database
+        candidatoRepository.saveAndFlush(candidato);
+
+        // Get all the candidatoList where eMail equals to DEFAULT_E_MAIL
+        defaultCandidatoShouldBeFound("eMail.equals=" + DEFAULT_E_MAIL);
+
+        // Get all the candidatoList where eMail equals to UPDATED_E_MAIL
+        defaultCandidatoShouldNotBeFound("eMail.equals=" + UPDATED_E_MAIL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCandidatoesByeMailIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        candidatoRepository.saveAndFlush(candidato);
+
+        // Get all the candidatoList where eMail not equals to DEFAULT_E_MAIL
+        defaultCandidatoShouldNotBeFound("eMail.notEquals=" + DEFAULT_E_MAIL);
+
+        // Get all the candidatoList where eMail not equals to UPDATED_E_MAIL
+        defaultCandidatoShouldBeFound("eMail.notEquals=" + UPDATED_E_MAIL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCandidatoesByeMailIsInShouldWork() throws Exception {
+        // Initialize the database
+        candidatoRepository.saveAndFlush(candidato);
+
+        // Get all the candidatoList where eMail in DEFAULT_E_MAIL or UPDATED_E_MAIL
+        defaultCandidatoShouldBeFound("eMail.in=" + DEFAULT_E_MAIL + "," + UPDATED_E_MAIL);
+
+        // Get all the candidatoList where eMail equals to UPDATED_E_MAIL
+        defaultCandidatoShouldNotBeFound("eMail.in=" + UPDATED_E_MAIL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCandidatoesByeMailIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        candidatoRepository.saveAndFlush(candidato);
+
+        // Get all the candidatoList where eMail is not null
+        defaultCandidatoShouldBeFound("eMail.specified=true");
+
+        // Get all the candidatoList where eMail is null
+        defaultCandidatoShouldNotBeFound("eMail.specified=false");
+    }
+                @Test
+    @Transactional
+    public void getAllCandidatoesByeMailContainsSomething() throws Exception {
+        // Initialize the database
+        candidatoRepository.saveAndFlush(candidato);
+
+        // Get all the candidatoList where eMail contains DEFAULT_E_MAIL
+        defaultCandidatoShouldBeFound("eMail.contains=" + DEFAULT_E_MAIL);
+
+        // Get all the candidatoList where eMail contains UPDATED_E_MAIL
+        defaultCandidatoShouldNotBeFound("eMail.contains=" + UPDATED_E_MAIL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllCandidatoesByeMailNotContainsSomething() throws Exception {
+        // Initialize the database
+        candidatoRepository.saveAndFlush(candidato);
+
+        // Get all the candidatoList where eMail does not contain DEFAULT_E_MAIL
+        defaultCandidatoShouldNotBeFound("eMail.doesNotContain=" + DEFAULT_E_MAIL);
+
+        // Get all the candidatoList where eMail does not contain UPDATED_E_MAIL
+        defaultCandidatoShouldBeFound("eMail.doesNotContain=" + UPDATED_E_MAIL);
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllCandidatoesByAnagraficaCandidatoIsEqualToSomething() throws Exception {
+        // Initialize the database
+        candidatoRepository.saveAndFlush(candidato);
+        AnagraficaCandidato anagraficaCandidato = AnagraficaCandidatoResourceIT.createEntity(em);
+        em.persist(anagraficaCandidato);
+        em.flush();
+        candidato.setAnagraficaCandidato(anagraficaCandidato);
+        anagraficaCandidato.setCandidato(candidato);
+        candidatoRepository.saveAndFlush(candidato);
+        Long anagraficaCandidatoId = anagraficaCandidato.getId();
+
+        // Get all the candidatoList where anagraficaCandidato equals to anagraficaCandidatoId
+        defaultCandidatoShouldBeFound("anagraficaCandidatoId.equals=" + anagraficaCandidatoId);
+
+        // Get all the candidatoList where anagraficaCandidato equals to anagraficaCandidatoId + 1
+        defaultCandidatoShouldNotBeFound("anagraficaCandidatoId.equals=" + (anagraficaCandidatoId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllCandidatoesByStatoRegistrazioneIsEqualToSomething() throws Exception {
+        // Initialize the database
+        candidatoRepository.saveAndFlush(candidato);
+        StatoRegistrazione statoRegistrazione = StatoRegistrazioneResourceIT.createEntity(em);
+        em.persist(statoRegistrazione);
+        em.flush();
+        candidato.setStatoRegistrazione(statoRegistrazione);
+        candidatoRepository.saveAndFlush(candidato);
+        Long statoRegistrazioneId = statoRegistrazione.getId();
+
+        // Get all the candidatoList where statoRegistrazione equals to statoRegistrazioneId
+        defaultCandidatoShouldBeFound("statoRegistrazioneId.equals=" + statoRegistrazioneId);
+
+        // Get all the candidatoList where statoRegistrazione equals to statoRegistrazioneId + 1
+        defaultCandidatoShouldNotBeFound("statoRegistrazioneId.equals=" + (statoRegistrazioneId + 1));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is returned.
+     */
+    private void defaultCandidatoShouldBeFound(String filter) throws Exception {
+        restCandidatoMockMvc.perform(get("/api/candidatoes?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(candidato.getId().intValue())))
+            .andExpect(jsonPath("$.[*].nome").value(hasItem(DEFAULT_NOME)))
+            .andExpect(jsonPath("$.[*].cognome").value(hasItem(DEFAULT_COGNOME)))
+            .andExpect(jsonPath("$.[*].codiceFiscale").value(hasItem(DEFAULT_CODICE_FISCALE)))
+            .andExpect(jsonPath("$.[*].eMail").value(hasItem(DEFAULT_E_MAIL)));
+
+        // Check, that the count call also returns 1
+        restCandidatoMockMvc.perform(get("/api/candidatoes/count?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(content().string("1"));
+    }
+
+    /**
+     * Executes the search, and checks that the default entity is not returned.
+     */
+    private void defaultCandidatoShouldNotBeFound(String filter) throws Exception {
+        restCandidatoMockMvc.perform(get("/api/candidatoes?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(jsonPath("$").isArray())
+            .andExpect(jsonPath("$").isEmpty());
+
+        // Check, that the count call also returns 0
+        restCandidatoMockMvc.perform(get("/api/candidatoes/count?sort=id,desc&" + filter))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(content().string("0"));
+    }
+
 
     @Test
     @Transactional

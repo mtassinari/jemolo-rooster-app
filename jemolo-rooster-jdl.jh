@@ -108,7 +108,7 @@ entity DichiarazioniObligatorie {
 entity Dichiarazioni {
 	descrizione String required
 }
-
+filter AnagraficaCandidato, Candidato
 dto Candidato, Competenza, AmbitoCompetenza, AnagraficaCandidato, TitoloStudio, Curriculum, CompetenzeLng, Lingua, 
 StatoRegistrazione, Allegato, Dichiarazioni, DichiarazioniObligatorie with mapstruct
 paginate Candidato, AnagraficaCandidato, CompetenzeLng, Competenza, Curriculum with pagination

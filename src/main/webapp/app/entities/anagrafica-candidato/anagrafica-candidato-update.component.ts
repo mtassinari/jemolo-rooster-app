@@ -59,7 +59,7 @@ export class AnagraficaCandidatoUpdateComponent implements OnInit {
       this.updateForm(anagraficaCandidato);
 
       this.candidatoService
-        .query({ filter: 'anagraficacandidato-is-null' })
+        .query({ 'anagraficaCandidatoId.specified': 'false' })
         .pipe(
           map((res: HttpResponse<ICandidato[]>) => {
             return res.body || [];
