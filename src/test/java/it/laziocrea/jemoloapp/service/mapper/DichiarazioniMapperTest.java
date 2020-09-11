@@ -12,7 +12,7 @@ public class DichiarazioniMapperTest {
     public void setUp() {
         dichiarazioniMapper = new DichiarazioniMapperImpl();
     }
-    
+
     @Test
     public void testEntityFromId() {
         Long id = 1L;

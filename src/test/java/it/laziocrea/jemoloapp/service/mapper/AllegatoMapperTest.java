@@ -7,12 +7,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class AllegatoMapperTest {
 
     private AllegatoMapper allegatoMapper;
-    
+
     @BeforeEach
     public void setUp() {
         allegatoMapper = new AllegatoMapperImpl();
     }
-    
+
     @Test
     public void testEntityFromId() {
         Long id = 1L;
