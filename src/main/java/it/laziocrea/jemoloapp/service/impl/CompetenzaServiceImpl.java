@@ -33,12 +33,6 @@ public class CompetenzaServiceImpl implements CompetenzaService {
         this.competenzaMapper = competenzaMapper;
     }
 
-    /**
-     * Save a competenza.
-     *
-     * @param competenzaDTO the entity to save.
-     * @return the persisted entity.
-     */
     @Override
     public CompetenzaDTO save(CompetenzaDTO competenzaDTO) {
         log.debug("Request to save Competenza : {}", competenzaDTO);
@@ -47,12 +41,6 @@ public class CompetenzaServiceImpl implements CompetenzaService {
         return competenzaMapper.toDto(competenza);
     }
 
-    /**
-     * Get all the competenzas.
-     *
-     * @param pageable the pagination information.
-     * @return the list of entities.
-     */
     @Override
     @Transactional(readOnly = true)
     public Page<CompetenzaDTO> findAll(Pageable pageable) {
@@ -61,12 +49,7 @@ public class CompetenzaServiceImpl implements CompetenzaService {
             .map(competenzaMapper::toDto);
     }
 
-    /**
-     * Get one competenza by id.
-     *
-     * @param id the id of the entity.
-     * @return the entity.
-     */
+
     @Override
     @Transactional(readOnly = true)
     public Optional<CompetenzaDTO> findOne(Long id) {
@@ -75,11 +58,6 @@ public class CompetenzaServiceImpl implements CompetenzaService {
             .map(competenzaMapper::toDto);
     }
 
-    /**
-     * Delete the competenza by id.
-     *
-     * @param id the id of the entity.
-     */
     @Override
     public void delete(Long id) {
         log.debug("Request to delete Competenza : {}", id);

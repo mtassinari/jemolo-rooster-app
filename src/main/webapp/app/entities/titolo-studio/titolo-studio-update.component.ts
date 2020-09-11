@@ -12,7 +12,7 @@ import { AnagraficaCandidatoService } from 'app/entities/anagrafica-candidato/an
 
 @Component({
   selector: 'jhi-titolo-studio-update',
-  templateUrl: './titolo-studio-update.component.html'
+  templateUrl: './titolo-studio-update.component.html',
 })
 export class TitoloStudioUpdateComponent implements OnInit {
   isSaving = false;
@@ -25,7 +25,7 @@ export class TitoloStudioUpdateComponent implements OnInit {
     conseguimento: [null, [Validators.required]],
     anno: [null, [Validators.required]],
     voto: [null, [Validators.required]],
-    anagraficaId: [null, Validators.required]
+    anagraficaId: [null, Validators.required],
   });
 
   constructor(
@@ -53,7 +53,7 @@ export class TitoloStudioUpdateComponent implements OnInit {
       conseguimento: titoloStudio.conseguimento,
       anno: titoloStudio.anno,
       voto: titoloStudio.voto,
-      anagraficaId: titoloStudio.anagraficaId
+      anagraficaId: titoloStudio.anagraficaId,
     });
   }
 
@@ -80,7 +80,7 @@ export class TitoloStudioUpdateComponent implements OnInit {
       conseguimento: this.editForm.get(['conseguimento'])!.value,
       anno: this.editForm.get(['anno'])!.value,
       voto: this.editForm.get(['voto'])!.value,
-      anagraficaId: this.editForm.get(['anagraficaId'])!.value
+      anagraficaId: this.editForm.get(['anagraficaId'])!.value,
     };
   }
 

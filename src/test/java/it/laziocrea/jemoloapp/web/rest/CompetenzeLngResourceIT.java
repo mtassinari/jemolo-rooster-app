@@ -8,27 +8,22 @@ import it.laziocrea.jemoloapp.repository.CompetenzeLngRepository;
 import it.laziocrea.jemoloapp.service.CompetenzeLngService;
 import it.laziocrea.jemoloapp.service.dto.CompetenzeLngDTO;
 import it.laziocrea.jemoloapp.service.mapper.CompetenzeLngMapper;
-import it.laziocrea.jemoloapp.web.rest.errors.ExceptionTranslator;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.Validator;
-
 import javax.persistence.EntityManager;
 import java.util.List;
 
-import static it.laziocrea.jemoloapp.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -36,6 +31,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Integration tests for the {@link CompetenzeLngResource} REST controller.
  */
 @SpringBootTest(classes = JemoloRoosterApp.class)
+@AutoConfigureMockMvc
+@WithMockUser
 public class CompetenzeLngResourceIT {
 
     private static final Integer DEFAULT_LIVELLO = 1;
@@ -51,35 +48,12 @@ public class CompetenzeLngResourceIT {
     private CompetenzeLngService competenzeLngService;
 
     @Autowired
-    private MappingJackson2HttpMessageConverter jacksonMessageConverter;
-
-    @Autowired
-    private PageableHandlerMethodArgumentResolver pageableArgumentResolver;
-
-    @Autowired
-    private ExceptionTranslator exceptionTranslator;
-
-    @Autowired
     private EntityManager em;
 
     @Autowired
-    private Validator validator;
-
     private MockMvc restCompetenzeLngMockMvc;
 
     private CompetenzeLng competenzeLng;
-
-    @BeforeEach
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
-        final CompetenzeLngResource competenzeLngResource = new CompetenzeLngResource(competenzeLngService);
-        this.restCompetenzeLngMockMvc = MockMvcBuilders.standaloneSetup(competenzeLngResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
-            .setControllerAdvice(exceptionTranslator)
-            .setConversionService(createFormattingConversionService())
-            .setMessageConverters(jacksonMessageConverter)
-            .setValidator(validator).build();
-    }
 
     /**
      * Create an entity for this test.
@@ -153,11 +127,10 @@ public class CompetenzeLngResourceIT {
     @Transactional
     public void createCompetenzeLng() throws Exception {
         int databaseSizeBeforeCreate = competenzeLngRepository.findAll().size();
-
         // Create the CompetenzeLng
         CompetenzeLngDTO competenzeLngDTO = competenzeLngMapper.toDto(competenzeLng);
-        restCompetenzeLngMockMvc.perform(post("/api/competenze-lngs")
-            .contentType(TestUtil.APPLICATION_JSON)
+        restCompetenzeLngMockMvc.perform(post("/api/competenze-lngs").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(competenzeLngDTO)))
             .andExpect(status().isCreated());
 
@@ -178,8 +151,8 @@ public class CompetenzeLngResourceIT {
         CompetenzeLngDTO competenzeLngDTO = competenzeLngMapper.toDto(competenzeLng);
 
         // An entity with an existing ID cannot be created, so this API call must fail
-        restCompetenzeLngMockMvc.perform(post("/api/competenze-lngs")
-            .contentType(TestUtil.APPLICATION_JSON)
+        restCompetenzeLngMockMvc.perform(post("/api/competenze-lngs").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(competenzeLngDTO)))
             .andExpect(status().isBadRequest());
 
@@ -199,8 +172,9 @@ public class CompetenzeLngResourceIT {
         // Create the CompetenzeLng, which fails.
         CompetenzeLngDTO competenzeLngDTO = competenzeLngMapper.toDto(competenzeLng);
 
-        restCompetenzeLngMockMvc.perform(post("/api/competenze-lngs")
-            .contentType(TestUtil.APPLICATION_JSON)
+
+        restCompetenzeLngMockMvc.perform(post("/api/competenze-lngs").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(competenzeLngDTO)))
             .andExpect(status().isBadRequest());
 
@@ -235,7 +209,6 @@ public class CompetenzeLngResourceIT {
             .andExpect(jsonPath("$.id").value(competenzeLng.getId().intValue()))
             .andExpect(jsonPath("$.livello").value(DEFAULT_LIVELLO));
     }
-
     @Test
     @Transactional
     public void getNonExistingCompetenzeLng() throws Exception {
@@ -260,8 +233,8 @@ public class CompetenzeLngResourceIT {
             .livello(UPDATED_LIVELLO);
         CompetenzeLngDTO competenzeLngDTO = competenzeLngMapper.toDto(updatedCompetenzeLng);
 
-        restCompetenzeLngMockMvc.perform(put("/api/competenze-lngs")
-            .contentType(TestUtil.APPLICATION_JSON)
+        restCompetenzeLngMockMvc.perform(put("/api/competenze-lngs").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(competenzeLngDTO)))
             .andExpect(status().isOk());
 
@@ -281,8 +254,8 @@ public class CompetenzeLngResourceIT {
         CompetenzeLngDTO competenzeLngDTO = competenzeLngMapper.toDto(competenzeLng);
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
-        restCompetenzeLngMockMvc.perform(put("/api/competenze-lngs")
-            .contentType(TestUtil.APPLICATION_JSON)
+        restCompetenzeLngMockMvc.perform(put("/api/competenze-lngs").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(competenzeLngDTO)))
             .andExpect(status().isBadRequest());
 
@@ -300,8 +273,8 @@ public class CompetenzeLngResourceIT {
         int databaseSizeBeforeDelete = competenzeLngRepository.findAll().size();
 
         // Delete the competenzeLng
-        restCompetenzeLngMockMvc.perform(delete("/api/competenze-lngs/{id}", competenzeLng.getId())
-            .accept(TestUtil.APPLICATION_JSON))
+        restCompetenzeLngMockMvc.perform(delete("/api/competenze-lngs/{id}", competenzeLng.getId()).with(csrf())
+            .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isNoContent());
 
         // Validate the database contains one less item

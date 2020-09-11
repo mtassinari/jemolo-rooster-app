@@ -16,7 +16,7 @@ describe('Component Tests', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [JemoloRoosterAppTestModule],
-        declarations: [LinguaComponent]
+        declarations: [LinguaComponent],
       })
         .overrideTemplate(LinguaComponent, '')
         .compileComponents();
@@ -33,7 +33,7 @@ describe('Component Tests', () => {
         of(
           new HttpResponse({
             body: [new Lingua(123)],
-            headers
+            headers,
           })
         )
       );

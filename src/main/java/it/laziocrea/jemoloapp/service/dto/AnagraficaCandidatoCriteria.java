@@ -354,6 +354,7 @@ public class AnagraficaCandidatoCriteria implements Serializable, Criteria {
         );
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "AnagraficaCandidatoCriteria{" +

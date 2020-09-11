@@ -4,6 +4,7 @@ import { Resolve, ActivatedRouteSnapshot, Routes, Router } from '@angular/router
 import { Observable, of, EMPTY } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
 
+import { Authority } from 'app/shared/constants/authority.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
 import { IDichiarazioniObligatorie, DichiarazioniObligatorie } from 'app/shared/model/dichiarazioni-obligatorie.model';
 import { DichiarazioniObligatorieService } from './dichiarazioni-obligatorie.service';
@@ -38,45 +39,45 @@ export const dichiarazioniObligatorieRoute: Routes = [
     path: '',
     component: DichiarazioniObligatorieComponent,
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'jemoloRoosterApp.dichiarazioniObligatorie.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'jemoloRoosterApp.dichiarazioniObligatorie.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
     component: DichiarazioniObligatorieDetailComponent,
     resolve: {
-      dichiarazioniObligatorie: DichiarazioniObligatorieResolve
+      dichiarazioniObligatorie: DichiarazioniObligatorieResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'jemoloRoosterApp.dichiarazioniObligatorie.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'jemoloRoosterApp.dichiarazioniObligatorie.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
     component: DichiarazioniObligatorieUpdateComponent,
     resolve: {
-      dichiarazioniObligatorie: DichiarazioniObligatorieResolve
+      dichiarazioniObligatorie: DichiarazioniObligatorieResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'jemoloRoosterApp.dichiarazioniObligatorie.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'jemoloRoosterApp.dichiarazioniObligatorie.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
     component: DichiarazioniObligatorieUpdateComponent,
     resolve: {
-      dichiarazioniObligatorie: DichiarazioniObligatorieResolve
+      dichiarazioniObligatorie: DichiarazioniObligatorieResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'jemoloRoosterApp.dichiarazioniObligatorie.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'jemoloRoosterApp.dichiarazioniObligatorie.home.title',
     },
-    canActivate: [UserRouteAccessService]
-  }
+    canActivate: [UserRouteAccessService],
+  },
 ];

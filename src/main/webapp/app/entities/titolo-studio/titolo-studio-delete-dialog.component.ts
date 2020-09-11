@@ -6,7 +6,7 @@ import { ITitoloStudio } from 'app/shared/model/titolo-studio.model';
 import { TitoloStudioService } from './titolo-studio.service';
 
 @Component({
-  templateUrl: './titolo-studio-delete-dialog.component.html'
+  templateUrl: './titolo-studio-delete-dialog.component.html',
 })
 export class TitoloStudioDeleteDialogComponent {
   titoloStudio?: ITitoloStudio;

@@ -25,6 +25,7 @@ public interface DichiarazioniService {
      */
     List<DichiarazioniDTO> findAll();
 
+
     /**
      * Get the "id" dichiarazioni.
      *

@@ -6,7 +6,7 @@ import { IDichiarazioniObligatorie } from 'app/shared/model/dichiarazioni-obliga
 import { DichiarazioniObligatorieService } from './dichiarazioni-obligatorie.service';
 
 @Component({
-  templateUrl: './dichiarazioni-obligatorie-delete-dialog.component.html'
+  templateUrl: './dichiarazioni-obligatorie-delete-dialog.component.html',
 })
 export class DichiarazioniObligatorieDeleteDialogComponent {
   dichiarazioniObligatorie?: IDichiarazioniObligatorie;

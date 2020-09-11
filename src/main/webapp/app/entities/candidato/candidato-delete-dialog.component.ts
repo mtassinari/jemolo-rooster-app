@@ -6,7 +6,7 @@ import { ICandidato } from 'app/shared/model/candidato.model';
 import { CandidatoService } from './candidato.service';
 
 @Component({
-  templateUrl: './candidato-delete-dialog.component.html'
+  templateUrl: './candidato-delete-dialog.component.html',
 })
 export class CandidatoDeleteDialogComponent {
   candidato?: ICandidato;

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { Resolve, ActivatedRouteSnapshot, Routes, Router } from '@angular/router';
-import { JhiResolvePagingParams } from 'ng-jhipster';
 import { Observable, of, EMPTY } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
 
+import { Authority } from 'app/shared/constants/authority.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
 import { ICandidato, Candidato } from 'app/shared/model/candidato.model';
 import { CandidatoService } from './candidato.service';
@@ -38,50 +38,47 @@ export const candidatoRoute: Routes = [
   {
     path: '',
     component: CandidatoComponent,
-    resolve: {
-      pagingParams: JhiResolvePagingParams
-    },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: [Authority.USER],
       defaultSort: 'id,asc',
-      pageTitle: 'jemoloRoosterApp.candidato.home.title'
+      pageTitle: 'jemoloRoosterApp.candidato.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
     component: CandidatoDetailComponent,
     resolve: {
-      candidato: CandidatoResolve
+      candidato: CandidatoResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'jemoloRoosterApp.candidato.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'jemoloRoosterApp.candidato.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
     component: CandidatoUpdateComponent,
     resolve: {
-      candidato: CandidatoResolve
+      candidato: CandidatoResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'jemoloRoosterApp.candidato.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'jemoloRoosterApp.candidato.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
     component: CandidatoUpdateComponent,
     resolve: {
-      candidato: CandidatoResolve
+      candidato: CandidatoResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'jemoloRoosterApp.candidato.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'jemoloRoosterApp.candidato.home.title',
     },
-    canActivate: [UserRouteAccessService]
-  }
+    canActivate: [UserRouteAccessService],
+  },
 ];

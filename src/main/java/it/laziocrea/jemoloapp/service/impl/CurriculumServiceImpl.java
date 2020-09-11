@@ -33,12 +33,6 @@ public class CurriculumServiceImpl implements CurriculumService {
         this.curriculumMapper = curriculumMapper;
     }
 
-    /**
-     * Save a curriculum.
-     *
-     * @param curriculumDTO the entity to save.
-     * @return the persisted entity.
-     */
     @Override
     public CurriculumDTO save(CurriculumDTO curriculumDTO) {
         log.debug("Request to save Curriculum : {}", curriculumDTO);
@@ -47,12 +41,6 @@ public class CurriculumServiceImpl implements CurriculumService {
         return curriculumMapper.toDto(curriculum);
     }
 
-    /**
-     * Get all the curricula.
-     *
-     * @param pageable the pagination information.
-     * @return the list of entities.
-     */
     @Override
     @Transactional(readOnly = true)
     public Page<CurriculumDTO> findAll(Pageable pageable) {
@@ -61,12 +49,7 @@ public class CurriculumServiceImpl implements CurriculumService {
             .map(curriculumMapper::toDto);
     }
 
-    /**
-     * Get one curriculum by id.
-     *
-     * @param id the id of the entity.
-     * @return the entity.
-     */
+
     @Override
     @Transactional(readOnly = true)
     public Optional<CurriculumDTO> findOne(Long id) {
@@ -75,11 +58,6 @@ public class CurriculumServiceImpl implements CurriculumService {
             .map(curriculumMapper::toDto);
     }
 
-    /**
-     * Delete the curriculum by id.
-     *
-     * @param id the id of the entity.
-     */
     @Override
     public void delete(Long id) {
         log.debug("Request to delete Curriculum : {}", id);

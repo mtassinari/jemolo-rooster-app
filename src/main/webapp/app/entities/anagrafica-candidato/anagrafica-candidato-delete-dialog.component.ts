@@ -6,7 +6,7 @@ import { IAnagraficaCandidato } from 'app/shared/model/anagrafica-candidato.mode
 import { AnagraficaCandidatoService } from './anagrafica-candidato.service';
 
 @Component({
-  templateUrl: './anagrafica-candidato-delete-dialog.component.html'
+  templateUrl: './anagrafica-candidato-delete-dialog.component.html',
 })
 export class AnagraficaCandidatoDeleteDialogComponent {
   anagraficaCandidato?: IAnagraficaCandidato;

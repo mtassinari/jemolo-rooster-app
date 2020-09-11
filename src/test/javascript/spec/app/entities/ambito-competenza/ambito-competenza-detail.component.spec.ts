@@ -16,7 +16,7 @@ describe('Component Tests', () => {
       TestBed.configureTestingModule({
         imports: [JemoloRoosterAppTestModule],
         declarations: [AmbitoCompetenzaDetailComponent],
-        providers: [{ provide: ActivatedRoute, useValue: route }]
+        providers: [{ provide: ActivatedRoute, useValue: route }],
       })
         .overrideTemplate(AmbitoCompetenzaDetailComponent, '')
         .compileComponents();

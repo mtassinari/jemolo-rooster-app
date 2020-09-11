@@ -4,6 +4,7 @@ import { Resolve, ActivatedRouteSnapshot, Routes, Router } from '@angular/router
 import { Observable, of, EMPTY } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
 
+import { Authority } from 'app/shared/constants/authority.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
 import { IAllegato, Allegato } from 'app/shared/model/allegato.model';
 import { AllegatoService } from './allegato.service';
@@ -38,45 +39,45 @@ export const allegatoRoute: Routes = [
     path: '',
     component: AllegatoComponent,
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'jemoloRoosterApp.allegato.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'jemoloRoosterApp.allegato.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
     component: AllegatoDetailComponent,
     resolve: {
-      allegato: AllegatoResolve
+      allegato: AllegatoResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'jemoloRoosterApp.allegato.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'jemoloRoosterApp.allegato.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
     component: AllegatoUpdateComponent,
     resolve: {
-      allegato: AllegatoResolve
+      allegato: AllegatoResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'jemoloRoosterApp.allegato.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'jemoloRoosterApp.allegato.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
     component: AllegatoUpdateComponent,
     resolve: {
-      allegato: AllegatoResolve
+      allegato: AllegatoResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'jemoloRoosterApp.allegato.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'jemoloRoosterApp.allegato.home.title',
     },
-    canActivate: [UserRouteAccessService]
-  }
+    canActivate: [UserRouteAccessService],
+  },
 ];

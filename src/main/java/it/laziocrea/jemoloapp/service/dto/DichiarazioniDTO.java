@@ -2,19 +2,18 @@ package it.laziocrea.jemoloapp.service.dto;
 
 import javax.validation.constraints.*;
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * A DTO for the {@link it.laziocrea.jemoloapp.domain.Dichiarazioni} entity.
  */
 public class DichiarazioniDTO implements Serializable {
-
+    
     private Long id;
 
     @NotNull
     private String descrizione;
 
-
+    
     public Long getId() {
         return id;
     }
@@ -36,22 +35,19 @@ public class DichiarazioniDTO implements Serializable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof DichiarazioniDTO)) {
             return false;
         }
 
-        DichiarazioniDTO dichiarazioniDTO = (DichiarazioniDTO) o;
-        if (dichiarazioniDTO.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), dichiarazioniDTO.getId());
+        return id != null && id.equals(((DichiarazioniDTO) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "DichiarazioniDTO{" +

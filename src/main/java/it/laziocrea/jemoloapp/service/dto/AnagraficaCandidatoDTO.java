@@ -4,14 +4,13 @@ import io.swagger.annotations.ApiModel;
 import java.time.LocalDate;
 import javax.validation.constraints.*;
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * A DTO for the {@link it.laziocrea.jemoloapp.domain.AnagraficaCandidato} entity.
  */
 @ApiModel(description = "Entity AnagraficaCandidato\n@author Marco Tassinari")
 public class AnagraficaCandidatoDTO implements Serializable {
-
+    
     private Long id;
 
     @NotNull
@@ -64,7 +63,7 @@ public class AnagraficaCandidatoDTO implements Serializable {
 
 
     private Long candidatoId;
-
+    
     public Long getId() {
         return id;
     }
@@ -214,22 +213,19 @@ public class AnagraficaCandidatoDTO implements Serializable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof AnagraficaCandidatoDTO)) {
             return false;
         }
 
-        AnagraficaCandidatoDTO anagraficaCandidatoDTO = (AnagraficaCandidatoDTO) o;
-        if (anagraficaCandidatoDTO.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), anagraficaCandidatoDTO.getId());
+        return id != null && id.equals(((AnagraficaCandidatoDTO) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "AnagraficaCandidatoDTO{" +

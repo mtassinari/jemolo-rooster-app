@@ -6,7 +6,7 @@ import { IStatoRegistrazione } from 'app/shared/model/stato-registrazione.model'
 import { StatoRegistrazioneService } from './stato-registrazione.service';
 
 @Component({
-  templateUrl: './stato-registrazione-delete-dialog.component.html'
+  templateUrl: './stato-registrazione-delete-dialog.component.html',
 })
 export class StatoRegistrazioneDeleteDialogComponent {
   statoRegistrazione?: IStatoRegistrazione;

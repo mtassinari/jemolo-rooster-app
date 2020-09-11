@@ -28,6 +28,7 @@ public interface CompetenzaService {
      */
     Page<CompetenzaDTO> findAll(Pageable pageable);
 
+
     /**
      * Get the "id" competenza.
      *

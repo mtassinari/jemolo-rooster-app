@@ -4,6 +4,7 @@ import { Resolve, ActivatedRouteSnapshot, Routes, Router } from '@angular/router
 import { Observable, of, EMPTY } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
 
+import { Authority } from 'app/shared/constants/authority.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
 import { ILingua, Lingua } from 'app/shared/model/lingua.model';
 import { LinguaService } from './lingua.service';
@@ -38,45 +39,45 @@ export const linguaRoute: Routes = [
     path: '',
     component: LinguaComponent,
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'jemoloRoosterApp.lingua.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'jemoloRoosterApp.lingua.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
     component: LinguaDetailComponent,
     resolve: {
-      lingua: LinguaResolve
+      lingua: LinguaResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'jemoloRoosterApp.lingua.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'jemoloRoosterApp.lingua.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
     component: LinguaUpdateComponent,
     resolve: {
-      lingua: LinguaResolve
+      lingua: LinguaResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'jemoloRoosterApp.lingua.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'jemoloRoosterApp.lingua.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
     component: LinguaUpdateComponent,
     resolve: {
-      lingua: LinguaResolve
+      lingua: LinguaResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'jemoloRoosterApp.lingua.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'jemoloRoosterApp.lingua.home.title',
     },
-    canActivate: [UserRouteAccessService]
-  }
+    canActivate: [UserRouteAccessService],
+  },
 ];

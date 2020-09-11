@@ -34,12 +34,6 @@ public class TitoloStudioServiceImpl implements TitoloStudioService {
         this.titoloStudioMapper = titoloStudioMapper;
     }
 
-    /**
-     * Save a titoloStudio.
-     *
-     * @param titoloStudioDTO the entity to save.
-     * @return the persisted entity.
-     */
     @Override
     public TitoloStudioDTO save(TitoloStudioDTO titoloStudioDTO) {
         log.debug("Request to save TitoloStudio : {}", titoloStudioDTO);
@@ -48,11 +42,6 @@ public class TitoloStudioServiceImpl implements TitoloStudioService {
         return titoloStudioMapper.toDto(titoloStudio);
     }
 
-    /**
-     * Get all the titoloStudios.
-     *
-     * @return the list of entities.
-     */
     @Override
     @Transactional(readOnly = true)
     public List<TitoloStudioDTO> findAll() {
@@ -62,12 +51,7 @@ public class TitoloStudioServiceImpl implements TitoloStudioService {
             .collect(Collectors.toCollection(LinkedList::new));
     }
 
-    /**
-     * Get one titoloStudio by id.
-     *
-     * @param id the id of the entity.
-     * @return the entity.
-     */
+
     @Override
     @Transactional(readOnly = true)
     public Optional<TitoloStudioDTO> findOne(Long id) {
@@ -76,11 +60,6 @@ public class TitoloStudioServiceImpl implements TitoloStudioService {
             .map(titoloStudioMapper::toDto);
     }
 
-    /**
-     * Delete the titoloStudio by id.
-     *
-     * @param id the id of the entity.
-     */
     @Override
     public void delete(Long id) {
         log.debug("Request to delete TitoloStudio : {}", id);

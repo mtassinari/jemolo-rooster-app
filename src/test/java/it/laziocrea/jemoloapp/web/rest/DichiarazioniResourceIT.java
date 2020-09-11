@@ -6,27 +6,22 @@ import it.laziocrea.jemoloapp.repository.DichiarazioniRepository;
 import it.laziocrea.jemoloapp.service.DichiarazioniService;
 import it.laziocrea.jemoloapp.service.dto.DichiarazioniDTO;
 import it.laziocrea.jemoloapp.service.mapper.DichiarazioniMapper;
-import it.laziocrea.jemoloapp.web.rest.errors.ExceptionTranslator;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.Validator;
-
 import javax.persistence.EntityManager;
 import java.util.List;
 
-import static it.laziocrea.jemoloapp.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -34,6 +29,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Integration tests for the {@link DichiarazioniResource} REST controller.
  */
 @SpringBootTest(classes = JemoloRoosterApp.class)
+@AutoConfigureMockMvc
+@WithMockUser
 public class DichiarazioniResourceIT {
 
     private static final String DEFAULT_DESCRIZIONE = "AAAAAAAAAA";
@@ -49,35 +46,12 @@ public class DichiarazioniResourceIT {
     private DichiarazioniService dichiarazioniService;
 
     @Autowired
-    private MappingJackson2HttpMessageConverter jacksonMessageConverter;
-
-    @Autowired
-    private PageableHandlerMethodArgumentResolver pageableArgumentResolver;
-
-    @Autowired
-    private ExceptionTranslator exceptionTranslator;
-
-    @Autowired
     private EntityManager em;
 
     @Autowired
-    private Validator validator;
-
     private MockMvc restDichiarazioniMockMvc;
 
     private Dichiarazioni dichiarazioni;
-
-    @BeforeEach
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
-        final DichiarazioniResource dichiarazioniResource = new DichiarazioniResource(dichiarazioniService);
-        this.restDichiarazioniMockMvc = MockMvcBuilders.standaloneSetup(dichiarazioniResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
-            .setControllerAdvice(exceptionTranslator)
-            .setConversionService(createFormattingConversionService())
-            .setMessageConverters(jacksonMessageConverter)
-            .setValidator(validator).build();
-    }
 
     /**
      * Create an entity for this test.
@@ -111,11 +85,10 @@ public class DichiarazioniResourceIT {
     @Transactional
     public void createDichiarazioni() throws Exception {
         int databaseSizeBeforeCreate = dichiarazioniRepository.findAll().size();
-
         // Create the Dichiarazioni
         DichiarazioniDTO dichiarazioniDTO = dichiarazioniMapper.toDto(dichiarazioni);
-        restDichiarazioniMockMvc.perform(post("/api/dichiarazionis")
-            .contentType(TestUtil.APPLICATION_JSON)
+        restDichiarazioniMockMvc.perform(post("/api/dichiarazionis").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(dichiarazioniDTO)))
             .andExpect(status().isCreated());
 
@@ -136,8 +109,8 @@ public class DichiarazioniResourceIT {
         DichiarazioniDTO dichiarazioniDTO = dichiarazioniMapper.toDto(dichiarazioni);
 
         // An entity with an existing ID cannot be created, so this API call must fail
-        restDichiarazioniMockMvc.perform(post("/api/dichiarazionis")
-            .contentType(TestUtil.APPLICATION_JSON)
+        restDichiarazioniMockMvc.perform(post("/api/dichiarazionis").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(dichiarazioniDTO)))
             .andExpect(status().isBadRequest());
 
@@ -157,8 +130,9 @@ public class DichiarazioniResourceIT {
         // Create the Dichiarazioni, which fails.
         DichiarazioniDTO dichiarazioniDTO = dichiarazioniMapper.toDto(dichiarazioni);
 
-        restDichiarazioniMockMvc.perform(post("/api/dichiarazionis")
-            .contentType(TestUtil.APPLICATION_JSON)
+
+        restDichiarazioniMockMvc.perform(post("/api/dichiarazionis").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(dichiarazioniDTO)))
             .andExpect(status().isBadRequest());
 
@@ -193,7 +167,6 @@ public class DichiarazioniResourceIT {
             .andExpect(jsonPath("$.id").value(dichiarazioni.getId().intValue()))
             .andExpect(jsonPath("$.descrizione").value(DEFAULT_DESCRIZIONE));
     }
-
     @Test
     @Transactional
     public void getNonExistingDichiarazioni() throws Exception {
@@ -218,8 +191,8 @@ public class DichiarazioniResourceIT {
             .descrizione(UPDATED_DESCRIZIONE);
         DichiarazioniDTO dichiarazioniDTO = dichiarazioniMapper.toDto(updatedDichiarazioni);
 
-        restDichiarazioniMockMvc.perform(put("/api/dichiarazionis")
-            .contentType(TestUtil.APPLICATION_JSON)
+        restDichiarazioniMockMvc.perform(put("/api/dichiarazionis").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(dichiarazioniDTO)))
             .andExpect(status().isOk());
 
@@ -239,8 +212,8 @@ public class DichiarazioniResourceIT {
         DichiarazioniDTO dichiarazioniDTO = dichiarazioniMapper.toDto(dichiarazioni);
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
-        restDichiarazioniMockMvc.perform(put("/api/dichiarazionis")
-            .contentType(TestUtil.APPLICATION_JSON)
+        restDichiarazioniMockMvc.perform(put("/api/dichiarazionis").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(dichiarazioniDTO)))
             .andExpect(status().isBadRequest());
 
@@ -258,8 +231,8 @@ public class DichiarazioniResourceIT {
         int databaseSizeBeforeDelete = dichiarazioniRepository.findAll().size();
 
         // Delete the dichiarazioni
-        restDichiarazioniMockMvc.perform(delete("/api/dichiarazionis/{id}", dichiarazioni.getId())
-            .accept(TestUtil.APPLICATION_JSON))
+        restDichiarazioniMockMvc.perform(delete("/api/dichiarazionis/{id}", dichiarazioni.getId()).with(csrf())
+            .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isNoContent());
 
         // Validate the database contains one less item

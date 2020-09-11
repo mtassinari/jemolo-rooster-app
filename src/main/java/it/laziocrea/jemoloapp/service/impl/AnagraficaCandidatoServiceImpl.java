@@ -33,12 +33,6 @@ public class AnagraficaCandidatoServiceImpl implements AnagraficaCandidatoServic
         this.anagraficaCandidatoMapper = anagraficaCandidatoMapper;
     }
 
-    /**
-     * Save a anagraficaCandidato.
-     *
-     * @param anagraficaCandidatoDTO the entity to save.
-     * @return the persisted entity.
-     */
     @Override
     public AnagraficaCandidatoDTO save(AnagraficaCandidatoDTO anagraficaCandidatoDTO) {
         log.debug("Request to save AnagraficaCandidato : {}", anagraficaCandidatoDTO);
@@ -47,12 +41,6 @@ public class AnagraficaCandidatoServiceImpl implements AnagraficaCandidatoServic
         return anagraficaCandidatoMapper.toDto(anagraficaCandidato);
     }
 
-    /**
-     * Get all the anagraficaCandidatoes.
-     *
-     * @param pageable the pagination information.
-     * @return the list of entities.
-     */
     @Override
     @Transactional(readOnly = true)
     public Page<AnagraficaCandidatoDTO> findAll(Pageable pageable) {
@@ -61,12 +49,7 @@ public class AnagraficaCandidatoServiceImpl implements AnagraficaCandidatoServic
             .map(anagraficaCandidatoMapper::toDto);
     }
 
-    /**
-     * Get one anagraficaCandidato by id.
-     *
-     * @param id the id of the entity.
-     * @return the entity.
-     */
+
     @Override
     @Transactional(readOnly = true)
     public Optional<AnagraficaCandidatoDTO> findOne(Long id) {
@@ -75,11 +58,6 @@ public class AnagraficaCandidatoServiceImpl implements AnagraficaCandidatoServic
             .map(anagraficaCandidatoMapper::toDto);
     }
 
-    /**
-     * Delete the anagraficaCandidato by id.
-     *
-     * @param id the id of the entity.
-     */
     @Override
     public void delete(Long id) {
         log.debug("Request to delete AnagraficaCandidato : {}", id);

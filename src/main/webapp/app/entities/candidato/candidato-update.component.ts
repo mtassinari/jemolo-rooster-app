@@ -12,7 +12,7 @@ import { StatoRegistrazioneService } from 'app/entities/stato-registrazione/stat
 
 @Component({
   selector: 'jhi-candidato-update',
-  templateUrl: './candidato-update.component.html'
+  templateUrl: './candidato-update.component.html',
 })
 export class CandidatoUpdateComponent implements OnInit {
   isSaving = false;
@@ -26,11 +26,11 @@ export class CandidatoUpdateComponent implements OnInit {
       null,
       [
         Validators.required,
-        Validators.pattern('^[a-zA-Z]{6}[0-9]{2}[abcdehlmprstABCDEHLMPRST]{1}[0-9]{2}([a-zA-Z]{1}[0-9]{3})[a-zA-Z]{1}$')
-      ]
+        Validators.pattern('^[a-zA-Z]{6}[0-9]{2}[abcdehlmprstABCDEHLMPRST]{1}[0-9]{2}([a-zA-Z]{1}[0-9]{3})[a-zA-Z]{1}$'),
+      ],
     ],
     eMail: [null, [Validators.required, Validators.pattern('^[A-z0-9.+_-]+@[A-z0-9._-]+.[A-z]{2,6}$')]],
-    statoRegistrazioneId: []
+    statoRegistrazioneId: [],
   });
 
   constructor(
@@ -57,7 +57,7 @@ export class CandidatoUpdateComponent implements OnInit {
       cognome: candidato.cognome,
       codiceFiscale: candidato.codiceFiscale,
       eMail: candidato.eMail,
-      statoRegistrazioneId: candidato.statoRegistrazioneId
+      statoRegistrazioneId: candidato.statoRegistrazioneId,
     });
   }
 
@@ -83,7 +83,7 @@ export class CandidatoUpdateComponent implements OnInit {
       cognome: this.editForm.get(['cognome'])!.value,
       codiceFiscale: this.editForm.get(['codiceFiscale'])!.value,
       eMail: this.editForm.get(['eMail'])!.value,
-      statoRegistrazioneId: this.editForm.get(['statoRegistrazioneId'])!.value
+      statoRegistrazioneId: this.editForm.get(['statoRegistrazioneId'])!.value,
     };
   }
 

@@ -11,6 +11,6 @@ import { competenzaRoute } from './competenza.route';
 @NgModule({
   imports: [JemoloRoosterAppSharedModule, RouterModule.forChild(competenzaRoute)],
   declarations: [CompetenzaComponent, CompetenzaDetailComponent, CompetenzaUpdateComponent, CompetenzaDeleteDialogComponent],
-  entryComponents: [CompetenzaDeleteDialogComponent]
+  entryComponents: [CompetenzaDeleteDialogComponent],
 })
 export class JemoloRoosterAppCompetenzaModule {}

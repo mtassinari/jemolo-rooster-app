@@ -5,7 +5,7 @@ import { ICandidato } from 'app/shared/model/candidato.model';
 
 @Component({
   selector: 'jhi-candidato-detail',
-  templateUrl: './candidato-detail.component.html'
+  templateUrl: './candidato-detail.component.html',
 })
 export class CandidatoDetailComponent implements OnInit {
   candidato: ICandidato | null = null;

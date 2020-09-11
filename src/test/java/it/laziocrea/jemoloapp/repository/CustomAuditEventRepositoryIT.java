@@ -1,6 +1,7 @@
 package it.laziocrea.jemoloapp.repository;
 
 import it.laziocrea.jemoloapp.JemoloRoosterApp;
+
 import it.laziocrea.jemoloapp.config.Constants;
 import it.laziocrea.jemoloapp.config.audit.AuditEventConverter;
 import it.laziocrea.jemoloapp.domain.PersistentAuditEvent;

@@ -29,7 +29,7 @@ public class Dichiarazioni implements Serializable {
     @OneToMany(mappedBy = "dichiarazioni")
     private Set<DichiarazioniObligatorie> dichiarazioniObligatories = new HashSet<>();
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
     }
@@ -75,7 +75,7 @@ public class Dichiarazioni implements Serializable {
     public void setDichiarazioniObligatories(Set<DichiarazioniObligatorie> dichiarazioniObligatories) {
         this.dichiarazioniObligatories = dichiarazioniObligatories;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
     public boolean equals(Object o) {
@@ -93,6 +93,7 @@ public class Dichiarazioni implements Serializable {
         return 31;
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "Dichiarazioni{" +

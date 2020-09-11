@@ -14,8 +14,8 @@ import { ambitoCompetenzaRoute } from './ambito-competenza.route';
     AmbitoCompetenzaComponent,
     AmbitoCompetenzaDetailComponent,
     AmbitoCompetenzaUpdateComponent,
-    AmbitoCompetenzaDeleteDialogComponent
+    AmbitoCompetenzaDeleteDialogComponent,
   ],
-  entryComponents: [AmbitoCompetenzaDeleteDialogComponent]
+  entryComponents: [AmbitoCompetenzaDeleteDialogComponent],
 })
 export class JemoloRoosterAppAmbitoCompetenzaModule {}

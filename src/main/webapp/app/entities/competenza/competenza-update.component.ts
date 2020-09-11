@@ -16,7 +16,7 @@ type SelectableEntity = IAnagraficaCandidato | IAmbitoCompetenza;
 
 @Component({
   selector: 'jhi-competenza-update',
-  templateUrl: './competenza-update.component.html'
+  templateUrl: './competenza-update.component.html',
 })
 export class CompetenzaUpdateComponent implements OnInit {
   isSaving = false;
@@ -27,7 +27,7 @@ export class CompetenzaUpdateComponent implements OnInit {
     id: [],
     anni: [null, [Validators.required]],
     anagraficaId: [null, Validators.required],
-    ambitoCompId: [null, Validators.required]
+    ambitoCompId: [null, Validators.required],
   });
 
   constructor(
@@ -55,7 +55,7 @@ export class CompetenzaUpdateComponent implements OnInit {
       id: competenza.id,
       anni: competenza.anni,
       anagraficaId: competenza.anagraficaId,
-      ambitoCompId: competenza.ambitoCompId
+      ambitoCompId: competenza.ambitoCompId,
     });
   }
 
@@ -79,7 +79,7 @@ export class CompetenzaUpdateComponent implements OnInit {
       id: this.editForm.get(['id'])!.value,
       anni: this.editForm.get(['anni'])!.value,
       anagraficaId: this.editForm.get(['anagraficaId'])!.value,
-      ambitoCompId: this.editForm.get(['ambitoCompId'])!.value
+      ambitoCompId: this.editForm.get(['ambitoCompId'])!.value,
     };
   }
 

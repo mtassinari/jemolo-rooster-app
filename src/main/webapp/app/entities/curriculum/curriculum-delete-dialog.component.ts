@@ -6,7 +6,7 @@ import { ICurriculum } from 'app/shared/model/curriculum.model';
 import { CurriculumService } from './curriculum.service';
 
 @Component({
-  templateUrl: './curriculum-delete-dialog.component.html'
+  templateUrl: './curriculum-delete-dialog.component.html',
 })
 export class CurriculumDeleteDialogComponent {
   curriculum?: ICurriculum;

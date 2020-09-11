@@ -25,6 +25,7 @@ public interface TitoloStudioService {
      */
     List<TitoloStudioDTO> findAll();
 
+
     /**
      * Get the "id" titoloStudio.
      *

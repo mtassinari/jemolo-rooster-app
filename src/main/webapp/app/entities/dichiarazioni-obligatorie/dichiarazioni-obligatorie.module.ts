@@ -14,8 +14,8 @@ import { dichiarazioniObligatorieRoute } from './dichiarazioni-obligatorie.route
     DichiarazioniObligatorieComponent,
     DichiarazioniObligatorieDetailComponent,
     DichiarazioniObligatorieUpdateComponent,
-    DichiarazioniObligatorieDeleteDialogComponent
+    DichiarazioniObligatorieDeleteDialogComponent,
   ],
-  entryComponents: [DichiarazioniObligatorieDeleteDialogComponent]
+  entryComponents: [DichiarazioniObligatorieDeleteDialogComponent],
 })
 export class JemoloRoosterAppDichiarazioniObligatorieModule {}

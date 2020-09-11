@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { Resolve, ActivatedRouteSnapshot, Routes, Router } from '@angular/router';
-import { JhiResolvePagingParams } from 'ng-jhipster';
 import { Observable, of, EMPTY } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
 
+import { Authority } from 'app/shared/constants/authority.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
 import { ICurriculum, Curriculum } from 'app/shared/model/curriculum.model';
 import { CurriculumService } from './curriculum.service';
@@ -38,50 +38,47 @@ export const curriculumRoute: Routes = [
   {
     path: '',
     component: CurriculumComponent,
-    resolve: {
-      pagingParams: JhiResolvePagingParams
-    },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: [Authority.USER],
       defaultSort: 'id,asc',
-      pageTitle: 'jemoloRoosterApp.curriculum.home.title'
+      pageTitle: 'jemoloRoosterApp.curriculum.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
     component: CurriculumDetailComponent,
     resolve: {
-      curriculum: CurriculumResolve
+      curriculum: CurriculumResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'jemoloRoosterApp.curriculum.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'jemoloRoosterApp.curriculum.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
     component: CurriculumUpdateComponent,
     resolve: {
-      curriculum: CurriculumResolve
+      curriculum: CurriculumResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'jemoloRoosterApp.curriculum.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'jemoloRoosterApp.curriculum.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
     component: CurriculumUpdateComponent,
     resolve: {
-      curriculum: CurriculumResolve
+      curriculum: CurriculumResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'jemoloRoosterApp.curriculum.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'jemoloRoosterApp.curriculum.home.title',
     },
-    canActivate: [UserRouteAccessService]
-  }
+    canActivate: [UserRouteAccessService],
+  },
 ];

@@ -34,12 +34,6 @@ public class DichiarazioniObligatorieServiceImpl implements DichiarazioniObligat
         this.dichiarazioniObligatorieMapper = dichiarazioniObligatorieMapper;
     }
 
-    /**
-     * Save a dichiarazioniObligatorie.
-     *
-     * @param dichiarazioniObligatorieDTO the entity to save.
-     * @return the persisted entity.
-     */
     @Override
     public DichiarazioniObligatorieDTO save(DichiarazioniObligatorieDTO dichiarazioniObligatorieDTO) {
         log.debug("Request to save DichiarazioniObligatorie : {}", dichiarazioniObligatorieDTO);
@@ -48,11 +42,6 @@ public class DichiarazioniObligatorieServiceImpl implements DichiarazioniObligat
         return dichiarazioniObligatorieMapper.toDto(dichiarazioniObligatorie);
     }
 
-    /**
-     * Get all the dichiarazioniObligatories.
-     *
-     * @return the list of entities.
-     */
     @Override
     @Transactional(readOnly = true)
     public List<DichiarazioniObligatorieDTO> findAll() {
@@ -62,12 +51,7 @@ public class DichiarazioniObligatorieServiceImpl implements DichiarazioniObligat
             .collect(Collectors.toCollection(LinkedList::new));
     }
 
-    /**
-     * Get one dichiarazioniObligatorie by id.
-     *
-     * @param id the id of the entity.
-     * @return the entity.
-     */
+
     @Override
     @Transactional(readOnly = true)
     public Optional<DichiarazioniObligatorieDTO> findOne(Long id) {
@@ -76,11 +60,6 @@ public class DichiarazioniObligatorieServiceImpl implements DichiarazioniObligat
             .map(dichiarazioniObligatorieMapper::toDto);
     }
 
-    /**
-     * Delete the dichiarazioniObligatorie by id.
-     *
-     * @param id the id of the entity.
-     */
     @Override
     public void delete(Long id) {
         log.debug("Request to delete DichiarazioniObligatorie : {}", id);

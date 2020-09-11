@@ -6,7 +6,7 @@ import { ILingua } from 'app/shared/model/lingua.model';
 import { LinguaService } from './lingua.service';
 
 @Component({
-  templateUrl: './lingua-delete-dialog.component.html'
+  templateUrl: './lingua-delete-dialog.component.html',
 })
 export class LinguaDeleteDialogComponent {
   lingua?: ILingua;

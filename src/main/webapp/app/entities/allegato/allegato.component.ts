@@ -10,7 +10,7 @@ import { AllegatoDeleteDialogComponent } from './allegato-delete-dialog.componen
 
 @Component({
   selector: 'jhi-allegato',
-  templateUrl: './allegato.component.html'
+  templateUrl: './allegato.component.html',
 })
 export class AllegatoComponent implements OnInit, OnDestroy {
   allegatoes?: IAllegato[];
@@ -47,7 +47,7 @@ export class AllegatoComponent implements OnInit, OnDestroy {
     return this.dataUtils.byteSize(base64String);
   }
 
-  openFile(contentType: string, base64String: string): void {
+  openFile(contentType = '', base64String: string): void {
     return this.dataUtils.openFile(contentType, base64String);
   }
 

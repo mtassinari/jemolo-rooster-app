@@ -10,7 +10,7 @@ import { AmbitoCompetenzaDeleteDialogComponent } from './ambito-competenza-delet
 
 @Component({
   selector: 'jhi-ambito-competenza',
-  templateUrl: './ambito-competenza.component.html'
+  templateUrl: './ambito-competenza.component.html',
 })
 export class AmbitoCompetenzaComponent implements OnInit, OnDestroy {
   ambitoCompetenzas?: IAmbitoCompetenza[];

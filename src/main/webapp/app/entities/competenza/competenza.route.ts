@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { Resolve, ActivatedRouteSnapshot, Routes, Router } from '@angular/router';
-import { JhiResolvePagingParams } from 'ng-jhipster';
 import { Observable, of, EMPTY } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
 
+import { Authority } from 'app/shared/constants/authority.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
 import { ICompetenza, Competenza } from 'app/shared/model/competenza.model';
 import { CompetenzaService } from './competenza.service';
@@ -38,50 +38,47 @@ export const competenzaRoute: Routes = [
   {
     path: '',
     component: CompetenzaComponent,
-    resolve: {
-      pagingParams: JhiResolvePagingParams
-    },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: [Authority.USER],
       defaultSort: 'id,asc',
-      pageTitle: 'jemoloRoosterApp.competenza.home.title'
+      pageTitle: 'jemoloRoosterApp.competenza.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
     component: CompetenzaDetailComponent,
     resolve: {
-      competenza: CompetenzaResolve
+      competenza: CompetenzaResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'jemoloRoosterApp.competenza.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'jemoloRoosterApp.competenza.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
     component: CompetenzaUpdateComponent,
     resolve: {
-      competenza: CompetenzaResolve
+      competenza: CompetenzaResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'jemoloRoosterApp.competenza.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'jemoloRoosterApp.competenza.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
     component: CompetenzaUpdateComponent,
     resolve: {
-      competenza: CompetenzaResolve
+      competenza: CompetenzaResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'jemoloRoosterApp.competenza.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'jemoloRoosterApp.competenza.home.title',
     },
-    canActivate: [UserRouteAccessService]
-  }
+    canActivate: [UserRouteAccessService],
+  },
 ];

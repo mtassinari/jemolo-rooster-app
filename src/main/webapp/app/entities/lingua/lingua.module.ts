@@ -11,6 +11,6 @@ import { linguaRoute } from './lingua.route';
 @NgModule({
   imports: [JemoloRoosterAppSharedModule, RouterModule.forChild(linguaRoute)],
   declarations: [LinguaComponent, LinguaDetailComponent, LinguaUpdateComponent, LinguaDeleteDialogComponent],
-  entryComponents: [LinguaDeleteDialogComponent]
+  entryComponents: [LinguaDeleteDialogComponent],
 })
 export class JemoloRoosterAppLinguaModule {}

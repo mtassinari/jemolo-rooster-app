@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { Resolve, ActivatedRouteSnapshot, Routes, Router } from '@angular/router';
-import { JhiResolvePagingParams } from 'ng-jhipster';
 import { Observable, of, EMPTY } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
 
+import { Authority } from 'app/shared/constants/authority.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
 import { ICompetenzeLng, CompetenzeLng } from 'app/shared/model/competenze-lng.model';
 import { CompetenzeLngService } from './competenze-lng.service';
@@ -38,50 +38,47 @@ export const competenzeLngRoute: Routes = [
   {
     path: '',
     component: CompetenzeLngComponent,
-    resolve: {
-      pagingParams: JhiResolvePagingParams
-    },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: [Authority.USER],
       defaultSort: 'id,asc',
-      pageTitle: 'jemoloRoosterApp.competenzeLng.home.title'
+      pageTitle: 'jemoloRoosterApp.competenzeLng.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
     component: CompetenzeLngDetailComponent,
     resolve: {
-      competenzeLng: CompetenzeLngResolve
+      competenzeLng: CompetenzeLngResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'jemoloRoosterApp.competenzeLng.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'jemoloRoosterApp.competenzeLng.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
     component: CompetenzeLngUpdateComponent,
     resolve: {
-      competenzeLng: CompetenzeLngResolve
+      competenzeLng: CompetenzeLngResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'jemoloRoosterApp.competenzeLng.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'jemoloRoosterApp.competenzeLng.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
     component: CompetenzeLngUpdateComponent,
     resolve: {
-      competenzeLng: CompetenzeLngResolve
+      competenzeLng: CompetenzeLngResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'jemoloRoosterApp.competenzeLng.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'jemoloRoosterApp.competenzeLng.home.title',
     },
-    canActivate: [UserRouteAccessService]
-  }
+    canActivate: [UserRouteAccessService],
+  },
 ];

@@ -18,7 +18,7 @@ describe('Component Tests', () => {
       TestBed.configureTestingModule({
         imports: [JemoloRoosterAppTestModule],
         declarations: [TitoloStudioUpdateComponent],
-        providers: [FormBuilder]
+        providers: [FormBuilder],
       })
         .overrideTemplate(TitoloStudioUpdateComponent, '')
         .compileComponents();

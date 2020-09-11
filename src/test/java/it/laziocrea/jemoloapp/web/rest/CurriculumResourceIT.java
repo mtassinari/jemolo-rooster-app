@@ -8,27 +8,22 @@ import it.laziocrea.jemoloapp.repository.CurriculumRepository;
 import it.laziocrea.jemoloapp.service.CurriculumService;
 import it.laziocrea.jemoloapp.service.dto.CurriculumDTO;
 import it.laziocrea.jemoloapp.service.mapper.CurriculumMapper;
-import it.laziocrea.jemoloapp.web.rest.errors.ExceptionTranslator;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.Validator;
-
 import javax.persistence.EntityManager;
 import java.util.List;
 
-import static it.laziocrea.jemoloapp.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -36,6 +31,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Integration tests for the {@link CurriculumResource} REST controller.
  */
 @SpringBootTest(classes = JemoloRoosterApp.class)
+@AutoConfigureMockMvc
+@WithMockUser
 public class CurriculumResourceIT {
 
     private static final String DEFAULT_CV = "AAAAAAAAAA";
@@ -63,35 +60,12 @@ public class CurriculumResourceIT {
     private CurriculumService curriculumService;
 
     @Autowired
-    private MappingJackson2HttpMessageConverter jacksonMessageConverter;
-
-    @Autowired
-    private PageableHandlerMethodArgumentResolver pageableArgumentResolver;
-
-    @Autowired
-    private ExceptionTranslator exceptionTranslator;
-
-    @Autowired
     private EntityManager em;
 
     @Autowired
-    private Validator validator;
-
     private MockMvc restCurriculumMockMvc;
 
     private Curriculum curriculum;
-
-    @BeforeEach
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
-        final CurriculumResource curriculumResource = new CurriculumResource(curriculumService);
-        this.restCurriculumMockMvc = MockMvcBuilders.standaloneSetup(curriculumResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
-            .setControllerAdvice(exceptionTranslator)
-            .setConversionService(createFormattingConversionService())
-            .setMessageConverters(jacksonMessageConverter)
-            .setValidator(validator).build();
-    }
 
     /**
      * Create an entity for this test.
@@ -173,11 +147,10 @@ public class CurriculumResourceIT {
     @Transactional
     public void createCurriculum() throws Exception {
         int databaseSizeBeforeCreate = curriculumRepository.findAll().size();
-
         // Create the Curriculum
         CurriculumDTO curriculumDTO = curriculumMapper.toDto(curriculum);
-        restCurriculumMockMvc.perform(post("/api/curricula")
-            .contentType(TestUtil.APPLICATION_JSON)
+        restCurriculumMockMvc.perform(post("/api/curricula").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(curriculumDTO)))
             .andExpect(status().isCreated());
 
@@ -202,8 +175,8 @@ public class CurriculumResourceIT {
         CurriculumDTO curriculumDTO = curriculumMapper.toDto(curriculum);
 
         // An entity with an existing ID cannot be created, so this API call must fail
-        restCurriculumMockMvc.perform(post("/api/curricula")
-            .contentType(TestUtil.APPLICATION_JSON)
+        restCurriculumMockMvc.perform(post("/api/curricula").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(curriculumDTO)))
             .andExpect(status().isBadRequest());
 
@@ -223,8 +196,9 @@ public class CurriculumResourceIT {
         // Create the Curriculum, which fails.
         CurriculumDTO curriculumDTO = curriculumMapper.toDto(curriculum);
 
-        restCurriculumMockMvc.perform(post("/api/curricula")
-            .contentType(TestUtil.APPLICATION_JSON)
+
+        restCurriculumMockMvc.perform(post("/api/curricula").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(curriculumDTO)))
             .andExpect(status().isBadRequest());
 
@@ -242,8 +216,9 @@ public class CurriculumResourceIT {
         // Create the Curriculum, which fails.
         CurriculumDTO curriculumDTO = curriculumMapper.toDto(curriculum);
 
-        restCurriculumMockMvc.perform(post("/api/curricula")
-            .contentType(TestUtil.APPLICATION_JSON)
+
+        restCurriculumMockMvc.perform(post("/api/curricula").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(curriculumDTO)))
             .andExpect(status().isBadRequest());
 
@@ -261,8 +236,9 @@ public class CurriculumResourceIT {
         // Create the Curriculum, which fails.
         CurriculumDTO curriculumDTO = curriculumMapper.toDto(curriculum);
 
-        restCurriculumMockMvc.perform(post("/api/curricula")
-            .contentType(TestUtil.APPLICATION_JSON)
+
+        restCurriculumMockMvc.perform(post("/api/curricula").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(curriculumDTO)))
             .andExpect(status().isBadRequest());
 
@@ -305,7 +281,6 @@ public class CurriculumResourceIT {
             .andExpect(jsonPath("$.mimeType").value(DEFAULT_MIME_TYPE))
             .andExpect(jsonPath("$.note").value(DEFAULT_NOTE));
     }
-
     @Test
     @Transactional
     public void getNonExistingCurriculum() throws Exception {
@@ -334,8 +309,8 @@ public class CurriculumResourceIT {
             .note(UPDATED_NOTE);
         CurriculumDTO curriculumDTO = curriculumMapper.toDto(updatedCurriculum);
 
-        restCurriculumMockMvc.perform(put("/api/curricula")
-            .contentType(TestUtil.APPLICATION_JSON)
+        restCurriculumMockMvc.perform(put("/api/curricula").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(curriculumDTO)))
             .andExpect(status().isOk());
 
@@ -359,8 +334,8 @@ public class CurriculumResourceIT {
         CurriculumDTO curriculumDTO = curriculumMapper.toDto(curriculum);
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
-        restCurriculumMockMvc.perform(put("/api/curricula")
-            .contentType(TestUtil.APPLICATION_JSON)
+        restCurriculumMockMvc.perform(put("/api/curricula").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(curriculumDTO)))
             .andExpect(status().isBadRequest());
 
@@ -378,8 +353,8 @@ public class CurriculumResourceIT {
         int databaseSizeBeforeDelete = curriculumRepository.findAll().size();
 
         // Delete the curriculum
-        restCurriculumMockMvc.perform(delete("/api/curricula/{id}", curriculum.getId())
-            .accept(TestUtil.APPLICATION_JSON))
+        restCurriculumMockMvc.perform(delete("/api/curricula/{id}", curriculum.getId()).with(csrf())
+            .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isNoContent());
 
         // Validate the database contains one less item

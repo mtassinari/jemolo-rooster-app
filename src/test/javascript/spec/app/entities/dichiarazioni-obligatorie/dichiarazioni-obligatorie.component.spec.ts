@@ -16,7 +16,7 @@ describe('Component Tests', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [JemoloRoosterAppTestModule],
-        declarations: [DichiarazioniObligatorieComponent]
+        declarations: [DichiarazioniObligatorieComponent],
       })
         .overrideTemplate(DichiarazioniObligatorieComponent, '')
         .compileComponents();
@@ -33,7 +33,7 @@ describe('Component Tests', () => {
         of(
           new HttpResponse({
             body: [new DichiarazioniObligatorie(123)],
-            headers
+            headers,
           })
         )
       );

@@ -34,12 +34,6 @@ public class DichiarazioniServiceImpl implements DichiarazioniService {
         this.dichiarazioniMapper = dichiarazioniMapper;
     }
 
-    /**
-     * Save a dichiarazioni.
-     *
-     * @param dichiarazioniDTO the entity to save.
-     * @return the persisted entity.
-     */
     @Override
     public DichiarazioniDTO save(DichiarazioniDTO dichiarazioniDTO) {
         log.debug("Request to save Dichiarazioni : {}", dichiarazioniDTO);
@@ -48,11 +42,6 @@ public class DichiarazioniServiceImpl implements DichiarazioniService {
         return dichiarazioniMapper.toDto(dichiarazioni);
     }
 
-    /**
-     * Get all the dichiarazionis.
-     *
-     * @return the list of entities.
-     */
     @Override
     @Transactional(readOnly = true)
     public List<DichiarazioniDTO> findAll() {
@@ -62,12 +51,7 @@ public class DichiarazioniServiceImpl implements DichiarazioniService {
             .collect(Collectors.toCollection(LinkedList::new));
     }
 
-    /**
-     * Get one dichiarazioni by id.
-     *
-     * @param id the id of the entity.
-     * @return the entity.
-     */
+
     @Override
     @Transactional(readOnly = true)
     public Optional<DichiarazioniDTO> findOne(Long id) {
@@ -76,11 +60,6 @@ public class DichiarazioniServiceImpl implements DichiarazioniService {
             .map(dichiarazioniMapper::toDto);
     }
 
-    /**
-     * Delete the dichiarazioni by id.
-     *
-     * @param id the id of the entity.
-     */
     @Override
     public void delete(Long id) {
         log.debug("Request to delete Dichiarazioni : {}", id);

@@ -27,15 +27,15 @@ public class CompetenzeLng implements Serializable {
 
     @ManyToOne(optional = false)
     @NotNull
-    @JsonIgnoreProperties("competenzeLinguistiches")
+    @JsonIgnoreProperties(value = "competenzeLinguistiches", allowSetters = true)
     private Lingua lingua;
 
     @ManyToOne(optional = false)
     @NotNull
-    @JsonIgnoreProperties("competenzeLngs")
+    @JsonIgnoreProperties(value = "competenzeLngs", allowSetters = true)
     private AnagraficaCandidato anagrafica;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
     }
@@ -82,7 +82,7 @@ public class CompetenzeLng implements Serializable {
     public void setAnagrafica(AnagraficaCandidato anagraficaCandidato) {
         this.anagrafica = anagraficaCandidato;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
     public boolean equals(Object o) {
@@ -100,6 +100,7 @@ public class CompetenzeLng implements Serializable {
         return 31;
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "CompetenzeLng{" +

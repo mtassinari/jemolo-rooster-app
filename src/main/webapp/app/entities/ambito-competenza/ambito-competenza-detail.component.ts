@@ -5,7 +5,7 @@ import { IAmbitoCompetenza } from 'app/shared/model/ambito-competenza.model';
 
 @Component({
   selector: 'jhi-ambito-competenza-detail',
-  templateUrl: './ambito-competenza-detail.component.html'
+  templateUrl: './ambito-competenza-detail.component.html',
 })
 export class AmbitoCompetenzaDetailComponent implements OnInit {
   ambitoCompetenza: IAmbitoCompetenza | null = null;

@@ -4,6 +4,7 @@ import { Resolve, ActivatedRouteSnapshot, Routes, Router } from '@angular/router
 import { Observable, of, EMPTY } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
 
+import { Authority } from 'app/shared/constants/authority.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
 import { IDichiarazioni, Dichiarazioni } from 'app/shared/model/dichiarazioni.model';
 import { DichiarazioniService } from './dichiarazioni.service';
@@ -38,45 +39,45 @@ export const dichiarazioniRoute: Routes = [
     path: '',
     component: DichiarazioniComponent,
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'jemoloRoosterApp.dichiarazioni.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'jemoloRoosterApp.dichiarazioni.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
     component: DichiarazioniDetailComponent,
     resolve: {
-      dichiarazioni: DichiarazioniResolve
+      dichiarazioni: DichiarazioniResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'jemoloRoosterApp.dichiarazioni.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'jemoloRoosterApp.dichiarazioni.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
     component: DichiarazioniUpdateComponent,
     resolve: {
-      dichiarazioni: DichiarazioniResolve
+      dichiarazioni: DichiarazioniResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'jemoloRoosterApp.dichiarazioni.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'jemoloRoosterApp.dichiarazioni.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
     component: DichiarazioniUpdateComponent,
     resolve: {
-      dichiarazioni: DichiarazioniResolve
+      dichiarazioni: DichiarazioniResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'jemoloRoosterApp.dichiarazioni.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'jemoloRoosterApp.dichiarazioni.home.title',
     },
-    canActivate: [UserRouteAccessService]
-  }
+    canActivate: [UserRouteAccessService],
+  },
 ];

@@ -59,6 +59,7 @@ public class StatoRegistrazioneService {
             .collect(Collectors.toCollection(LinkedList::new));
     }
 
+
     /**
      * Get one statoRegistrazione by id.
      *

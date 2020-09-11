@@ -10,7 +10,7 @@ import { StatoRegistrazioneDeleteDialogComponent } from './stato-registrazione-d
 
 @Component({
   selector: 'jhi-stato-registrazione',
-  templateUrl: './stato-registrazione.component.html'
+  templateUrl: './stato-registrazione.component.html',
 })
 export class StatoRegistrazioneComponent implements OnInit, OnDestroy {
   statoRegistraziones?: IStatoRegistrazione[];

@@ -11,6 +11,6 @@ import { titoloStudioRoute } from './titolo-studio.route';
 @NgModule({
   imports: [JemoloRoosterAppSharedModule, RouterModule.forChild(titoloStudioRoute)],
   declarations: [TitoloStudioComponent, TitoloStudioDetailComponent, TitoloStudioUpdateComponent, TitoloStudioDeleteDialogComponent],
-  entryComponents: [TitoloStudioDeleteDialogComponent]
+  entryComponents: [TitoloStudioDeleteDialogComponent],
 })
 export class JemoloRoosterAppTitoloStudioModule {}

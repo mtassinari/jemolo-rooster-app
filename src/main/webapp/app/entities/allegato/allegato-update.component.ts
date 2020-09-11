@@ -12,7 +12,7 @@ import { AlertError } from 'app/shared/alert/alert-error.model';
 
 @Component({
   selector: 'jhi-allegato-update',
-  templateUrl: './allegato-update.component.html'
+  templateUrl: './allegato-update.component.html',
 })
 export class AllegatoUpdateComponent implements OnInit {
   isSaving = false;
@@ -20,7 +20,7 @@ export class AllegatoUpdateComponent implements OnInit {
   editForm = this.fb.group({
     id: [],
     data: [null, [Validators.required]],
-    dataContentType: []
+    dataContentType: [],
   });
 
   constructor(
@@ -41,7 +41,7 @@ export class AllegatoUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: allegato.id,
       data: allegato.data,
-      dataContentType: allegato.dataContentType
+      dataContentType: allegato.dataContentType,
     });
   }
 
@@ -80,7 +80,7 @@ export class AllegatoUpdateComponent implements OnInit {
       ...new Allegato(),
       id: this.editForm.get(['id'])!.value,
       dataContentType: this.editForm.get(['dataContentType'])!.value,
-      data: this.editForm.get(['data'])!.value
+      data: this.editForm.get(['data'])!.value,
     };
   }
 

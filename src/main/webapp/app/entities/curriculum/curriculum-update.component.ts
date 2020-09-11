@@ -17,7 +17,7 @@ type SelectableEntity = IAllegato | IAnagraficaCandidato;
 
 @Component({
   selector: 'jhi-curriculum-update',
-  templateUrl: './curriculum-update.component.html'
+  templateUrl: './curriculum-update.component.html',
 })
 export class CurriculumUpdateComponent implements OnInit {
   isSaving = false;
@@ -32,7 +32,7 @@ export class CurriculumUpdateComponent implements OnInit {
     mimeType: [],
     note: [],
     attachId: [null, Validators.required],
-    anagraficaId: [null, Validators.required]
+    anagraficaId: [null, Validators.required],
   });
 
   constructor(
@@ -84,7 +84,7 @@ export class CurriculumUpdateComponent implements OnInit {
       mimeType: curriculum.mimeType,
       note: curriculum.note,
       attachId: curriculum.attachId,
-      anagraficaId: curriculum.anagraficaId
+      anagraficaId: curriculum.anagraficaId,
     });
   }
 
@@ -112,7 +112,7 @@ export class CurriculumUpdateComponent implements OnInit {
       mimeType: this.editForm.get(['mimeType'])!.value,
       note: this.editForm.get(['note'])!.value,
       attachId: this.editForm.get(['attachId'])!.value,
-      anagraficaId: this.editForm.get(['anagraficaId'])!.value
+      anagraficaId: this.editForm.get(['anagraficaId'])!.value,
     };
   }
 

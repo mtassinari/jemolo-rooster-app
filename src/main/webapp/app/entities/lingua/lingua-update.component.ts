@@ -10,14 +10,14 @@ import { LinguaService } from './lingua.service';
 
 @Component({
   selector: 'jhi-lingua-update',
-  templateUrl: './lingua-update.component.html'
+  templateUrl: './lingua-update.component.html',
 })
 export class LinguaUpdateComponent implements OnInit {
   isSaving = false;
 
   editForm = this.fb.group({
     id: [],
-    lingua: [null, [Validators.required]]
+    lingua: [null, [Validators.required]],
   });
 
   constructor(protected linguaService: LinguaService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
@@ -31,7 +31,7 @@ export class LinguaUpdateComponent implements OnInit {
   updateForm(lingua: ILingua): void {
     this.editForm.patchValue({
       id: lingua.id,
-      lingua: lingua.lingua
+      lingua: lingua.lingua,
     });
   }
 
@@ -53,7 +53,7 @@ export class LinguaUpdateComponent implements OnInit {
     return {
       ...new Lingua(),
       id: this.editForm.get(['id'])!.value,
-      lingua: this.editForm.get(['lingua'])!.value
+      lingua: this.editForm.get(['lingua'])!.value,
     };
   }
 

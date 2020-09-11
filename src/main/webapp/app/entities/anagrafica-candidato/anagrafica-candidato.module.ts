@@ -14,8 +14,8 @@ import { anagraficaCandidatoRoute } from './anagrafica-candidato.route';
     AnagraficaCandidatoComponent,
     AnagraficaCandidatoDetailComponent,
     AnagraficaCandidatoUpdateComponent,
-    AnagraficaCandidatoDeleteDialogComponent
+    AnagraficaCandidatoDeleteDialogComponent,
   ],
-  entryComponents: [AnagraficaCandidatoDeleteDialogComponent]
+  entryComponents: [AnagraficaCandidatoDeleteDialogComponent],
 })
 export class JemoloRoosterAppAnagraficaCandidatoModule {}

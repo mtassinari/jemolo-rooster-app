@@ -18,7 +18,7 @@
         <span jhiTranslate="jemoloRoosterApp.statoRegistrazione.home.notFound">No statoRegistraziones found</span>
     </div>
 
-    <div class="table-responsive" id="entities" *ngIf="statoRegistraziones?.length > 0">
+    <div class="table-responsive" id="entities" *ngIf="statoRegistraziones && statoRegistraziones.length > 0">
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
                 <tr>

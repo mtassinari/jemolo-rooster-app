@@ -11,6 +11,6 @@ import { allegatoRoute } from './allegato.route';
 @NgModule({
   imports: [JemoloRoosterAppSharedModule, RouterModule.forChild(allegatoRoute)],
   declarations: [AllegatoComponent, AllegatoDetailComponent, AllegatoUpdateComponent, AllegatoDeleteDialogComponent],
-  entryComponents: [AllegatoDeleteDialogComponent]
+  entryComponents: [AllegatoDeleteDialogComponent],
 })
 export class JemoloRoosterAppAllegatoModule {}
