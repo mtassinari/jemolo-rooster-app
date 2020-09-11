@@ -13,11 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 /**
  * Service Implementation for managing {@link Candidato}.
@@ -53,21 +49,6 @@ public class CandidatoServiceImpl implements CandidatoService {
             .map(candidatoMapper::toDto);
     }
 
-
-
-    /**
-     *  Get all the candidatoes where AnagraficaCandidato is {@code null}.
-     *  @return the list of entities.
-     */
-    @Transactional(readOnly = true) 
-    public List<CandidatoDTO> findAllWhereAnagraficaCandidatoIsNull() {
-        log.debug("Request to get all candidatoes where AnagraficaCandidato is null");
-        return StreamSupport
-            .stream(candidatoRepository.findAll().spliterator(), false)
-            .filter(candidato -> candidato.getAnagraficaCandidato() == null)
-            .map(candidatoMapper::toDto)
-            .collect(Collectors.toCollection(LinkedList::new));
-    }
 
     @Override
     @Transactional(readOnly = true)

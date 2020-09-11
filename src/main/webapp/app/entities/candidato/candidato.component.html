@@ -27,6 +27,7 @@
                     <th scope="col"  jhiSortBy="cognome"><span jhiTranslate="jemoloRoosterApp.candidato.cognome">Cognome</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="codiceFiscale"><span jhiTranslate="jemoloRoosterApp.candidato.codiceFiscale">Codice Fiscale</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="eMail"><span jhiTranslate="jemoloRoosterApp.candidato.eMail">E Mail</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="anagraficaCandidatoId"><span jhiTranslate="jemoloRoosterApp.candidato.anagraficaCandidato">Anagrafica Candidato</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="statoRegistrazioneId"><span jhiTranslate="jemoloRoosterApp.candidato.statoRegistrazione">Stato Registrazione</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
@@ -38,6 +39,11 @@
                     <td>{{ candidato.cognome }}</td>
                     <td>{{ candidato.codiceFiscale }}</td>
                     <td>{{ candidato.eMail }}</td>
+                    <td>
+                        <div *ngIf="candidato.anagraficaCandidatoId">
+                            <a [routerLink]="['/anagrafica-candidato', candidato.anagraficaCandidatoId , 'view']" >{{ candidato.anagraficaCandidatoId }}</a>
+                        </div>
+                    </td>
                     <td>
                         <div *ngIf="candidato.statoRegistrazioneId">
                             <a [routerLink]="['/stato-registrazione', candidato.statoRegistrazioneId , 'view']" >{{ candidato.statoRegistrazioneId }}</a>

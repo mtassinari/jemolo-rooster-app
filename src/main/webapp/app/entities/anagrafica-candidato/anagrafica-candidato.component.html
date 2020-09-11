@@ -39,7 +39,6 @@
                     <th scope="col"  jhiSortBy="comuneResidenza"><span jhiTranslate="jemoloRoosterApp.anagraficaCandidato.comuneResidenza">Comune Residenza</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="provinciaResidenza"><span jhiTranslate="jemoloRoosterApp.anagraficaCandidato.provinciaResidenza">Provincia Residenza</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="note"><span jhiTranslate="jemoloRoosterApp.anagraficaCandidato.note">Note</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="candidatoId"><span jhiTranslate="jemoloRoosterApp.anagraficaCandidato.candidato">Candidato</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -62,11 +61,6 @@
                     <td>{{ anagraficaCandidato.comuneResidenza }}</td>
                     <td>{{ anagraficaCandidato.provinciaResidenza }}</td>
                     <td>{{ anagraficaCandidato.note }}</td>
-                    <td>
-                        <div *ngIf="anagraficaCandidato.candidatoId">
-                            <a [routerLink]="['/candidato', anagraficaCandidato.candidatoId , 'view']" >{{ anagraficaCandidato.candidatoId }}</a>
-                        </div>
-                    </td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

@@ -3,7 +3,6 @@ package it.laziocrea.jemoloapp.web.rest;
 import it.laziocrea.jemoloapp.JemoloRoosterApp;
 import it.laziocrea.jemoloapp.domain.DichiarazioniObligatorie;
 import it.laziocrea.jemoloapp.domain.AnagraficaCandidato;
-import it.laziocrea.jemoloapp.domain.Dichiarazioni;
 import it.laziocrea.jemoloapp.repository.DichiarazioniObligatorieRepository;
 import it.laziocrea.jemoloapp.service.DichiarazioniObligatorieService;
 import it.laziocrea.jemoloapp.service.dto.DichiarazioniObligatorieDTO;
@@ -38,9 +37,6 @@ public class DichiarazioniObligatorieResourceIT {
     private static final Boolean DEFAULT_STATO = false;
     private static final Boolean UPDATED_STATO = true;
 
-    private static final String DEFAULT_DICHIARAZIONE = "AAAAAAAAAA";
-    private static final String UPDATED_DICHIARAZIONE = "BBBBBBBBBB";
-
     @Autowired
     private DichiarazioniObligatorieRepository dichiarazioniObligatorieRepository;
 
@@ -66,8 +62,7 @@ public class DichiarazioniObligatorieResourceIT {
      */
     public static DichiarazioniObligatorie createEntity(EntityManager em) {
         DichiarazioniObligatorie dichiarazioniObligatorie = new DichiarazioniObligatorie()
-            .stato(DEFAULT_STATO)
-            .dichiarazione(DEFAULT_DICHIARAZIONE);
+            .stato(DEFAULT_STATO);
         // Add required entity
         AnagraficaCandidato anagraficaCandidato;
         if (TestUtil.findAll(em, AnagraficaCandidato.class).isEmpty()) {
@@ -78,16 +73,6 @@ public class DichiarazioniObligatorieResourceIT {
             anagraficaCandidato = TestUtil.findAll(em, AnagraficaCandidato.class).get(0);
         }
         dichiarazioniObligatorie.setAnagrafica(anagraficaCandidato);
-        // Add required entity
-        Dichiarazioni dichiarazioni;
-        if (TestUtil.findAll(em, Dichiarazioni.class).isEmpty()) {
-            dichiarazioni = DichiarazioniResourceIT.createEntity(em);
-            em.persist(dichiarazioni);
-            em.flush();
-        } else {
-            dichiarazioni = TestUtil.findAll(em, Dichiarazioni.class).get(0);
-        }
-        dichiarazioniObligatorie.setDichiarazioni(dichiarazioni);
         return dichiarazioniObligatorie;
     }
     /**
@@ -98,8 +83,7 @@ public class DichiarazioniObligatorieResourceIT {
      */
     public static DichiarazioniObligatorie createUpdatedEntity(EntityManager em) {
         DichiarazioniObligatorie dichiarazioniObligatorie = new DichiarazioniObligatorie()
-            .stato(UPDATED_STATO)
-            .dichiarazione(UPDATED_DICHIARAZIONE);
+            .stato(UPDATED_STATO);
         // Add required entity
         AnagraficaCandidato anagraficaCandidato;
         if (TestUtil.findAll(em, AnagraficaCandidato.class).isEmpty()) {
@@ -110,16 +94,6 @@ public class DichiarazioniObligatorieResourceIT {
             anagraficaCandidato = TestUtil.findAll(em, AnagraficaCandidato.class).get(0);
         }
         dichiarazioniObligatorie.setAnagrafica(anagraficaCandidato);
-        // Add required entity
-        Dichiarazioni dichiarazioni;
-        if (TestUtil.findAll(em, Dichiarazioni.class).isEmpty()) {
-            dichiarazioni = DichiarazioniResourceIT.createUpdatedEntity(em);
-            em.persist(dichiarazioni);
-            em.flush();
-        } else {
-            dichiarazioni = TestUtil.findAll(em, Dichiarazioni.class).get(0);
-        }
-        dichiarazioniObligatorie.setDichiarazioni(dichiarazioni);
         return dichiarazioniObligatorie;
     }
 
@@ -144,7 +118,6 @@ public class DichiarazioniObligatorieResourceIT {
         assertThat(dichiarazioniObligatorieList).hasSize(databaseSizeBeforeCreate + 1);
         DichiarazioniObligatorie testDichiarazioniObligatorie = dichiarazioniObligatorieList.get(dichiarazioniObligatorieList.size() - 1);
         assertThat(testDichiarazioniObligatorie.isStato()).isEqualTo(DEFAULT_STATO);
-        assertThat(testDichiarazioniObligatorie.getDichiarazione()).isEqualTo(DEFAULT_DICHIARAZIONE);
     }
 
     @Test
@@ -190,26 +163,6 @@ public class DichiarazioniObligatorieResourceIT {
 
     @Test
     @Transactional
-    public void checkDichiarazioneIsRequired() throws Exception {
-        int databaseSizeBeforeTest = dichiarazioniObligatorieRepository.findAll().size();
-        // set the field null
-        dichiarazioniObligatorie.setDichiarazione(null);
-
-        // Create the DichiarazioniObligatorie, which fails.
-        DichiarazioniObligatorieDTO dichiarazioniObligatorieDTO = dichiarazioniObligatorieMapper.toDto(dichiarazioniObligatorie);
-
-
-        restDichiarazioniObligatorieMockMvc.perform(post("/api/dichiarazioni-obligatories").with(csrf())
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(dichiarazioniObligatorieDTO)))
-            .andExpect(status().isBadRequest());
-
-        List<DichiarazioniObligatorie> dichiarazioniObligatorieList = dichiarazioniObligatorieRepository.findAll();
-        assertThat(dichiarazioniObligatorieList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     public void getAllDichiarazioniObligatories() throws Exception {
         // Initialize the database
         dichiarazioniObligatorieRepository.saveAndFlush(dichiarazioniObligatorie);
@@ -219,8 +172,7 @@ public class DichiarazioniObligatorieResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(dichiarazioniObligatorie.getId().intValue())))
-            .andExpect(jsonPath("$.[*].stato").value(hasItem(DEFAULT_STATO.booleanValue())))
-            .andExpect(jsonPath("$.[*].dichiarazione").value(hasItem(DEFAULT_DICHIARAZIONE)));
+            .andExpect(jsonPath("$.[*].stato").value(hasItem(DEFAULT_STATO.booleanValue())));
     }
     
     @Test
@@ -234,8 +186,7 @@ public class DichiarazioniObligatorieResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(dichiarazioniObligatorie.getId().intValue()))
-            .andExpect(jsonPath("$.stato").value(DEFAULT_STATO.booleanValue()))
-            .andExpect(jsonPath("$.dichiarazione").value(DEFAULT_DICHIARAZIONE));
+            .andExpect(jsonPath("$.stato").value(DEFAULT_STATO.booleanValue()));
     }
     @Test
     @Transactional
@@ -258,8 +209,7 @@ public class DichiarazioniObligatorieResourceIT {
         // Disconnect from session so that the updates on updatedDichiarazioniObligatorie are not directly saved in db
         em.detach(updatedDichiarazioniObligatorie);
         updatedDichiarazioniObligatorie
-            .stato(UPDATED_STATO)
-            .dichiarazione(UPDATED_DICHIARAZIONE);
+            .stato(UPDATED_STATO);
         DichiarazioniObligatorieDTO dichiarazioniObligatorieDTO = dichiarazioniObligatorieMapper.toDto(updatedDichiarazioniObligatorie);
 
         restDichiarazioniObligatorieMockMvc.perform(put("/api/dichiarazioni-obligatories").with(csrf())
@@ -272,7 +222,6 @@ public class DichiarazioniObligatorieResourceIT {
         assertThat(dichiarazioniObligatorieList).hasSize(databaseSizeBeforeUpdate);
         DichiarazioniObligatorie testDichiarazioniObligatorie = dichiarazioniObligatorieList.get(dichiarazioniObligatorieList.size() - 1);
         assertThat(testDichiarazioniObligatorie.isStato()).isEqualTo(UPDATED_STATO);
-        assertThat(testDichiarazioniObligatorie.getDichiarazione()).isEqualTo(UPDATED_DICHIARAZIONE);
     }
 
     @Test

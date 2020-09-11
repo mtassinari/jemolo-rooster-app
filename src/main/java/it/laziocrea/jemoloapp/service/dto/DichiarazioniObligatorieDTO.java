@@ -13,9 +13,6 @@ public class DichiarazioniObligatorieDTO implements Serializable {
     @NotNull
     private Boolean stato;
 
-    @NotNull
-    private String dichiarazione;
-
 
     private Long anagraficaId;
 
@@ -35,14 +32,6 @@ public class DichiarazioniObligatorieDTO implements Serializable {
 
     public void setStato(Boolean stato) {
         this.stato = stato;
-    }
-
-    public String getDichiarazione() {
-        return dichiarazione;
-    }
-
-    public void setDichiarazione(String dichiarazione) {
-        this.dichiarazione = dichiarazione;
     }
 
     public Long getAnagraficaId() {
@@ -84,7 +73,6 @@ public class DichiarazioniObligatorieDTO implements Serializable {
         return "DichiarazioniObligatorieDTO{" +
             "id=" + getId() +
             ", stato='" + isStato() + "'" +
-            ", dichiarazione='" + getDichiarazione() + "'" +
             ", anagraficaId=" + getAnagraficaId() +
             ", dichiarazioniId=" + getDichiarazioniId() +
             "}";

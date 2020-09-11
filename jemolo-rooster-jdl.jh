@@ -78,7 +78,7 @@ entity TitoloStudio {
   tipologia String required
   descrizione String required
   conseguimento String required
-  anno String required
+  anno Integer required
   voto String required
 }
 /**
@@ -102,18 +102,33 @@ entity Lingua {
 
 entity DichiarazioniObligatorie {
 	stato Boolean required
-    dichiarazione String required
 }
 
 entity Dichiarazioni {
 	descrizione String required
 }
+
+entity Provincia {
+	sigla String required
+    nome String required
+}
+
+entity Comune {
+	nome String required
+    nomeProvincia String required
+    siglaProvincia String required
+}
+
 filter AnagraficaCandidato, Candidato
 dto Candidato, Competenza, AmbitoCompetenza, AnagraficaCandidato, TitoloStudio, Curriculum, CompetenzeLng, Lingua, 
-StatoRegistrazione, Allegato, Dichiarazioni, DichiarazioniObligatorie with mapstruct
+StatoRegistrazione, Allegato, DichiarazioniObligatorie with mapstruct
 paginate Candidato, AnagraficaCandidato, CompetenzeLng, Competenza, Curriculum with pagination
-service DichiarazioniObligatorie, Dichiarazioni, Candidato, Competenza, AnagraficaCandidato, 
+service DichiarazioniObligatorie, Candidato, Competenza, AnagraficaCandidato, 
 TitoloStudio, Curriculum with serviceImpl
+
+relationship OneToMany {
+	Comune{comune} to Comune{provincia}
+}
 
 relationship OneToMany {
     Lingua{competenzeLinguistiche} to CompetenzeLng{lingua required} 
@@ -136,8 +151,7 @@ relationship OneToMany {
 }
 
 relationship OneToOne {
-	AnagraficaCandidato{candidato required } to 
-    Candidato{anagraficaCandidato}
+	Candidato{anagraficaCandidato} to AnagraficaCandidato{candidato(id) required }
 }
 
 relationship OneToMany {
@@ -163,5 +177,5 @@ relationship OneToMany {
 }
 
 relationship OneToMany {
-	Dichiarazioni to DichiarazioniObligatorie{dichiarazioni required}
+	Dichiarazioni to DichiarazioniObligatorie
 }

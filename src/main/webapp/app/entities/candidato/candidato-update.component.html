@@ -68,6 +68,14 @@
                 </div>
 
                 <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="jemoloRoosterApp.candidato.anagraficaCandidato" for="field_anagraficaCandidato">Anagrafica Candidato</label>
+                    <select class="form-control" id="field_anagraficaCandidato" name="anagraficaCandidato" formControlName="anagraficaCandidatoId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="anagraficaCandidatoOption.id" *ngFor="let anagraficaCandidatoOption of anagraficacandidatoes; trackBy: trackById">{{ anagraficaCandidatoOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="jemoloRoosterApp.candidato.statoRegistrazione" for="field_statoRegistrazione">Stato Registrazione</label>
                     <select class="form-control" id="field_statoRegistrazione" name="statoRegistrazione" formControlName="statoRegistrazioneId">
                         <option [ngValue]="null"></option>

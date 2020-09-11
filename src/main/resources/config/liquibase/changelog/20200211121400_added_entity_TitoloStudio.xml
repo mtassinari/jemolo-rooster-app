@@ -24,7 +24,7 @@
             <column name="conseguimento" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            <column name="anno" type="varchar(255)">
+            <column name="anno" type="integer">
                 <constraints nullable="false" />
             </column>
             <column name="voto" type="varchar(255)">
@@ -59,7 +59,7 @@
             <column name="tipologia" type="string"/>
             <column name="descrizione" type="string"/>
             <column name="conseguimento" type="string"/>
-            <column name="anno" type="string"/>
+            <column name="anno" type="numeric"/>
             <column name="voto" type="string"/>
             <column name="anagrafica_id" type="numeric"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->

@@ -1,0 +1,44 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="comune">
+            <h2><span jhiTranslate="jemoloRoosterApp.comune.detail.title">Comune</span> {{ comune.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="jemoloRoosterApp.comune.nome">Nome</span></dt>
+                <dd>
+                    <span>{{ comune.nome }}</span>
+                </dd>
+                <dt><span jhiTranslate="jemoloRoosterApp.comune.nomeProvincia">Nome Provincia</span></dt>
+                <dd>
+                    <span>{{ comune.nomeProvincia }}</span>
+                </dd>
+                <dt><span jhiTranslate="jemoloRoosterApp.comune.siglaProvincia">Sigla Provincia</span></dt>
+                <dd>
+                    <span>{{ comune.siglaProvincia }}</span>
+                </dd>
+                <dt><span jhiTranslate="jemoloRoosterApp.comune.provincia">Provincia</span></dt>
+                <dd>
+                    <div *ngIf="comune.provincia">
+                        <a [routerLink]="['/comune', comune.provincia?.id, 'view']">{{ comune.provincia?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/comune', comune.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

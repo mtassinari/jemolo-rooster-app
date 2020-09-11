@@ -27,6 +27,8 @@ public class CandidatoDTO implements Serializable {
     private String eMail;
 
 
+    private Long anagraficaCandidatoId;
+
     private Long statoRegistrazioneId;
     
     public Long getId() {
@@ -69,6 +71,14 @@ public class CandidatoDTO implements Serializable {
         this.eMail = eMail;
     }
 
+    public Long getAnagraficaCandidatoId() {
+        return anagraficaCandidatoId;
+    }
+
+    public void setAnagraficaCandidatoId(Long anagraficaCandidatoId) {
+        this.anagraficaCandidatoId = anagraficaCandidatoId;
+    }
+
     public Long getStatoRegistrazioneId() {
         return statoRegistrazioneId;
     }
@@ -103,6 +113,7 @@ public class CandidatoDTO implements Serializable {
             ", cognome='" + getCognome() + "'" +
             ", codiceFiscale='" + getCodiceFiscale() + "'" +
             ", eMail='" + geteMail() + "'" +
+            ", anagraficaCandidatoId=" + getAnagraficaCandidatoId() +
             ", statoRegistrazioneId=" + getStatoRegistrazioneId() +
             "}";
     }

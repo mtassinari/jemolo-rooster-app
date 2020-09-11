@@ -4,12 +4,9 @@ import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 import { IAnagraficaCandidato, AnagraficaCandidato } from 'app/shared/model/anagrafica-candidato.model';
 import { AnagraficaCandidatoService } from './anagrafica-candidato.service';
-import { ICandidato } from 'app/shared/model/candidato.model';
-import { CandidatoService } from 'app/entities/candidato/candidato.service';
 
 @Component({
   selector: 'jhi-anagrafica-candidato-update',
@@ -17,7 +14,6 @@ import { CandidatoService } from 'app/entities/candidato/candidato.service';
 })
 export class AnagraficaCandidatoUpdateComponent implements OnInit {
   isSaving = false;
-  candidatoes: ICandidato[] = [];
   dataNascitaDp: any;
 
   editForm = this.fb.group({
@@ -44,12 +40,10 @@ export class AnagraficaCandidatoUpdateComponent implements OnInit {
     comuneResidenza: [null, [Validators.required]],
     provinciaResidenza: [null, [Validators.required]],
     note: [],
-    candidatoId: [null, Validators.required],
   });
 
   constructor(
     protected anagraficaCandidatoService: AnagraficaCandidatoService,
-    protected candidatoService: CandidatoService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -57,28 +51,6 @@ export class AnagraficaCandidatoUpdateComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ anagraficaCandidato }) => {
       this.updateForm(anagraficaCandidato);
-
-      this.candidatoService
-        .query({ 'anagraficaCandidatoId.specified': 'false' })
-        .pipe(
-          map((res: HttpResponse<ICandidato[]>) => {
-            return res.body || [];
-          })
-        )
-        .subscribe((resBody: ICandidato[]) => {
-          if (!anagraficaCandidato.candidatoId) {
-            this.candidatoes = resBody;
-          } else {
-            this.candidatoService
-              .find(anagraficaCandidato.candidatoId)
-              .pipe(
-                map((subRes: HttpResponse<ICandidato>) => {
-                  return subRes.body ? [subRes.body].concat(resBody) : resBody;
-                })
-              )
-              .subscribe((concatRes: ICandidato[]) => (this.candidatoes = concatRes));
-          }
-        });
     });
   }
 
@@ -101,7 +73,6 @@ export class AnagraficaCandidatoUpdateComponent implements OnInit {
       comuneResidenza: anagraficaCandidato.comuneResidenza,
       provinciaResidenza: anagraficaCandidato.provinciaResidenza,
       note: anagraficaCandidato.note,
-      candidatoId: anagraficaCandidato.candidatoId,
     });
   }
 
@@ -139,7 +110,6 @@ export class AnagraficaCandidatoUpdateComponent implements OnInit {
       comuneResidenza: this.editForm.get(['comuneResidenza'])!.value,
       provinciaResidenza: this.editForm.get(['provinciaResidenza'])!.value,
       note: this.editForm.get(['note'])!.value,
-      candidatoId: this.editForm.get(['candidatoId'])!.value,
     };
   }
 
@@ -157,9 +127,5 @@ export class AnagraficaCandidatoUpdateComponent implements OnInit {
 
   protected onSaveError(): void {
     this.isSaving = false;
-  }
-
-  trackById(index: number, item: ICandidato): any {
-    return item.id;
   }
 }

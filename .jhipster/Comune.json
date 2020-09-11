@@ -1,0 +1,46 @@
+{
+  "name": "Comune",
+  "fields": [
+    {
+      "fieldName": "nome",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "nomeProvincia",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "siglaProvincia",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "comune",
+      "otherEntityRelationshipName": "provincia",
+      "relationshipName": "comune"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "comune",
+      "otherEntityRelationshipName": "comune",
+      "relationshipName": "provincia",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200911201919",
+  "entityTableName": "comune",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

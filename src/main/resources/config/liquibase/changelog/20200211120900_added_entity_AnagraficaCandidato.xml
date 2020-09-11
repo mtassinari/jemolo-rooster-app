@@ -63,9 +63,6 @@
             <column name="note" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="candidato_id" type="bigint">
-                <constraints unique="true" nullable="false" uniqueConstraintName="ux_anagrafica_candidato_candidato_id" />
-            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
     </changeSet>
@@ -105,7 +102,6 @@
             <column name="comune_residenza" type="string"/>
             <column name="provincia_residenza" type="string"/>
             <column name="note" type="string"/>
-            <column name="candidato_id" type="numeric"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

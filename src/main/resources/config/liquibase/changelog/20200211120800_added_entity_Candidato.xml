@@ -27,6 +27,9 @@
             <column name="e_mail" type="varchar(255)">
                 <constraints nullable="false" unique="true" uniqueConstraintName="ux_candidato_e_mail" />
             </column>
+            <column name="anagrafica_candidato_id" type="bigint">
+                <constraints unique="true" nullable="true" uniqueConstraintName="ux_candidato_anagrafica_candidato_id" />
+            </column>
             <column name="stato_registrazione_id" type="bigint">
                 <constraints nullable="true" />
             </column>

@@ -86,15 +86,6 @@
   ],
   "relationships": [
     {
-      "relationshipType": "one-to-one",
-      "otherEntityName": "candidato",
-      "otherEntityRelationshipName": "anagraficaCandidato",
-      "relationshipValidateRules": "required",
-      "relationshipName": "candidato",
-      "otherEntityField": "id",
-      "ownerSide": true
-    },
-    {
       "relationshipType": "one-to-many",
       "otherEntityName": "competenzeLng",
       "otherEntityRelationshipName": "anagrafica",
@@ -123,6 +114,14 @@
       "otherEntityName": "dichiarazioniObligatorie",
       "otherEntityRelationshipName": "anagrafica",
       "relationshipName": "dichiarazioni"
+    },
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "candidato",
+      "otherEntityRelationshipName": "anagraficaCandidato",
+      "relationshipValidateRules": "required",
+      "relationshipName": "candidato",
+      "ownerSide": false
     }
   ],
   "changelogDate": "20200211120900",

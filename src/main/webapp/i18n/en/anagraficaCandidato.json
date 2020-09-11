@@ -32,12 +32,12 @@
       "comuneResidenza": "Comune Residenza",
       "provinciaResidenza": "Provincia Residenza",
       "note": "Note",
-      "candidato": "Candidato",
       "competenzeLng": "Competenze Lng",
       "titoloStudio": "Titolo Studio",
       "curriculum": "Curriculum",
       "competenza": "Competenza",
-      "dichiarazioni": "Dichiarazioni"
+      "dichiarazioni": "Dichiarazioni",
+      "candidato": "Candidato"
     }
   }
 }

@@ -35,7 +35,7 @@ public class TitoloStudio implements Serializable {
 
     @NotNull
     @Column(name = "anno", nullable = false)
-    private String anno;
+    private Integer anno;
 
     @NotNull
     @Column(name = "voto", nullable = false)
@@ -94,16 +94,16 @@ public class TitoloStudio implements Serializable {
         this.conseguimento = conseguimento;
     }
 
-    public String getAnno() {
+    public Integer getAnno() {
         return anno;
     }
 
-    public TitoloStudio anno(String anno) {
+    public TitoloStudio anno(Integer anno) {
         this.anno = anno;
         return this;
     }
 
-    public void setAnno(String anno) {
+    public void setAnno(Integer anno) {
         this.anno = anno;
     }
 
@@ -158,7 +158,7 @@ public class TitoloStudio implements Serializable {
             ", tipologia='" + getTipologia() + "'" +
             ", descrizione='" + getDescrizione() + "'" +
             ", conseguimento='" + getConseguimento() + "'" +
-            ", anno='" + getAnno() + "'" +
+            ", anno=" + getAnno() +
             ", voto='" + getVoto() + "'" +
             "}";
     }

@@ -202,20 +202,6 @@
                     <input type="text" class="form-control" name="note" id="field_note"
                            formControlName="note"/>
                 </div>
-
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="jemoloRoosterApp.anagraficaCandidato.candidato" for="field_candidato">Candidato</label>
-                    <select class="form-control" id="field_candidato" name="candidato" formControlName="candidatoId">
-                        <option *ngIf="!editForm.get('candidatoId')!.value" [ngValue]="null" selected></option>
-                        <option [ngValue]="candidatoOption.id" *ngFor="let candidatoOption of candidatoes; trackBy: trackById">{{ candidatoOption.id }}</option>
-                    </select>
-                </div>
-                <div *ngIf="editForm.get('candidatoId')!.invalid && (editForm.get('candidatoId')!.dirty || editForm.get('candidatoId')!.touched)">
-                    <small class="form-text text-danger"
-                           *ngIf="editForm.get('candidatoId')?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                    </small>
-                </div>
             </div>
 
             <div>

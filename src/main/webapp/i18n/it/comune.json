@@ -1,0 +1,26 @@
+{
+  "jemoloRoosterApp": {
+    "comune": {
+      "home": {
+        "title": "Comunes",
+        "createLabel": "Genera un nuovo Comune",
+        "createOrEditLabel": "Genera o modifica un Comune",
+        "notFound": "No Comunes found"
+      },
+      "created": "&Egrave; stato generato un nuovo Comune con identificatore {{ param }}",
+      "updated": "&Egrave; stato aggiornato Comune identificato da {{ param }}",
+      "deleted": "&Egrave; stato eliminato Comune con identificatore {{ param }}",
+      "delete": {
+        "question": "Sei sicuro di volere eliminare Comune {{ id }}?"
+      },
+      "detail": {
+        "title": "Comune"
+      },
+      "nome": "Nome",
+      "nomeProvincia": "Nome Provincia",
+      "siglaProvincia": "Sigla Provincia",
+      "comune": "Comune",
+      "provincia": "Provincia"
+    }
+  }
+}

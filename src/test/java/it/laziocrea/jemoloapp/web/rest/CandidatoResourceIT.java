@@ -600,7 +600,6 @@ public class CandidatoResourceIT {
         em.persist(anagraficaCandidato);
         em.flush();
         candidato.setAnagraficaCandidato(anagraficaCandidato);
-        anagraficaCandidato.setCandidato(candidato);
         candidatoRepository.saveAndFlush(candidato);
         Long anagraficaCandidatoId = anagraficaCandidato.getId();
 

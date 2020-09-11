@@ -5,7 +5,6 @@ import it.laziocrea.jemoloapp.service.dto.CandidatoDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -28,12 +27,6 @@ public interface CandidatoService {
      * @return the list of entities.
      */
     Page<CandidatoDTO> findAll(Pageable pageable);
-    /**
-     * Get all the CandidatoDTO where AnagraficaCandidato is {@code null}.
-     *
-     * @return the {@link List} of entities.
-     */
-    List<CandidatoDTO> findAllWhereAnagraficaCandidatoIsNull();
 
 
     /**

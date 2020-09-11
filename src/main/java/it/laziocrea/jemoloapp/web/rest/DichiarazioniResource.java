@@ -1,8 +1,8 @@
 package it.laziocrea.jemoloapp.web.rest;
 
-import it.laziocrea.jemoloapp.service.DichiarazioniService;
+import it.laziocrea.jemoloapp.domain.Dichiarazioni;
+import it.laziocrea.jemoloapp.repository.DichiarazioniRepository;
 import it.laziocrea.jemoloapp.web.rest.errors.BadRequestAlertException;
-import it.laziocrea.jemoloapp.service.dto.DichiarazioniDTO;
 
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -23,6 +24,7 @@ import java.util.Optional;
  */
 @RestController
 @RequestMapping("/api")
+@Transactional
 public class DichiarazioniResource {
 
     private final Logger log = LoggerFactory.getLogger(DichiarazioniResource.class);
@@ -32,26 +34,26 @@ public class DichiarazioniResource {
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
-    private final DichiarazioniService dichiarazioniService;
+    private final DichiarazioniRepository dichiarazioniRepository;
 
-    public DichiarazioniResource(DichiarazioniService dichiarazioniService) {
-        this.dichiarazioniService = dichiarazioniService;
+    public DichiarazioniResource(DichiarazioniRepository dichiarazioniRepository) {
+        this.dichiarazioniRepository = dichiarazioniRepository;
     }
 
     /**
      * {@code POST  /dichiarazionis} : Create a new dichiarazioni.
      *
-     * @param dichiarazioniDTO the dichiarazioniDTO to create.
-     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new dichiarazioniDTO, or with status {@code 400 (Bad Request)} if the dichiarazioni has already an ID.
+     * @param dichiarazioni the dichiarazioni to create.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new dichiarazioni, or with status {@code 400 (Bad Request)} if the dichiarazioni has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/dichiarazionis")
-    public ResponseEntity<DichiarazioniDTO> createDichiarazioni(@Valid @RequestBody DichiarazioniDTO dichiarazioniDTO) throws URISyntaxException {
-        log.debug("REST request to save Dichiarazioni : {}", dichiarazioniDTO);
-        if (dichiarazioniDTO.getId() != null) {
+    public ResponseEntity<Dichiarazioni> createDichiarazioni(@Valid @RequestBody Dichiarazioni dichiarazioni) throws URISyntaxException {
+        log.debug("REST request to save Dichiarazioni : {}", dichiarazioni);
+        if (dichiarazioni.getId() != null) {
             throw new BadRequestAlertException("A new dichiarazioni cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        DichiarazioniDTO result = dichiarazioniService.save(dichiarazioniDTO);
+        Dichiarazioni result = dichiarazioniRepository.save(dichiarazioni);
         return ResponseEntity.created(new URI("/api/dichiarazionis/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -60,21 +62,21 @@ public class DichiarazioniResource {
     /**
      * {@code PUT  /dichiarazionis} : Updates an existing dichiarazioni.
      *
-     * @param dichiarazioniDTO the dichiarazioniDTO to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated dichiarazioniDTO,
-     * or with status {@code 400 (Bad Request)} if the dichiarazioniDTO is not valid,
-     * or with status {@code 500 (Internal Server Error)} if the dichiarazioniDTO couldn't be updated.
+     * @param dichiarazioni the dichiarazioni to update.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated dichiarazioni,
+     * or with status {@code 400 (Bad Request)} if the dichiarazioni is not valid,
+     * or with status {@code 500 (Internal Server Error)} if the dichiarazioni couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/dichiarazionis")
-    public ResponseEntity<DichiarazioniDTO> updateDichiarazioni(@Valid @RequestBody DichiarazioniDTO dichiarazioniDTO) throws URISyntaxException {
-        log.debug("REST request to update Dichiarazioni : {}", dichiarazioniDTO);
-        if (dichiarazioniDTO.getId() == null) {
+    public ResponseEntity<Dichiarazioni> updateDichiarazioni(@Valid @RequestBody Dichiarazioni dichiarazioni) throws URISyntaxException {
+        log.debug("REST request to update Dichiarazioni : {}", dichiarazioni);
+        if (dichiarazioni.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        DichiarazioniDTO result = dichiarazioniService.save(dichiarazioniDTO);
+        Dichiarazioni result = dichiarazioniRepository.save(dichiarazioni);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, dichiarazioniDTO.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, dichiarazioni.getId().toString()))
             .body(result);
     }
 
@@ -84,34 +86,34 @@ public class DichiarazioniResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of dichiarazionis in body.
      */
     @GetMapping("/dichiarazionis")
-    public List<DichiarazioniDTO> getAllDichiarazionis() {
+    public List<Dichiarazioni> getAllDichiarazionis() {
         log.debug("REST request to get all Dichiarazionis");
-        return dichiarazioniService.findAll();
+        return dichiarazioniRepository.findAll();
     }
 
     /**
      * {@code GET  /dichiarazionis/:id} : get the "id" dichiarazioni.
      *
-     * @param id the id of the dichiarazioniDTO to retrieve.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the dichiarazioniDTO, or with status {@code 404 (Not Found)}.
+     * @param id the id of the dichiarazioni to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the dichiarazioni, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/dichiarazionis/{id}")
-    public ResponseEntity<DichiarazioniDTO> getDichiarazioni(@PathVariable Long id) {
+    public ResponseEntity<Dichiarazioni> getDichiarazioni(@PathVariable Long id) {
         log.debug("REST request to get Dichiarazioni : {}", id);
-        Optional<DichiarazioniDTO> dichiarazioniDTO = dichiarazioniService.findOne(id);
-        return ResponseUtil.wrapOrNotFound(dichiarazioniDTO);
+        Optional<Dichiarazioni> dichiarazioni = dichiarazioniRepository.findById(id);
+        return ResponseUtil.wrapOrNotFound(dichiarazioni);
     }
 
     /**
      * {@code DELETE  /dichiarazionis/:id} : delete the "id" dichiarazioni.
      *
-     * @param id the id of the dichiarazioniDTO to delete.
+     * @param id the id of the dichiarazioni to delete.
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/dichiarazionis/{id}")
     public ResponseEntity<Void> deleteDichiarazioni(@PathVariable Long id) {
         log.debug("REST request to delete Dichiarazioni : {}", id);
-        dichiarazioniService.delete(id);
+        dichiarazioniRepository.deleteById(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }
 }

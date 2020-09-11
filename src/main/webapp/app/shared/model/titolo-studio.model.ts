@@ -3,7 +3,7 @@ export interface ITitoloStudio {
   tipologia?: string;
   descrizione?: string;
   conseguimento?: string;
-  anno?: string;
+  anno?: number;
   voto?: string;
   anagraficaId?: number;
 }
@@ -14,7 +14,7 @@ export class TitoloStudio implements ITitoloStudio {
     public tipologia?: string,
     public descrizione?: string,
     public conseguimento?: string,
-    public anno?: string,
+    public anno?: number,
     public voto?: string,
     public anagraficaId?: number
   ) {}

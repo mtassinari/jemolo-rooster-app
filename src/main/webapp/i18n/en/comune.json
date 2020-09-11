@@ -1,0 +1,26 @@
+{
+  "jemoloRoosterApp": {
+    "comune": {
+      "home": {
+        "title": "Comunes",
+        "createLabel": "Create a new Comune",
+        "createOrEditLabel": "Create or edit a Comune",
+        "notFound": "No Comunes found"
+      },
+      "created": "A new Comune is created with identifier {{ param }}",
+      "updated": "A Comune is updated with identifier {{ param }}",
+      "deleted": "A Comune is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Comune {{ id }}?"
+      },
+      "detail": {
+        "title": "Comune"
+      },
+      "nome": "Nome",
+      "nomeProvincia": "Nome Provincia",
+      "siglaProvincia": "Sigla Provincia",
+      "comune": "Comune",
+      "provincia": "Provincia"
+    }
+  }
+}

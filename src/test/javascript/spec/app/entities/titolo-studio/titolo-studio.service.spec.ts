@@ -20,7 +20,7 @@ describe('Service Tests', () => {
       service = injector.get(TitoloStudioService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new TitoloStudio(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA');
+      elemDefault = new TitoloStudio(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 0, 'AAAAAAA');
     });
 
     describe('Service methods', () => {
@@ -57,7 +57,7 @@ describe('Service Tests', () => {
             tipologia: 'BBBBBB',
             descrizione: 'BBBBBB',
             conseguimento: 'BBBBBB',
-            anno: 'BBBBBB',
+            anno: 1,
             voto: 'BBBBBB',
           },
           elemDefault
@@ -78,7 +78,7 @@ describe('Service Tests', () => {
             tipologia: 'BBBBBB',
             descrizione: 'BBBBBB',
             conseguimento: 'BBBBBB',
-            anno: 'BBBBBB',
+            anno: 1,
             voto: 'BBBBBB',
           },
           elemDefault

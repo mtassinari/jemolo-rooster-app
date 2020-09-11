@@ -3,9 +3,6 @@ package it.laziocrea.jemoloapp.web.rest;
 import it.laziocrea.jemoloapp.JemoloRoosterApp;
 import it.laziocrea.jemoloapp.domain.Dichiarazioni;
 import it.laziocrea.jemoloapp.repository.DichiarazioniRepository;
-import it.laziocrea.jemoloapp.service.DichiarazioniService;
-import it.laziocrea.jemoloapp.service.dto.DichiarazioniDTO;
-import it.laziocrea.jemoloapp.service.mapper.DichiarazioniMapper;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -38,12 +35,6 @@ public class DichiarazioniResourceIT {
 
     @Autowired
     private DichiarazioniRepository dichiarazioniRepository;
-
-    @Autowired
-    private DichiarazioniMapper dichiarazioniMapper;
-
-    @Autowired
-    private DichiarazioniService dichiarazioniService;
 
     @Autowired
     private EntityManager em;
@@ -86,10 +77,9 @@ public class DichiarazioniResourceIT {
     public void createDichiarazioni() throws Exception {
         int databaseSizeBeforeCreate = dichiarazioniRepository.findAll().size();
         // Create the Dichiarazioni
-        DichiarazioniDTO dichiarazioniDTO = dichiarazioniMapper.toDto(dichiarazioni);
         restDichiarazioniMockMvc.perform(post("/api/dichiarazionis").with(csrf())
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(dichiarazioniDTO)))
+            .content(TestUtil.convertObjectToJsonBytes(dichiarazioni)))
             .andExpect(status().isCreated());
 
         // Validate the Dichiarazioni in the database
@@ -106,12 +96,11 @@ public class DichiarazioniResourceIT {
 
         // Create the Dichiarazioni with an existing ID
         dichiarazioni.setId(1L);
-        DichiarazioniDTO dichiarazioniDTO = dichiarazioniMapper.toDto(dichiarazioni);
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restDichiarazioniMockMvc.perform(post("/api/dichiarazionis").with(csrf())
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(dichiarazioniDTO)))
+            .content(TestUtil.convertObjectToJsonBytes(dichiarazioni)))
             .andExpect(status().isBadRequest());
 
         // Validate the Dichiarazioni in the database
@@ -128,12 +117,11 @@ public class DichiarazioniResourceIT {
         dichiarazioni.setDescrizione(null);
 
         // Create the Dichiarazioni, which fails.
-        DichiarazioniDTO dichiarazioniDTO = dichiarazioniMapper.toDto(dichiarazioni);
 
 
         restDichiarazioniMockMvc.perform(post("/api/dichiarazionis").with(csrf())
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(dichiarazioniDTO)))
+            .content(TestUtil.convertObjectToJsonBytes(dichiarazioni)))
             .andExpect(status().isBadRequest());
 
         List<Dichiarazioni> dichiarazioniList = dichiarazioniRepository.findAll();
@@ -189,11 +177,10 @@ public class DichiarazioniResourceIT {
         em.detach(updatedDichiarazioni);
         updatedDichiarazioni
             .descrizione(UPDATED_DESCRIZIONE);
-        DichiarazioniDTO dichiarazioniDTO = dichiarazioniMapper.toDto(updatedDichiarazioni);
 
         restDichiarazioniMockMvc.perform(put("/api/dichiarazionis").with(csrf())
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(dichiarazioniDTO)))
+            .content(TestUtil.convertObjectToJsonBytes(updatedDichiarazioni)))
             .andExpect(status().isOk());
 
         // Validate the Dichiarazioni in the database
@@ -208,13 +195,10 @@ public class DichiarazioniResourceIT {
     public void updateNonExistingDichiarazioni() throws Exception {
         int databaseSizeBeforeUpdate = dichiarazioniRepository.findAll().size();
 
-        // Create the Dichiarazioni
-        DichiarazioniDTO dichiarazioniDTO = dichiarazioniMapper.toDto(dichiarazioni);
-
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restDichiarazioniMockMvc.perform(put("/api/dichiarazionis").with(csrf())
             .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(dichiarazioniDTO)))
+            .content(TestUtil.convertObjectToJsonBytes(dichiarazioni)))
             .andExpect(status().isBadRequest());
 
         // Validate the Dichiarazioni in the database

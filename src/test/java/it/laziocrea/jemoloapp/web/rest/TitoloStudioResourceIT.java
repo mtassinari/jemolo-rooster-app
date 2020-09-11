@@ -43,8 +43,8 @@ public class TitoloStudioResourceIT {
     private static final String DEFAULT_CONSEGUIMENTO = "AAAAAAAAAA";
     private static final String UPDATED_CONSEGUIMENTO = "BBBBBBBBBB";
 
-    private static final String DEFAULT_ANNO = "AAAAAAAAAA";
-    private static final String UPDATED_ANNO = "BBBBBBBBBB";
+    private static final Integer DEFAULT_ANNO = 1;
+    private static final Integer UPDATED_ANNO = 2;
 
     private static final String DEFAULT_VOTO = "AAAAAAAAAA";
     private static final String UPDATED_VOTO = "BBBBBBBBBB";

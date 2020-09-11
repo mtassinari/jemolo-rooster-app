@@ -72,12 +72,6 @@
                 <dd>
                     <span>{{ anagraficaCandidato.note }}</span>
                 </dd>
-                <dt><span jhiTranslate="jemoloRoosterApp.anagraficaCandidato.candidato">Candidato</span></dt>
-                <dd>
-                    <div *ngIf="anagraficaCandidato.candidatoId">
-                        <a [routerLink]="['/candidato', anagraficaCandidato.candidatoId, 'view']">{{ anagraficaCandidato.candidatoId }}</a>
-                    </div>
-                </dd>
             </dl>
 
             <button type="submit"

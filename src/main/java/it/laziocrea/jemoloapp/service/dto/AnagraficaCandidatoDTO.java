@@ -61,8 +61,6 @@ public class AnagraficaCandidatoDTO implements Serializable {
 
     private String note;
 
-
-    private Long candidatoId;
     
     public Long getId() {
         return id;
@@ -200,14 +198,6 @@ public class AnagraficaCandidatoDTO implements Serializable {
         this.note = note;
     }
 
-    public Long getCandidatoId() {
-        return candidatoId;
-    }
-
-    public void setCandidatoId(Long candidatoId) {
-        this.candidatoId = candidatoId;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -246,7 +236,6 @@ public class AnagraficaCandidatoDTO implements Serializable {
             ", comuneResidenza='" + getComuneResidenza() + "'" +
             ", provinciaResidenza='" + getProvinciaResidenza() + "'" +
             ", note='" + getNote() + "'" +
-            ", candidatoId=" + getCandidatoId() +
             "}";
     }
 }

@@ -139,10 +139,6 @@ public class AnagraficaCandidatoQueryService extends QueryService<AnagraficaCand
             if (criteria.getNote() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getNote(), AnagraficaCandidato_.note));
             }
-            if (criteria.getCandidatoId() != null) {
-                specification = specification.and(buildSpecification(criteria.getCandidatoId(),
-                    root -> root.join(AnagraficaCandidato_.candidato, JoinType.LEFT).get(Candidato_.id)));
-            }
             if (criteria.getCompetenzeLngId() != null) {
                 specification = specification.and(buildSpecification(criteria.getCompetenzeLngId(),
                     root -> root.join(AnagraficaCandidato_.competenzeLngs, JoinType.LEFT).get(CompetenzeLng_.id)));
@@ -162,6 +158,10 @@ public class AnagraficaCandidatoQueryService extends QueryService<AnagraficaCand
             if (criteria.getDichiarazioniId() != null) {
                 specification = specification.and(buildSpecification(criteria.getDichiarazioniId(),
                     root -> root.join(AnagraficaCandidato_.dichiarazionis, JoinType.LEFT).get(DichiarazioniObligatorie_.id)));
+            }
+            if (criteria.getCandidatoId() != null) {
+                specification = specification.and(buildSpecification(criteria.getCandidatoId(),
+                    root -> root.join(AnagraficaCandidato_.candidato, JoinType.LEFT).get(Candidato_.id)));
             }
         }
         return specification;

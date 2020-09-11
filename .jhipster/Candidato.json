@@ -30,7 +30,8 @@
       "otherEntityName": "anagraficaCandidato",
       "otherEntityRelationshipName": "candidato",
       "relationshipName": "anagraficaCandidato",
-      "ownerSide": false
+      "otherEntityField": "id",
+      "ownerSide": true
     },
     {
       "relationshipType": "many-to-one",

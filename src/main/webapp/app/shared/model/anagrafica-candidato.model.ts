@@ -23,12 +23,12 @@ export interface IAnagraficaCandidato {
   comuneResidenza?: string;
   provinciaResidenza?: string;
   note?: string;
-  candidatoId?: number;
   competenzeLngs?: ICompetenzeLng[];
   titoloStudios?: ITitoloStudio[];
   curricula?: ICurriculum[];
   competenzas?: ICompetenza[];
   dichiarazionis?: IDichiarazioniObligatorie[];
+  candidatoId?: number;
 }
 
 export class AnagraficaCandidato implements IAnagraficaCandidato {
@@ -50,11 +50,11 @@ export class AnagraficaCandidato implements IAnagraficaCandidato {
     public comuneResidenza?: string,
     public provinciaResidenza?: string,
     public note?: string,
-    public candidatoId?: number,
     public competenzeLngs?: ICompetenzeLng[],
     public titoloStudios?: ITitoloStudio[],
     public curricula?: ICurriculum[],
     public competenzas?: ICompetenza[],
-    public dichiarazionis?: IDichiarazioniObligatorie[]
+    public dichiarazionis?: IDichiarazioniObligatorie[],
+    public candidatoId?: number
   ) {}
 }

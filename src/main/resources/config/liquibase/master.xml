@@ -26,6 +26,8 @@
     <include file="config/liquibase/changelog/20200211121700_added_entity_Lingua.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200211121800_added_entity_DichiarazioniObligatorie.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200212071400_added_entity_Dichiarazioni.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200911201819_added_entity_Provincia.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200911201919_added_entity_Comune.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20200211120800_added_entity_constraints_Candidato.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200211120900_added_entity_constraints_AnagraficaCandidato.xml" relativeToChangelogFile="false"/>
@@ -35,6 +37,7 @@
     <include file="config/liquibase/changelog/20200211121400_added_entity_constraints_TitoloStudio.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200211121600_added_entity_constraints_CompetenzeLng.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200211121800_added_entity_constraints_DichiarazioniObligatorie.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200911201919_added_entity_constraints_Comune.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>

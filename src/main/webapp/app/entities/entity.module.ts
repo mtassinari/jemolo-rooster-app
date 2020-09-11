@@ -57,6 +57,14 @@ import { RouterModule } from '@angular/router';
         path: 'dichiarazioni',
         loadChildren: () => import('./dichiarazioni/dichiarazioni.module').then(m => m.JemoloRoosterAppDichiarazioniModule),
       },
+      {
+        path: 'provincia',
+        loadChildren: () => import('./provincia/provincia.module').then(m => m.JemoloRoosterAppProvinciaModule),
+      },
+      {
+        path: 'comune',
+        loadChildren: () => import('./comune/comune.module').then(m => m.JemoloRoosterAppComuneModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],

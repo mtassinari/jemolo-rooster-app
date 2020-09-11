@@ -20,7 +20,7 @@ describe('Service Tests', () => {
       service = injector.get(DichiarazioniObligatorieService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new DichiarazioniObligatorie(0, false, 'AAAAAAA');
+      elemDefault = new DichiarazioniObligatorie(0, false);
     });
 
     describe('Service methods', () => {
@@ -55,7 +55,6 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             stato: true,
-            dichiarazione: 'BBBBBB',
           },
           elemDefault
         );
@@ -73,7 +72,6 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             stato: true,
-            dichiarazione: 'BBBBBB',
           },
           elemDefault
         );

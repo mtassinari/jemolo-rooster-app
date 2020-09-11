@@ -1,5 +1,6 @@
 package it.laziocrea.jemoloapp.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -87,11 +88,6 @@ public class AnagraficaCandidato implements Serializable {
     @Column(name = "note")
     private String note;
 
-    @OneToOne(optional = false)
-    @NotNull
-    @JoinColumn(unique = true)
-    private Candidato candidato;
-
     @OneToMany(mappedBy = "anagrafica")
     private Set<CompetenzeLng> competenzeLngs = new HashSet<>();
 
@@ -106,6 +102,10 @@ public class AnagraficaCandidato implements Serializable {
 
     @OneToMany(mappedBy = "anagrafica")
     private Set<DichiarazioniObligatorie> dichiarazionis = new HashSet<>();
+
+    @OneToOne(mappedBy = "anagraficaCandidato")
+    @JsonIgnore
+    private Candidato candidato;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -324,19 +324,6 @@ public class AnagraficaCandidato implements Serializable {
         this.note = note;
     }
 
-    public Candidato getCandidato() {
-        return candidato;
-    }
-
-    public AnagraficaCandidato candidato(Candidato candidato) {
-        this.candidato = candidato;
-        return this;
-    }
-
-    public void setCandidato(Candidato candidato) {
-        this.candidato = candidato;
-    }
-
     public Set<CompetenzeLng> getCompetenzeLngs() {
         return competenzeLngs;
     }
@@ -460,6 +447,19 @@ public class AnagraficaCandidato implements Serializable {
 
     public void setDichiarazionis(Set<DichiarazioniObligatorie> dichiarazioniObligatories) {
         this.dichiarazionis = dichiarazioniObligatories;
+    }
+
+    public Candidato getCandidato() {
+        return candidato;
+    }
+
+    public AnagraficaCandidato candidato(Candidato candidato) {
+        this.candidato = candidato;
+        return this;
+    }
+
+    public void setCandidato(Candidato candidato) {
+        this.candidato = candidato;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

@@ -2,12 +2,12 @@ package it.laziocrea.jemoloapp.web.rest;
 
 import it.laziocrea.jemoloapp.JemoloRoosterApp;
 import it.laziocrea.jemoloapp.domain.AnagraficaCandidato;
-import it.laziocrea.jemoloapp.domain.Candidato;
 import it.laziocrea.jemoloapp.domain.CompetenzeLng;
 import it.laziocrea.jemoloapp.domain.TitoloStudio;
 import it.laziocrea.jemoloapp.domain.Curriculum;
 import it.laziocrea.jemoloapp.domain.Competenza;
 import it.laziocrea.jemoloapp.domain.DichiarazioniObligatorie;
+import it.laziocrea.jemoloapp.domain.Candidato;
 import it.laziocrea.jemoloapp.repository.AnagraficaCandidatoRepository;
 import it.laziocrea.jemoloapp.service.AnagraficaCandidatoService;
 import it.laziocrea.jemoloapp.service.dto.AnagraficaCandidatoDTO;
@@ -1839,22 +1839,6 @@ public class AnagraficaCandidatoResourceIT {
 
     @Test
     @Transactional
-    public void getAllAnagraficaCandidatoesByCandidatoIsEqualToSomething() throws Exception {
-        // Get already existing entity
-        Candidato candidato = anagraficaCandidato.getCandidato();
-        anagraficaCandidatoRepository.saveAndFlush(anagraficaCandidato);
-        Long candidatoId = candidato.getId();
-
-        // Get all the anagraficaCandidatoList where candidato equals to candidatoId
-        defaultAnagraficaCandidatoShouldBeFound("candidatoId.equals=" + candidatoId);
-
-        // Get all the anagraficaCandidatoList where candidato equals to candidatoId + 1
-        defaultAnagraficaCandidatoShouldNotBeFound("candidatoId.equals=" + (candidatoId + 1));
-    }
-
-
-    @Test
-    @Transactional
     public void getAllAnagraficaCandidatoesByCompetenzeLngIsEqualToSomething() throws Exception {
         // Initialize the database
         anagraficaCandidatoRepository.saveAndFlush(anagraficaCandidato);
@@ -1950,6 +1934,22 @@ public class AnagraficaCandidatoResourceIT {
 
         // Get all the anagraficaCandidatoList where dichiarazioni equals to dichiarazioniId + 1
         defaultAnagraficaCandidatoShouldNotBeFound("dichiarazioniId.equals=" + (dichiarazioniId + 1));
+    }
+
+
+    @Test
+    @Transactional
+    public void getAllAnagraficaCandidatoesByCandidatoIsEqualToSomething() throws Exception {
+        // Get already existing entity
+        Candidato candidato = anagraficaCandidato.getCandidato();
+        anagraficaCandidatoRepository.saveAndFlush(anagraficaCandidato);
+        Long candidatoId = candidato.getId();
+
+        // Get all the anagraficaCandidatoList where candidato equals to candidatoId
+        defaultAnagraficaCandidatoShouldBeFound("candidatoId.equals=" + candidatoId);
+
+        // Get all the anagraficaCandidatoList where candidato equals to candidatoId + 1
+        defaultAnagraficaCandidatoShouldNotBeFound("candidatoId.equals=" + (candidatoId + 1));
     }
 
     /**

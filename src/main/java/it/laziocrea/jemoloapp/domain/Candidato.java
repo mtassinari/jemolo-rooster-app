@@ -1,6 +1,5 @@
 package it.laziocrea.jemoloapp.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -40,8 +39,8 @@ public class Candidato implements Serializable {
     @Column(name = "e_mail", nullable = false, unique = true)
     private String eMail;
 
-    @OneToOne(mappedBy = "candidato")
-    @JsonIgnore
+    @OneToOne
+    @JoinColumn(unique = true)
     private AnagraficaCandidato anagraficaCandidato;
 
     @ManyToOne

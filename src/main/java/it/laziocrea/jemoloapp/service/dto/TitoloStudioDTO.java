@@ -22,7 +22,7 @@ public class TitoloStudioDTO implements Serializable {
     private String conseguimento;
 
     @NotNull
-    private String anno;
+    private Integer anno;
 
     @NotNull
     private String voto;
@@ -62,11 +62,11 @@ public class TitoloStudioDTO implements Serializable {
         this.conseguimento = conseguimento;
     }
 
-    public String getAnno() {
+    public Integer getAnno() {
         return anno;
     }
 
-    public void setAnno(String anno) {
+    public void setAnno(Integer anno) {
         this.anno = anno;
     }
 
@@ -111,7 +111,7 @@ public class TitoloStudioDTO implements Serializable {
             ", tipologia='" + getTipologia() + "'" +
             ", descrizione='" + getDescrizione() + "'" +
             ", conseguimento='" + getConseguimento() + "'" +
-            ", anno='" + getAnno() + "'" +
+            ", anno=" + getAnno() +
             ", voto='" + getVoto() + "'" +
             ", anagraficaId=" + getAnagraficaId() +
             "}";

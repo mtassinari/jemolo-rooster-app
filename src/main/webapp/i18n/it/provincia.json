@@ -1,0 +1,23 @@
+{
+  "jemoloRoosterApp": {
+    "provincia": {
+      "home": {
+        "title": "Provincias",
+        "createLabel": "Genera un nuovo Provincia",
+        "createOrEditLabel": "Genera o modifica un Provincia",
+        "notFound": "No Provincias found"
+      },
+      "created": "&Egrave; stato generato un nuovo Provincia con identificatore {{ param }}",
+      "updated": "&Egrave; stato aggiornato Provincia identificato da {{ param }}",
+      "deleted": "&Egrave; stato eliminato Provincia con identificatore {{ param }}",
+      "delete": {
+        "question": "Sei sicuro di volere eliminare Provincia {{ id }}?"
+      },
+      "detail": {
+        "title": "Provincia"
+      },
+      "sigla": "Sigla",
+      "nome": "Nome"
+    }
+  }
+}

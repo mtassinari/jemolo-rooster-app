@@ -49,12 +49,16 @@
 
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="jemoloRoosterApp.titoloStudio.anno" for="field_anno">Anno</label>
-                    <input type="text" class="form-control" name="anno" id="field_anno"
+                    <input type="number" class="form-control" name="anno" id="field_anno"
                            formControlName="anno"/>
                     <div *ngIf="editForm.get('anno')!.invalid && (editForm.get('anno')!.dirty || editForm.get('anno')!.touched)">
                         <small class="form-text text-danger"
                                *ngIf="editForm.get('anno')?.errors?.required" jhiTranslate="entity.validation.required">
                         This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('anno')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
                         </small>
                     </div>
                 </div>

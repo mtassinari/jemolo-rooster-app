@@ -18,14 +18,11 @@
             <column name="stato" type="boolean">
                 <constraints nullable="false" />
             </column>
-            <column name="dichiarazione" type="varchar(255)">
-                <constraints nullable="false" />
-            </column>
             <column name="anagrafica_id" type="bigint">
                 <constraints nullable="false" />
             </column>
             <column name="dichiarazioni_id" type="bigint">
-                <constraints nullable="false" />
+                <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
@@ -51,9 +48,7 @@
                   tableName="dichiarazioni_obligatorie">
             <column name="id" type="numeric"/>
             <column name="stato" type="boolean"/>
-            <column name="dichiarazione" type="string"/>
             <column name="anagrafica_id" type="numeric"/>
-            <column name="dichiarazioni_id" type="numeric"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

@@ -24,6 +24,12 @@
                 <dd>
                     <span>{{ candidato.eMail }}</span>
                 </dd>
+                <dt><span jhiTranslate="jemoloRoosterApp.candidato.anagraficaCandidato">Anagrafica Candidato</span></dt>
+                <dd>
+                    <div *ngIf="candidato.anagraficaCandidatoId">
+                        <a [routerLink]="['/anagrafica-candidato', candidato.anagraficaCandidatoId, 'view']">{{ candidato.anagraficaCandidatoId }}</a>
+                    </div>
+                </dd>
                 <dt><span jhiTranslate="jemoloRoosterApp.candidato.statoRegistrazione">Stato Registrazione</span></dt>
                 <dd>
                     <div *ngIf="candidato.statoRegistrazioneId">

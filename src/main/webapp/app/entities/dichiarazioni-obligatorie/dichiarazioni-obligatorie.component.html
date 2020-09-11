@@ -24,7 +24,6 @@
                 <tr>
                     <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
                     <th scope="col" ><span jhiTranslate="jemoloRoosterApp.dichiarazioniObligatorie.stato">Stato</span></th>
-                    <th scope="col" ><span jhiTranslate="jemoloRoosterApp.dichiarazioniObligatorie.dichiarazione">Dichiarazione</span></th>
                     <th scope="col" ><span jhiTranslate="jemoloRoosterApp.dichiarazioniObligatorie.anagrafica">Anagrafica</span></th>
                     <th scope="col" ><span jhiTranslate="jemoloRoosterApp.dichiarazioniObligatorie.dichiarazioni">Dichiarazioni</span></th>
                     <th scope="col"></th>
@@ -34,7 +33,6 @@
                 <tr *ngFor="let dichiarazioniObligatorie of dichiarazioniObligatories ;trackBy: trackId">
                     <td><a [routerLink]="['/dichiarazioni-obligatorie', dichiarazioniObligatorie.id, 'view']">{{ dichiarazioniObligatorie.id }}</a></td>
                     <td>{{ dichiarazioniObligatorie.stato }}</td>
-                    <td>{{ dichiarazioniObligatorie.dichiarazione }}</td>
                     <td>
                         <div *ngIf="dichiarazioniObligatorie.anagraficaId">
                             <a [routerLink]="['/anagrafica-candidato', dichiarazioniObligatorie.anagraficaId , 'view']" >{{ dichiarazioniObligatorie.anagraficaId }}</a>

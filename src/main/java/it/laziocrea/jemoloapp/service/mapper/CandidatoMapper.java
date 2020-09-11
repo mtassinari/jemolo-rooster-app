@@ -9,13 +9,14 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity {@link Candidato} and its DTO {@link CandidatoDTO}.
  */
-@Mapper(componentModel = "spring", uses = {StatoRegistrazioneMapper.class})
+@Mapper(componentModel = "spring", uses = {AnagraficaCandidatoMapper.class, StatoRegistrazioneMapper.class})
 public interface CandidatoMapper extends EntityMapper<CandidatoDTO, Candidato> {
 
+    @Mapping(source = "anagraficaCandidato.id", target = "anagraficaCandidatoId")
     @Mapping(source = "statoRegistrazione.id", target = "statoRegistrazioneId")
     CandidatoDTO toDto(Candidato candidato);
 
-    @Mapping(target = "anagraficaCandidato", ignore = true)
+    @Mapping(source = "anagraficaCandidatoId", target = "anagraficaCandidato")
     @Mapping(source = "statoRegistrazioneId", target = "statoRegistrazione")
     Candidato toEntity(CandidatoDTO candidatoDTO);
 

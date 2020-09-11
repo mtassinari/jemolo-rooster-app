@@ -8,6 +8,12 @@
     -->
     <changeSet id="20200211120800-2" author="jhipster">
         
+        <addForeignKeyConstraint baseColumnNames="anagrafica_candidato_id"
+                                 baseTableName="candidato"
+                                 constraintName="fk_candidato_anagrafica_candidato_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="anagrafica_candidato"/>
+
         <addForeignKeyConstraint baseColumnNames="stato_registrazione_id"
                                  baseTableName="candidato"
                                  constraintName="fk_candidato_stato_registrazione_id"

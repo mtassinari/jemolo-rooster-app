@@ -4,11 +4,16 @@ import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { ICandidato, Candidato } from 'app/shared/model/candidato.model';
 import { CandidatoService } from './candidato.service';
+import { IAnagraficaCandidato } from 'app/shared/model/anagrafica-candidato.model';
+import { AnagraficaCandidatoService } from 'app/entities/anagrafica-candidato/anagrafica-candidato.service';
 import { IStatoRegistrazione } from 'app/shared/model/stato-registrazione.model';
 import { StatoRegistrazioneService } from 'app/entities/stato-registrazione/stato-registrazione.service';
+
+type SelectableEntity = IAnagraficaCandidato | IStatoRegistrazione;
 
 @Component({
   selector: 'jhi-candidato-update',
@@ -16,6 +21,7 @@ import { StatoRegistrazioneService } from 'app/entities/stato-registrazione/stat
 })
 export class CandidatoUpdateComponent implements OnInit {
   isSaving = false;
+  anagraficacandidatoes: IAnagraficaCandidato[] = [];
   statoregistraziones: IStatoRegistrazione[] = [];
 
   editForm = this.fb.group({
@@ -30,11 +36,13 @@ export class CandidatoUpdateComponent implements OnInit {
       ],
     ],
     eMail: [null, [Validators.required, Validators.pattern('^[A-z0-9.+_-]+@[A-z0-9._-]+.[A-z]{2,6}$')]],
+    anagraficaCandidatoId: [],
     statoRegistrazioneId: [],
   });
 
   constructor(
     protected candidatoService: CandidatoService,
+    protected anagraficaCandidatoService: AnagraficaCandidatoService,
     protected statoRegistrazioneService: StatoRegistrazioneService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
@@ -43,6 +51,28 @@ export class CandidatoUpdateComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ candidato }) => {
       this.updateForm(candidato);
+
+      this.anagraficaCandidatoService
+        .query({ 'candidatoId.specified': 'false' })
+        .pipe(
+          map((res: HttpResponse<IAnagraficaCandidato[]>) => {
+            return res.body || [];
+          })
+        )
+        .subscribe((resBody: IAnagraficaCandidato[]) => {
+          if (!candidato.anagraficaCandidatoId) {
+            this.anagraficacandidatoes = resBody;
+          } else {
+            this.anagraficaCandidatoService
+              .find(candidato.anagraficaCandidatoId)
+              .pipe(
+                map((subRes: HttpResponse<IAnagraficaCandidato>) => {
+                  return subRes.body ? [subRes.body].concat(resBody) : resBody;
+                })
+              )
+              .subscribe((concatRes: IAnagraficaCandidato[]) => (this.anagraficacandidatoes = concatRes));
+          }
+        });
 
       this.statoRegistrazioneService
         .query()
@@ -57,6 +87,7 @@ export class CandidatoUpdateComponent implements OnInit {
       cognome: candidato.cognome,
       codiceFiscale: candidato.codiceFiscale,
       eMail: candidato.eMail,
+      anagraficaCandidatoId: candidato.anagraficaCandidatoId,
       statoRegistrazioneId: candidato.statoRegistrazioneId,
     });
   }
@@ -83,6 +114,7 @@ export class CandidatoUpdateComponent implements OnInit {
       cognome: this.editForm.get(['cognome'])!.value,
       codiceFiscale: this.editForm.get(['codiceFiscale'])!.value,
       eMail: this.editForm.get(['eMail'])!.value,
+      anagraficaCandidatoId: this.editForm.get(['anagraficaCandidatoId'])!.value,
       statoRegistrazioneId: this.editForm.get(['statoRegistrazioneId'])!.value,
     };
   }
@@ -103,7 +135,7 @@ export class CandidatoUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  trackById(index: number, item: IStatoRegistrazione): any {
+  trackById(index: number, item: SelectableEntity): any {
     return item.id;
   }
 }

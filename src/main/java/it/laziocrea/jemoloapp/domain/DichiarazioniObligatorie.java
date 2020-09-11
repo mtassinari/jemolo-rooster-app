@@ -25,17 +25,12 @@ public class DichiarazioniObligatorie implements Serializable {
     @Column(name = "stato", nullable = false)
     private Boolean stato;
 
-    @NotNull
-    @Column(name = "dichiarazione", nullable = false)
-    private String dichiarazione;
-
     @ManyToOne(optional = false)
     @NotNull
     @JsonIgnoreProperties(value = "dichiarazionis", allowSetters = true)
     private AnagraficaCandidato anagrafica;
 
-    @ManyToOne(optional = false)
-    @NotNull
+    @ManyToOne
     @JsonIgnoreProperties(value = "dichiarazioniObligatories", allowSetters = true)
     private Dichiarazioni dichiarazioni;
 
@@ -59,19 +54,6 @@ public class DichiarazioniObligatorie implements Serializable {
 
     public void setStato(Boolean stato) {
         this.stato = stato;
-    }
-
-    public String getDichiarazione() {
-        return dichiarazione;
-    }
-
-    public DichiarazioniObligatorie dichiarazione(String dichiarazione) {
-        this.dichiarazione = dichiarazione;
-        return this;
-    }
-
-    public void setDichiarazione(String dichiarazione) {
-        this.dichiarazione = dichiarazione;
     }
 
     public AnagraficaCandidato getAnagrafica() {
@@ -123,7 +105,6 @@ public class DichiarazioniObligatorie implements Serializable {
         return "DichiarazioniObligatorie{" +
             "id=" + getId() +
             ", stato='" + isStato() + "'" +
-            ", dichiarazione='" + getDichiarazione() + "'" +
             "}";
     }
 }

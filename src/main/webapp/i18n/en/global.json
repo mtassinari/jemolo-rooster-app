@@ -19,6 +19,8 @@
         "lingua": "Lingua",
         "dichiarazioniObligatorie": "Dichiarazioni Obligatorie",
         "dichiarazioni": "Dichiarazioni",
+        "provincia": "Provincia",
+        "comune": "Comune",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

@@ -59,8 +59,6 @@ public class AnagraficaCandidatoCriteria implements Serializable, Criteria {
 
     private StringFilter note;
 
-    private LongFilter candidatoId;
-
     private LongFilter competenzeLngId;
 
     private LongFilter titoloStudioId;
@@ -70,6 +68,8 @@ public class AnagraficaCandidatoCriteria implements Serializable, Criteria {
     private LongFilter competenzaId;
 
     private LongFilter dichiarazioniId;
+
+    private LongFilter candidatoId;
 
     public AnagraficaCandidatoCriteria() {
     }
@@ -92,12 +92,12 @@ public class AnagraficaCandidatoCriteria implements Serializable, Criteria {
         this.comuneResidenza = other.comuneResidenza == null ? null : other.comuneResidenza.copy();
         this.provinciaResidenza = other.provinciaResidenza == null ? null : other.provinciaResidenza.copy();
         this.note = other.note == null ? null : other.note.copy();
-        this.candidatoId = other.candidatoId == null ? null : other.candidatoId.copy();
         this.competenzeLngId = other.competenzeLngId == null ? null : other.competenzeLngId.copy();
         this.titoloStudioId = other.titoloStudioId == null ? null : other.titoloStudioId.copy();
         this.curriculumId = other.curriculumId == null ? null : other.curriculumId.copy();
         this.competenzaId = other.competenzaId == null ? null : other.competenzaId.copy();
         this.dichiarazioniId = other.dichiarazioniId == null ? null : other.dichiarazioniId.copy();
+        this.candidatoId = other.candidatoId == null ? null : other.candidatoId.copy();
     }
 
     @Override
@@ -241,14 +241,6 @@ public class AnagraficaCandidatoCriteria implements Serializable, Criteria {
         this.note = note;
     }
 
-    public LongFilter getCandidatoId() {
-        return candidatoId;
-    }
-
-    public void setCandidatoId(LongFilter candidatoId) {
-        this.candidatoId = candidatoId;
-    }
-
     public LongFilter getCompetenzeLngId() {
         return competenzeLngId;
     }
@@ -289,6 +281,14 @@ public class AnagraficaCandidatoCriteria implements Serializable, Criteria {
         this.dichiarazioniId = dichiarazioniId;
     }
 
+    public LongFilter getCandidatoId() {
+        return candidatoId;
+    }
+
+    public void setCandidatoId(LongFilter candidatoId) {
+        this.candidatoId = candidatoId;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -317,12 +317,12 @@ public class AnagraficaCandidatoCriteria implements Serializable, Criteria {
             Objects.equals(comuneResidenza, that.comuneResidenza) &&
             Objects.equals(provinciaResidenza, that.provinciaResidenza) &&
             Objects.equals(note, that.note) &&
-            Objects.equals(candidatoId, that.candidatoId) &&
             Objects.equals(competenzeLngId, that.competenzeLngId) &&
             Objects.equals(titoloStudioId, that.titoloStudioId) &&
             Objects.equals(curriculumId, that.curriculumId) &&
             Objects.equals(competenzaId, that.competenzaId) &&
-            Objects.equals(dichiarazioniId, that.dichiarazioniId);
+            Objects.equals(dichiarazioniId, that.dichiarazioniId) &&
+            Objects.equals(candidatoId, that.candidatoId);
     }
 
     @Override
@@ -345,12 +345,12 @@ public class AnagraficaCandidatoCriteria implements Serializable, Criteria {
         comuneResidenza,
         provinciaResidenza,
         note,
-        candidatoId,
         competenzeLngId,
         titoloStudioId,
         curriculumId,
         competenzaId,
-        dichiarazioniId
+        dichiarazioniId,
+        candidatoId
         );
     }
 
@@ -375,12 +375,12 @@ public class AnagraficaCandidatoCriteria implements Serializable, Criteria {
                 (comuneResidenza != null ? "comuneResidenza=" + comuneResidenza + ", " : "") +
                 (provinciaResidenza != null ? "provinciaResidenza=" + provinciaResidenza + ", " : "") +
                 (note != null ? "note=" + note + ", " : "") +
-                (candidatoId != null ? "candidatoId=" + candidatoId + ", " : "") +
                 (competenzeLngId != null ? "competenzeLngId=" + competenzeLngId + ", " : "") +
                 (titoloStudioId != null ? "titoloStudioId=" + titoloStudioId + ", " : "") +
                 (curriculumId != null ? "curriculumId=" + curriculumId + ", " : "") +
                 (competenzaId != null ? "competenzaId=" + competenzaId + ", " : "") +
                 (dichiarazioniId != null ? "dichiarazioniId=" + dichiarazioniId + ", " : "") +
+                (candidatoId != null ? "candidatoId=" + candidatoId + ", " : "") +
             "}";
     }
 

@@ -9,13 +9,10 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity {@link AnagraficaCandidato} and its DTO {@link AnagraficaCandidatoDTO}.
  */
-@Mapper(componentModel = "spring", uses = {CandidatoMapper.class})
+@Mapper(componentModel = "spring", uses = {})
 public interface AnagraficaCandidatoMapper extends EntityMapper<AnagraficaCandidatoDTO, AnagraficaCandidato> {
 
-    @Mapping(source = "candidato.id", target = "candidatoId")
-    AnagraficaCandidatoDTO toDto(AnagraficaCandidato anagraficaCandidato);
 
-    @Mapping(source = "candidatoId", target = "candidato")
     @Mapping(target = "competenzeLngs", ignore = true)
     @Mapping(target = "removeCompetenzeLng", ignore = true)
     @Mapping(target = "titoloStudios", ignore = true)
@@ -26,6 +23,7 @@ public interface AnagraficaCandidatoMapper extends EntityMapper<AnagraficaCandid
     @Mapping(target = "removeCompetenza", ignore = true)
     @Mapping(target = "dichiarazionis", ignore = true)
     @Mapping(target = "removeDichiarazioni", ignore = true)
+    @Mapping(target = "candidato", ignore = true)
     AnagraficaCandidato toEntity(AnagraficaCandidatoDTO anagraficaCandidatoDTO);
 
     default AnagraficaCandidato fromId(Long id) {

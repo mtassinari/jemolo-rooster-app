@@ -26,9 +26,8 @@ export class DichiarazioniObligatorieUpdateComponent implements OnInit {
   editForm = this.fb.group({
     id: [],
     stato: [null, [Validators.required]],
-    dichiarazione: [null, [Validators.required]],
     anagraficaId: [null, Validators.required],
-    dichiarazioniId: [null, Validators.required],
+    dichiarazioniId: [],
   });
 
   constructor(
@@ -55,7 +54,6 @@ export class DichiarazioniObligatorieUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: dichiarazioniObligatorie.id,
       stato: dichiarazioniObligatorie.stato,
-      dichiarazione: dichiarazioniObligatorie.dichiarazione,
       anagraficaId: dichiarazioniObligatorie.anagraficaId,
       dichiarazioniId: dichiarazioniObligatorie.dichiarazioniId,
     });
@@ -80,7 +78,6 @@ export class DichiarazioniObligatorieUpdateComponent implements OnInit {
       ...new DichiarazioniObligatorie(),
       id: this.editForm.get(['id'])!.value,
       stato: this.editForm.get(['stato'])!.value,
-      dichiarazione: this.editForm.get(['dichiarazione'])!.value,
       anagraficaId: this.editForm.get(['anagraficaId'])!.value,
       dichiarazioniId: this.editForm.get(['dichiarazioniId'])!.value,
     };
