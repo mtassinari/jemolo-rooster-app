@@ -1,0 +1,23 @@
+{
+  "jemoloRoosterApp": {
+    "dichiarazioni": {
+      "home": {
+        "title": "Dichiarazionis",
+        "createLabel": "Genera un nuovo Dichiarazioni",
+        "createOrEditLabel": "Genera o modifica un Dichiarazioni",
+        "notFound": "No Dichiarazionis found"
+      },
+      "created": "&Egrave; stato generato un nuovo Dichiarazioni con identificatore {{ param }}",
+      "updated": "&Egrave; stato aggiornato Dichiarazioni identificato da {{ param }}",
+      "deleted": "&Egrave; stato eliminato Dichiarazioni con identificatore {{ param }}",
+      "delete": {
+        "question": "Sei sicuro di volere eliminare Dichiarazioni {{ id }}?"
+      },
+      "detail": {
+        "title": "Dichiarazioni"
+      },
+      "descrizione": "Descrizione",
+      "dichiarazioniObligatorie": "Dichiarazioni Obligatorie"
+    }
+  }
+}

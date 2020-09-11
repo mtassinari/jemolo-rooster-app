@@ -1,0 +1,69 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="jemoloRoosterApp.ambitoCompetenza.home.title">Ambito Competenzas</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-ambito-competenza" [routerLink]="['/ambito-competenza/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="jemoloRoosterApp.ambitoCompetenza.home.createLabel">
+            Create a new Ambito Competenza
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="ambitoCompetenzas?.length === 0">
+        <span jhiTranslate="jemoloRoosterApp.ambitoCompetenza.home.notFound">No ambitoCompetenzas found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="ambitoCompetenzas?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
+                    <th scope="col" ><span jhiTranslate="jemoloRoosterApp.ambitoCompetenza.descrizione">Descrizione</span></th>
+                    <th scope="col" ><span jhiTranslate="jemoloRoosterApp.ambitoCompetenza.tipo">Tipo</span></th>
+                    <th scope="col" ><span jhiTranslate="jemoloRoosterApp.ambitoCompetenza.ambito">Ambito</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let ambitoCompetenza of ambitoCompetenzas ;trackBy: trackId">
+                    <td><a [routerLink]="['/ambito-competenza', ambitoCompetenza.id, 'view']">{{ ambitoCompetenza.id }}</a></td>
+                    <td>{{ ambitoCompetenza.descrizione }}</td>
+                    <td>{{ ambitoCompetenza.tipo }}</td>
+                    <td>
+                        <div *ngIf="ambitoCompetenza.ambitoId">
+                            <a [routerLink]="['/ambito-competenza', ambitoCompetenza.ambitoId , 'view']" >{{ ambitoCompetenza.ambitoId }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/ambito-competenza', ambitoCompetenza.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/ambito-competenza', ambitoCompetenza.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(ambitoCompetenza)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

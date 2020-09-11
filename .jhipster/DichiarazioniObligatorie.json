@@ -1,0 +1,47 @@
+{
+    "name": "DichiarazioniObligatorie",
+    "fields": [
+        {
+            "fieldName": "stato",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "dichiarazione",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "anagraficaCandidato",
+            "otherEntityRelationshipName": "dichiarazioni",
+            "relationshipValidateRules": "required",
+            "relationshipName": "anagrafica",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "dichiarazioni",
+            "otherEntityRelationshipName": "dichiarazioniObligatorie",
+            "relationshipValidateRules": "required",
+            "relationshipName": "dichiarazioni",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200211121800",
+    "entityTableName": "dichiarazioni_obligatorie",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

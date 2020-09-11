@@ -1,0 +1,41 @@
+{
+    "name": "Competenza",
+    "fields": [
+        {
+            "fieldName": "anni",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "anagraficaCandidato",
+            "otherEntityRelationshipName": "competenza",
+            "relationshipValidateRules": "required",
+            "relationshipName": "anagrafica",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "ambitoCompetenza",
+            "otherEntityRelationshipName": "competenza",
+            "relationshipValidateRules": "required",
+            "relationshipName": "ambitoComp",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200211121200",
+    "javadoc": "Entity Competenza\\n@author Marco Tassinari",
+    "entityTableName": "competenza",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -1,0 +1,27 @@
+{
+  "jemoloRoosterApp": {
+    "candidato": {
+      "home": {
+        "title": "Candidatoes",
+        "createLabel": "Genera un nuovo Candidato",
+        "createOrEditLabel": "Genera o modifica un Candidato",
+        "notFound": "No Candidatoes found"
+      },
+      "created": "&Egrave; stato generato un nuovo Candidato con identificatore {{ param }}",
+      "updated": "&Egrave; stato aggiornato Candidato identificato da {{ param }}",
+      "deleted": "&Egrave; stato eliminato Candidato con identificatore {{ param }}",
+      "delete": {
+        "question": "Sei sicuro di volere eliminare Candidato {{ id }}?"
+      },
+      "detail": {
+        "title": "Candidato"
+      },
+      "nome": "Nome",
+      "cognome": "Cognome",
+      "codiceFiscale": "Codice Fiscale",
+      "eMail": "E Mail",
+      "anagraficaCandidato": "Anagrafica Candidato",
+      "statoRegistrazione": "Stato Registrazione"
+    }
+  }
+}

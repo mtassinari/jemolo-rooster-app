@@ -1,0 +1,340 @@
+package it.laziocrea.jemoloapp.web.rest;
+
+import it.laziocrea.jemoloapp.JemoloRoosterApp;
+import it.laziocrea.jemoloapp.domain.DichiarazioniObligatorie;
+import it.laziocrea.jemoloapp.domain.AnagraficaCandidato;
+import it.laziocrea.jemoloapp.domain.Dichiarazioni;
+import it.laziocrea.jemoloapp.repository.DichiarazioniObligatorieRepository;
+import it.laziocrea.jemoloapp.service.DichiarazioniObligatorieService;
+import it.laziocrea.jemoloapp.service.dto.DichiarazioniObligatorieDTO;
+import it.laziocrea.jemoloapp.service.mapper.DichiarazioniObligatorieMapper;
+import it.laziocrea.jemoloapp.web.rest.errors.ExceptionTranslator;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
+import org.springframework.http.MediaType;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.Validator;
+
+import javax.persistence.EntityManager;
+import java.util.List;
+
+import static it.laziocrea.jemoloapp.web.rest.TestUtil.createFormattingConversionService;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+/**
+ * Integration tests for the {@link DichiarazioniObligatorieResource} REST controller.
+ */
+@SpringBootTest(classes = JemoloRoosterApp.class)
+public class DichiarazioniObligatorieResourceIT {
+
+    private static final Boolean DEFAULT_STATO = false;
+    private static final Boolean UPDATED_STATO = true;
+
+    private static final String DEFAULT_DICHIARAZIONE = "AAAAAAAAAA";
+    private static final String UPDATED_DICHIARAZIONE = "BBBBBBBBBB";
+
+    @Autowired
+    private DichiarazioniObligatorieRepository dichiarazioniObligatorieRepository;
+
+    @Autowired
+    private DichiarazioniObligatorieMapper dichiarazioniObligatorieMapper;
+
+    @Autowired
+    private DichiarazioniObligatorieService dichiarazioniObligatorieService;
+
+    @Autowired
+    private MappingJackson2HttpMessageConverter jacksonMessageConverter;
+
+    @Autowired
+    private PageableHandlerMethodArgumentResolver pageableArgumentResolver;
+
+    @Autowired
+    private ExceptionTranslator exceptionTranslator;
+
+    @Autowired
+    private EntityManager em;
+
+    @Autowired
+    private Validator validator;
+
+    private MockMvc restDichiarazioniObligatorieMockMvc;
+
+    private DichiarazioniObligatorie dichiarazioniObligatorie;
+
+    @BeforeEach
+    public void setup() {
+        MockitoAnnotations.initMocks(this);
+        final DichiarazioniObligatorieResource dichiarazioniObligatorieResource = new DichiarazioniObligatorieResource(dichiarazioniObligatorieService);
+        this.restDichiarazioniObligatorieMockMvc = MockMvcBuilders.standaloneSetup(dichiarazioniObligatorieResource)
+            .setCustomArgumentResolvers(pageableArgumentResolver)
+            .setControllerAdvice(exceptionTranslator)
+            .setConversionService(createFormattingConversionService())
+            .setMessageConverters(jacksonMessageConverter)
+            .setValidator(validator).build();
+    }
+
+    /**
+     * Create an entity for this test.
+     *
+     * This is a static method, as tests for other entities might also need it,
+     * if they test an entity which requires the current entity.
+     */
+    public static DichiarazioniObligatorie createEntity(EntityManager em) {
+        DichiarazioniObligatorie dichiarazioniObligatorie = new DichiarazioniObligatorie()
+            .stato(DEFAULT_STATO)
+            .dichiarazione(DEFAULT_DICHIARAZIONE);
+        // Add required entity
+        AnagraficaCandidato anagraficaCandidato;
+        if (TestUtil.findAll(em, AnagraficaCandidato.class).isEmpty()) {
+            anagraficaCandidato = AnagraficaCandidatoResourceIT.createEntity(em);
+            em.persist(anagraficaCandidato);
+            em.flush();
+        } else {
+            anagraficaCandidato = TestUtil.findAll(em, AnagraficaCandidato.class).get(0);
+        }
+        dichiarazioniObligatorie.setAnagrafica(anagraficaCandidato);
+        // Add required entity
+        Dichiarazioni dichiarazioni;
+        if (TestUtil.findAll(em, Dichiarazioni.class).isEmpty()) {
+            dichiarazioni = DichiarazioniResourceIT.createEntity(em);
+            em.persist(dichiarazioni);
+            em.flush();
+        } else {
+            dichiarazioni = TestUtil.findAll(em, Dichiarazioni.class).get(0);
+        }
+        dichiarazioniObligatorie.setDichiarazioni(dichiarazioni);
+        return dichiarazioniObligatorie;
+    }
+    /**
+     * Create an updated entity for this test.
+     *
+     * This is a static method, as tests for other entities might also need it,
+     * if they test an entity which requires the current entity.
+     */
+    public static DichiarazioniObligatorie createUpdatedEntity(EntityManager em) {
+        DichiarazioniObligatorie dichiarazioniObligatorie = new DichiarazioniObligatorie()
+            .stato(UPDATED_STATO)
+            .dichiarazione(UPDATED_DICHIARAZIONE);
+        // Add required entity
+        AnagraficaCandidato anagraficaCandidato;
+        if (TestUtil.findAll(em, AnagraficaCandidato.class).isEmpty()) {
+            anagraficaCandidato = AnagraficaCandidatoResourceIT.createUpdatedEntity(em);
+            em.persist(anagraficaCandidato);
+            em.flush();
+        } else {
+            anagraficaCandidato = TestUtil.findAll(em, AnagraficaCandidato.class).get(0);
+        }
+        dichiarazioniObligatorie.setAnagrafica(anagraficaCandidato);
+        // Add required entity
+        Dichiarazioni dichiarazioni;
+        if (TestUtil.findAll(em, Dichiarazioni.class).isEmpty()) {
+            dichiarazioni = DichiarazioniResourceIT.createUpdatedEntity(em);
+            em.persist(dichiarazioni);
+            em.flush();
+        } else {
+            dichiarazioni = TestUtil.findAll(em, Dichiarazioni.class).get(0);
+        }
+        dichiarazioniObligatorie.setDichiarazioni(dichiarazioni);
+        return dichiarazioniObligatorie;
+    }
+
+    @BeforeEach
+    public void initTest() {
+        dichiarazioniObligatorie = createEntity(em);
+    }
+
+    @Test
+    @Transactional
+    public void createDichiarazioniObligatorie() throws Exception {
+        int databaseSizeBeforeCreate = dichiarazioniObligatorieRepository.findAll().size();
+
+        // Create the DichiarazioniObligatorie
+        DichiarazioniObligatorieDTO dichiarazioniObligatorieDTO = dichiarazioniObligatorieMapper.toDto(dichiarazioniObligatorie);
+        restDichiarazioniObligatorieMockMvc.perform(post("/api/dichiarazioni-obligatories")
+            .contentType(TestUtil.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(dichiarazioniObligatorieDTO)))
+            .andExpect(status().isCreated());
+
+        // Validate the DichiarazioniObligatorie in the database
+        List<DichiarazioniObligatorie> dichiarazioniObligatorieList = dichiarazioniObligatorieRepository.findAll();
+        assertThat(dichiarazioniObligatorieList).hasSize(databaseSizeBeforeCreate + 1);
+        DichiarazioniObligatorie testDichiarazioniObligatorie = dichiarazioniObligatorieList.get(dichiarazioniObligatorieList.size() - 1);
+        assertThat(testDichiarazioniObligatorie.isStato()).isEqualTo(DEFAULT_STATO);
+        assertThat(testDichiarazioniObligatorie.getDichiarazione()).isEqualTo(DEFAULT_DICHIARAZIONE);
+    }
+
+    @Test
+    @Transactional
+    public void createDichiarazioniObligatorieWithExistingId() throws Exception {
+        int databaseSizeBeforeCreate = dichiarazioniObligatorieRepository.findAll().size();
+
+        // Create the DichiarazioniObligatorie with an existing ID
+        dichiarazioniObligatorie.setId(1L);
+        DichiarazioniObligatorieDTO dichiarazioniObligatorieDTO = dichiarazioniObligatorieMapper.toDto(dichiarazioniObligatorie);
+
+        // An entity with an existing ID cannot be created, so this API call must fail
+        restDichiarazioniObligatorieMockMvc.perform(post("/api/dichiarazioni-obligatories")
+            .contentType(TestUtil.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(dichiarazioniObligatorieDTO)))
+            .andExpect(status().isBadRequest());
+
+        // Validate the DichiarazioniObligatorie in the database
+        List<DichiarazioniObligatorie> dichiarazioniObligatorieList = dichiarazioniObligatorieRepository.findAll();
+        assertThat(dichiarazioniObligatorieList).hasSize(databaseSizeBeforeCreate);
+    }
+
+
+    @Test
+    @Transactional
+    public void checkStatoIsRequired() throws Exception {
+        int databaseSizeBeforeTest = dichiarazioniObligatorieRepository.findAll().size();
+        // set the field null
+        dichiarazioniObligatorie.setStato(null);
+
+        // Create the DichiarazioniObligatorie, which fails.
+        DichiarazioniObligatorieDTO dichiarazioniObligatorieDTO = dichiarazioniObligatorieMapper.toDto(dichiarazioniObligatorie);
+
+        restDichiarazioniObligatorieMockMvc.perform(post("/api/dichiarazioni-obligatories")
+            .contentType(TestUtil.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(dichiarazioniObligatorieDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<DichiarazioniObligatorie> dichiarazioniObligatorieList = dichiarazioniObligatorieRepository.findAll();
+        assertThat(dichiarazioniObligatorieList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkDichiarazioneIsRequired() throws Exception {
+        int databaseSizeBeforeTest = dichiarazioniObligatorieRepository.findAll().size();
+        // set the field null
+        dichiarazioniObligatorie.setDichiarazione(null);
+
+        // Create the DichiarazioniObligatorie, which fails.
+        DichiarazioniObligatorieDTO dichiarazioniObligatorieDTO = dichiarazioniObligatorieMapper.toDto(dichiarazioniObligatorie);
+
+        restDichiarazioniObligatorieMockMvc.perform(post("/api/dichiarazioni-obligatories")
+            .contentType(TestUtil.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(dichiarazioniObligatorieDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<DichiarazioniObligatorie> dichiarazioniObligatorieList = dichiarazioniObligatorieRepository.findAll();
+        assertThat(dichiarazioniObligatorieList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void getAllDichiarazioniObligatories() throws Exception {
+        // Initialize the database
+        dichiarazioniObligatorieRepository.saveAndFlush(dichiarazioniObligatorie);
+
+        // Get all the dichiarazioniObligatorieList
+        restDichiarazioniObligatorieMockMvc.perform(get("/api/dichiarazioni-obligatories?sort=id,desc"))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(dichiarazioniObligatorie.getId().intValue())))
+            .andExpect(jsonPath("$.[*].stato").value(hasItem(DEFAULT_STATO.booleanValue())))
+            .andExpect(jsonPath("$.[*].dichiarazione").value(hasItem(DEFAULT_DICHIARAZIONE)));
+    }
+    
+    @Test
+    @Transactional
+    public void getDichiarazioniObligatorie() throws Exception {
+        // Initialize the database
+        dichiarazioniObligatorieRepository.saveAndFlush(dichiarazioniObligatorie);
+
+        // Get the dichiarazioniObligatorie
+        restDichiarazioniObligatorieMockMvc.perform(get("/api/dichiarazioni-obligatories/{id}", dichiarazioniObligatorie.getId()))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(jsonPath("$.id").value(dichiarazioniObligatorie.getId().intValue()))
+            .andExpect(jsonPath("$.stato").value(DEFAULT_STATO.booleanValue()))
+            .andExpect(jsonPath("$.dichiarazione").value(DEFAULT_DICHIARAZIONE));
+    }
+
+    @Test
+    @Transactional
+    public void getNonExistingDichiarazioniObligatorie() throws Exception {
+        // Get the dichiarazioniObligatorie
+        restDichiarazioniObligatorieMockMvc.perform(get("/api/dichiarazioni-obligatories/{id}", Long.MAX_VALUE))
+            .andExpect(status().isNotFound());
+    }
+
+    @Test
+    @Transactional
+    public void updateDichiarazioniObligatorie() throws Exception {
+        // Initialize the database
+        dichiarazioniObligatorieRepository.saveAndFlush(dichiarazioniObligatorie);
+
+        int databaseSizeBeforeUpdate = dichiarazioniObligatorieRepository.findAll().size();
+
+        // Update the dichiarazioniObligatorie
+        DichiarazioniObligatorie updatedDichiarazioniObligatorie = dichiarazioniObligatorieRepository.findById(dichiarazioniObligatorie.getId()).get();
+        // Disconnect from session so that the updates on updatedDichiarazioniObligatorie are not directly saved in db
+        em.detach(updatedDichiarazioniObligatorie);
+        updatedDichiarazioniObligatorie
+            .stato(UPDATED_STATO)
+            .dichiarazione(UPDATED_DICHIARAZIONE);
+        DichiarazioniObligatorieDTO dichiarazioniObligatorieDTO = dichiarazioniObligatorieMapper.toDto(updatedDichiarazioniObligatorie);
+
+        restDichiarazioniObligatorieMockMvc.perform(put("/api/dichiarazioni-obligatories")
+            .contentType(TestUtil.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(dichiarazioniObligatorieDTO)))
+            .andExpect(status().isOk());
+
+        // Validate the DichiarazioniObligatorie in the database
+        List<DichiarazioniObligatorie> dichiarazioniObligatorieList = dichiarazioniObligatorieRepository.findAll();
+        assertThat(dichiarazioniObligatorieList).hasSize(databaseSizeBeforeUpdate);
+        DichiarazioniObligatorie testDichiarazioniObligatorie = dichiarazioniObligatorieList.get(dichiarazioniObligatorieList.size() - 1);
+        assertThat(testDichiarazioniObligatorie.isStato()).isEqualTo(UPDATED_STATO);
+        assertThat(testDichiarazioniObligatorie.getDichiarazione()).isEqualTo(UPDATED_DICHIARAZIONE);
+    }
+
+    @Test
+    @Transactional
+    public void updateNonExistingDichiarazioniObligatorie() throws Exception {
+        int databaseSizeBeforeUpdate = dichiarazioniObligatorieRepository.findAll().size();
+
+        // Create the DichiarazioniObligatorie
+        DichiarazioniObligatorieDTO dichiarazioniObligatorieDTO = dichiarazioniObligatorieMapper.toDto(dichiarazioniObligatorie);
+
+        // If the entity doesn't have an ID, it will throw BadRequestAlertException
+        restDichiarazioniObligatorieMockMvc.perform(put("/api/dichiarazioni-obligatories")
+            .contentType(TestUtil.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(dichiarazioniObligatorieDTO)))
+            .andExpect(status().isBadRequest());
+
+        // Validate the DichiarazioniObligatorie in the database
+        List<DichiarazioniObligatorie> dichiarazioniObligatorieList = dichiarazioniObligatorieRepository.findAll();
+        assertThat(dichiarazioniObligatorieList).hasSize(databaseSizeBeforeUpdate);
+    }
+
+    @Test
+    @Transactional
+    public void deleteDichiarazioniObligatorie() throws Exception {
+        // Initialize the database
+        dichiarazioniObligatorieRepository.saveAndFlush(dichiarazioniObligatorie);
+
+        int databaseSizeBeforeDelete = dichiarazioniObligatorieRepository.findAll().size();
+
+        // Delete the dichiarazioniObligatorie
+        restDichiarazioniObligatorieMockMvc.perform(delete("/api/dichiarazioni-obligatories/{id}", dichiarazioniObligatorie.getId())
+            .accept(TestUtil.APPLICATION_JSON))
+            .andExpect(status().isNoContent());
+
+        // Validate the database contains one less item
+        List<DichiarazioniObligatorie> dichiarazioniObligatorieList = dichiarazioniObligatorieRepository.findAll();
+        assertThat(dichiarazioniObligatorieList).hasSize(databaseSizeBeforeDelete - 1);
+    }
+}

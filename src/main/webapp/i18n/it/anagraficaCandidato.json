@@ -1,0 +1,43 @@
+{
+  "jemoloRoosterApp": {
+    "anagraficaCandidato": {
+      "home": {
+        "title": "AnagraficaCandidatoes",
+        "createLabel": "Genera un nuovo Anagrafica Candidato",
+        "createOrEditLabel": "Genera o modifica un Anagrafica Candidato",
+        "notFound": "No Anagrafica Candidatoes found"
+      },
+      "created": "&Egrave; stato generato un nuovo Anagrafica Candidato con identificatore {{ param }}",
+      "updated": "&Egrave; stato aggiornato Anagrafica Candidato identificato da {{ param }}",
+      "deleted": "&Egrave; stato eliminato Anagrafica Candidato con identificatore {{ param }}",
+      "delete": {
+        "question": "Sei sicuro di volere eliminare Anagrafica Candidato {{ id }}?"
+      },
+      "detail": {
+        "title": "Anagrafica Candidato"
+      },
+      "cognome": "Cognome",
+      "nome": "Nome",
+      "luogoNascita": "Luogo Nascita",
+      "dataNascita": "Data Nascita",
+      "codiceFiscale": "Codice Fiscale",
+      "professione": "Professione",
+      "partitaIva": "Partita Iva",
+      "numeroTelefonoFisso": "Numero Telefono Fisso",
+      "numeroTelefonoCellulare": "Numero Telefono Cellulare",
+      "eMail": "E Mail",
+      "indirizzoPec": "Indirizzo Pec",
+      "indirizzoResidenza": "Indirizzo Residenza",
+      "capResidenza": "Cap Residenza",
+      "comuneResidenza": "Comune Residenza",
+      "provinciaResidenza": "Provincia Residenza",
+      "note": "Note",
+      "candidato": "Candidato",
+      "competenzeLng": "Competenze Lng",
+      "titoloStudio": "Titolo Studio",
+      "curriculum": "Curriculum",
+      "competenza": "Competenza",
+      "dichiarazioni": "Dichiarazioni"
+    }
+  }
+}

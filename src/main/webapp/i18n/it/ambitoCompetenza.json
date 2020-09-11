@@ -1,0 +1,26 @@
+{
+  "jemoloRoosterApp": {
+    "ambitoCompetenza": {
+      "home": {
+        "title": "AmbitoCompetenzas",
+        "createLabel": "Genera un nuovo Ambito Competenza",
+        "createOrEditLabel": "Genera o modifica un Ambito Competenza",
+        "notFound": "No Ambito Competenzas found"
+      },
+      "created": "&Egrave; stato generato un nuovo Ambito Competenza con identificatore {{ param }}",
+      "updated": "&Egrave; stato aggiornato Ambito Competenza identificato da {{ param }}",
+      "deleted": "&Egrave; stato eliminato Ambito Competenza con identificatore {{ param }}",
+      "delete": {
+        "question": "Sei sicuro di volere eliminare Ambito Competenza {{ id }}?"
+      },
+      "detail": {
+        "title": "Ambito Competenza"
+      },
+      "descrizione": "Descrizione",
+      "tipo": "Tipo",
+      "competenza": "Competenza",
+      "sottoambito": "Sottoambito",
+      "ambito": "Ambito"
+    }
+  }
+}

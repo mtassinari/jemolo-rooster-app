@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity DichiarazioniObligatorie.
+    -->
+    <changeSet id="20200211121800-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="anagrafica_id"
+                                 baseTableName="dichiarazioni_obligatorie"
+                                 constraintName="fk_dichiarazioni_obligatorie_anagrafica_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="anagrafica_candidato"/>
+
+        <addForeignKeyConstraint baseColumnNames="dichiarazioni_id"
+                                 baseTableName="dichiarazioni_obligatorie"
+                                 constraintName="fk_dichiarazioni_obligatorie_dichiarazioni_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="dichiarazioni"/>
+
+    </changeSet>
+</databaseChangeLog>

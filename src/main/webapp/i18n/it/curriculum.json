@@ -1,0 +1,28 @@
+{
+  "jemoloRoosterApp": {
+    "curriculum": {
+      "home": {
+        "title": "Curricula",
+        "createLabel": "Genera un nuovo Curriculum",
+        "createOrEditLabel": "Genera o modifica un Curriculum",
+        "notFound": "No Curricula found"
+      },
+      "created": "&Egrave; stato generato un nuovo Curriculum con identificatore {{ param }}",
+      "updated": "&Egrave; stato aggiornato Curriculum identificato da {{ param }}",
+      "deleted": "&Egrave; stato eliminato Curriculum con identificatore {{ param }}",
+      "delete": {
+        "question": "Sei sicuro di volere eliminare Curriculum {{ id }}?"
+      },
+      "detail": {
+        "title": "Curriculum"
+      },
+      "cv": "Cv",
+      "size": "Size",
+      "urlAllegato": "Url Allegato",
+      "mimeType": "Mime Type",
+      "note": "Note",
+      "attach": "Attach",
+      "anagrafica": "Anagrafica"
+    }
+  }
+}

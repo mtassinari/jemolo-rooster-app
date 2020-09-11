@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity CompetenzeLng.
+    -->
+    <changeSet id="20200211121600-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="lingua_id"
+                                 baseTableName="competenze_lng"
+                                 constraintName="fk_competenze_lng_lingua_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="lingua"/>
+
+        <addForeignKeyConstraint baseColumnNames="anagrafica_id"
+                                 baseTableName="competenze_lng"
+                                 constraintName="fk_competenze_lng_anagrafica_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="anagrafica_candidato"/>
+
+    </changeSet>
+</databaseChangeLog>

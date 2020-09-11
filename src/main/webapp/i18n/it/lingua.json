@@ -1,0 +1,23 @@
+{
+  "jemoloRoosterApp": {
+    "lingua": {
+      "home": {
+        "title": "Linguas",
+        "createLabel": "Genera un nuovo Lingua",
+        "createOrEditLabel": "Genera o modifica un Lingua",
+        "notFound": "No Linguas found"
+      },
+      "created": "&Egrave; stato generato un nuovo Lingua con identificatore {{ param }}",
+      "updated": "&Egrave; stato aggiornato Lingua identificato da {{ param }}",
+      "deleted": "&Egrave; stato eliminato Lingua con identificatore {{ param }}",
+      "delete": {
+        "question": "Sei sicuro di volere eliminare Lingua {{ id }}?"
+      },
+      "detail": {
+        "title": "Lingua"
+      },
+      "lingua": "Lingua",
+      "competenzeLinguistiche": "Competenze Linguistiche"
+    }
+  }
+}

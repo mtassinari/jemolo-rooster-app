@@ -1,0 +1,32 @@
+{
+    "name": "StatoRegistrazione",
+    "fields": [
+        {
+            "fieldName": "stato",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "unique",
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "candidato",
+            "otherEntityRelationshipName": "statoRegistrazione",
+            "relationshipName": "candidato"
+        }
+    ],
+    "changelogDate": "20200211121500",
+    "javadoc": "Entity StatoRegistrazione\\n@author Marco Tassinari",
+    "entityTableName": "stato_registrazione",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

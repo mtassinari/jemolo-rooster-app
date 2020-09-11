@@ -1,0 +1,83 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="jemoloRoosterApp.competenza.home.title">Competenzas</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-competenza" [routerLink]="['/competenza/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="jemoloRoosterApp.competenza.home.createLabel">
+            Create a new Competenza
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="competenzas?.length === 0">
+        <span jhiTranslate="jemoloRoosterApp.competenza.home.notFound">No competenzas found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="competenzas?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="anni"><span jhiTranslate="jemoloRoosterApp.competenza.anni">Anni</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="anagraficaId"><span jhiTranslate="jemoloRoosterApp.competenza.anagrafica">Anagrafica</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="ambitoCompId"><span jhiTranslate="jemoloRoosterApp.competenza.ambitoComp">Ambito Comp</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let competenza of competenzas ;trackBy: trackId">
+                    <td><a [routerLink]="['/competenza', competenza.id, 'view']">{{ competenza.id }}</a></td>
+                    <td>{{ competenza.anni }}</td>
+                    <td>
+                        <div *ngIf="competenza.anagraficaId">
+                            <a [routerLink]="['/anagrafica-candidato', competenza.anagraficaId , 'view']" >{{ competenza.anagraficaId }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="competenza.ambitoCompId">
+                            <a [routerLink]="['/ambito-competenza', competenza.ambitoCompId , 'view']" >{{ competenza.ambitoCompId }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/competenza', competenza.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/competenza', competenza.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(competenza)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="competenzas?.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

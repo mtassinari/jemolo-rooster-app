@@ -1,0 +1,96 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="anagraficaCandidato">
+            <h2><span jhiTranslate="jemoloRoosterApp.anagraficaCandidato.detail.title">Anagrafica Candidato</span> {{ anagraficaCandidato.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="jemoloRoosterApp.anagraficaCandidato.cognome">Cognome</span></dt>
+                <dd>
+                    <span>{{ anagraficaCandidato.cognome }}</span>
+                </dd>
+                <dt><span jhiTranslate="jemoloRoosterApp.anagraficaCandidato.nome">Nome</span></dt>
+                <dd>
+                    <span>{{ anagraficaCandidato.nome }}</span>
+                </dd>
+                <dt><span jhiTranslate="jemoloRoosterApp.anagraficaCandidato.luogoNascita">Luogo Nascita</span></dt>
+                <dd>
+                    <span>{{ anagraficaCandidato.luogoNascita }}</span>
+                </dd>
+                <dt><span jhiTranslate="jemoloRoosterApp.anagraficaCandidato.dataNascita">Data Nascita</span></dt>
+                <dd>
+                    <span>{{ anagraficaCandidato.dataNascita }}</span>
+                </dd>
+                <dt><span jhiTranslate="jemoloRoosterApp.anagraficaCandidato.codiceFiscale">Codice Fiscale</span></dt>
+                <dd>
+                    <span>{{ anagraficaCandidato.codiceFiscale }}</span>
+                </dd>
+                <dt><span jhiTranslate="jemoloRoosterApp.anagraficaCandidato.professione">Professione</span></dt>
+                <dd>
+                    <span>{{ anagraficaCandidato.professione }}</span>
+                </dd>
+                <dt><span jhiTranslate="jemoloRoosterApp.anagraficaCandidato.partitaIva">Partita Iva</span></dt>
+                <dd>
+                    <span>{{ anagraficaCandidato.partitaIva }}</span>
+                </dd>
+                <dt><span jhiTranslate="jemoloRoosterApp.anagraficaCandidato.numeroTelefonoFisso">Numero Telefono Fisso</span></dt>
+                <dd>
+                    <span>{{ anagraficaCandidato.numeroTelefonoFisso }}</span>
+                </dd>
+                <dt><span jhiTranslate="jemoloRoosterApp.anagraficaCandidato.numeroTelefonoCellulare">Numero Telefono Cellulare</span></dt>
+                <dd>
+                    <span>{{ anagraficaCandidato.numeroTelefonoCellulare }}</span>
+                </dd>
+                <dt><span jhiTranslate="jemoloRoosterApp.anagraficaCandidato.eMail">E Mail</span></dt>
+                <dd>
+                    <span>{{ anagraficaCandidato.eMail }}</span>
+                </dd>
+                <dt><span jhiTranslate="jemoloRoosterApp.anagraficaCandidato.indirizzoPec">Indirizzo Pec</span></dt>
+                <dd>
+                    <span>{{ anagraficaCandidato.indirizzoPec }}</span>
+                </dd>
+                <dt><span jhiTranslate="jemoloRoosterApp.anagraficaCandidato.indirizzoResidenza">Indirizzo Residenza</span></dt>
+                <dd>
+                    <span>{{ anagraficaCandidato.indirizzoResidenza }}</span>
+                </dd>
+                <dt><span jhiTranslate="jemoloRoosterApp.anagraficaCandidato.capResidenza">Cap Residenza</span></dt>
+                <dd>
+                    <span>{{ anagraficaCandidato.capResidenza }}</span>
+                </dd>
+                <dt><span jhiTranslate="jemoloRoosterApp.anagraficaCandidato.comuneResidenza">Comune Residenza</span></dt>
+                <dd>
+                    <span>{{ anagraficaCandidato.comuneResidenza }}</span>
+                </dd>
+                <dt><span jhiTranslate="jemoloRoosterApp.anagraficaCandidato.provinciaResidenza">Provincia Residenza</span></dt>
+                <dd>
+                    <span>{{ anagraficaCandidato.provinciaResidenza }}</span>
+                </dd>
+                <dt><span jhiTranslate="jemoloRoosterApp.anagraficaCandidato.note">Note</span></dt>
+                <dd>
+                    <span>{{ anagraficaCandidato.note }}</span>
+                </dd>
+                <dt><span jhiTranslate="jemoloRoosterApp.anagraficaCandidato.candidato">Candidato</span></dt>
+                <dd>
+                    <div *ngIf="anagraficaCandidato.candidatoId">
+                        <a [routerLink]="['/candidato', anagraficaCandidato.candidatoId, 'view']">{{ anagraficaCandidato.candidatoId }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/anagrafica-candidato', anagraficaCandidato.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
