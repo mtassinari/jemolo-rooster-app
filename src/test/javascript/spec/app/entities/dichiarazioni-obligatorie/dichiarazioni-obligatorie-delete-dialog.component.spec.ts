@@ -20,7 +20,7 @@ describe('Component Tests', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [JemoloRoosterAppTestModule],
-        declarations: [DichiarazioniObligatorieDeleteDialogComponent]
+        declarations: [DichiarazioniObligatorieDeleteDialogComponent],
       })
         .overrideTemplate(DichiarazioniObligatorieDeleteDialogComponent, '')
         .compileComponents();

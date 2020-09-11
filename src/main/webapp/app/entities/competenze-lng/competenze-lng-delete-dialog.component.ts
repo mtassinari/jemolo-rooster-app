@@ -6,7 +6,7 @@ import { ICompetenzeLng } from 'app/shared/model/competenze-lng.model';
 import { CompetenzeLngService } from './competenze-lng.service';
 
 @Component({
-  templateUrl: './competenze-lng-delete-dialog.component.html'
+  templateUrl: './competenze-lng-delete-dialog.component.html',
 })
 export class CompetenzeLngDeleteDialogComponent {
   competenzeLng?: ICompetenzeLng;

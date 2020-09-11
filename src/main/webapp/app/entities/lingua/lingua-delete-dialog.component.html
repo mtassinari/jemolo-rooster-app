@@ -1,4 +1,4 @@
-<form *ngIf="lingua" name="deleteForm" (ngSubmit)="confirmDelete(lingua.id!)">
+<form *ngIf="lingua" name="deleteForm" (ngSubmit)="confirmDelete(lingua?.id!)">
     <div class="modal-header">
         <h4 class="modal-title" jhiTranslate="entity.delete.title">Confirm delete operation</h4>
 

@@ -10,7 +10,7 @@ import { DichiarazioniDeleteDialogComponent } from './dichiarazioni-delete-dialo
 
 @Component({
   selector: 'jhi-dichiarazioni',
-  templateUrl: './dichiarazioni.component.html'
+  templateUrl: './dichiarazioni.component.html',
 })
 export class DichiarazioniComponent implements OnInit, OnDestroy {
   dichiarazionis?: IDichiarazioni[];

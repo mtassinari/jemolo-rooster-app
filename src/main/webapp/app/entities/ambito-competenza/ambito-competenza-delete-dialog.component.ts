@@ -6,7 +6,7 @@ import { IAmbitoCompetenza } from 'app/shared/model/ambito-competenza.model';
 import { AmbitoCompetenzaService } from './ambito-competenza.service';
 
 @Component({
-  templateUrl: './ambito-competenza-delete-dialog.component.html'
+  templateUrl: './ambito-competenza-delete-dialog.component.html',
 })
 export class AmbitoCompetenzaDeleteDialogComponent {
   ambitoCompetenza?: IAmbitoCompetenza;

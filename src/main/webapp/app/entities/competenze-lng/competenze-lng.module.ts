@@ -11,6 +11,6 @@ import { competenzeLngRoute } from './competenze-lng.route';
 @NgModule({
   imports: [JemoloRoosterAppSharedModule, RouterModule.forChild(competenzeLngRoute)],
   declarations: [CompetenzeLngComponent, CompetenzeLngDetailComponent, CompetenzeLngUpdateComponent, CompetenzeLngDeleteDialogComponent],
-  entryComponents: [CompetenzeLngDeleteDialogComponent]
+  entryComponents: [CompetenzeLngDeleteDialogComponent],
 })
 export class JemoloRoosterAppCompetenzeLngModule {}

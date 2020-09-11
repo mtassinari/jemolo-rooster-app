@@ -31,15 +31,15 @@ public class DichiarazioniObligatorie implements Serializable {
 
     @ManyToOne(optional = false)
     @NotNull
-    @JsonIgnoreProperties("dichiarazionis")
+    @JsonIgnoreProperties(value = "dichiarazionis", allowSetters = true)
     private AnagraficaCandidato anagrafica;
 
     @ManyToOne(optional = false)
     @NotNull
-    @JsonIgnoreProperties("dichiarazioniObligatories")
+    @JsonIgnoreProperties(value = "dichiarazioniObligatories", allowSetters = true)
     private Dichiarazioni dichiarazioni;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
     }
@@ -99,7 +99,7 @@ public class DichiarazioniObligatorie implements Serializable {
     public void setDichiarazioni(Dichiarazioni dichiarazioni) {
         this.dichiarazioni = dichiarazioni;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
     public boolean equals(Object o) {
@@ -117,6 +117,7 @@ public class DichiarazioniObligatorie implements Serializable {
         return 31;
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "DichiarazioniObligatorie{" +

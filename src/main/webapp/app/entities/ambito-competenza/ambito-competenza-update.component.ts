@@ -10,7 +10,7 @@ import { AmbitoCompetenzaService } from './ambito-competenza.service';
 
 @Component({
   selector: 'jhi-ambito-competenza-update',
-  templateUrl: './ambito-competenza-update.component.html'
+  templateUrl: './ambito-competenza-update.component.html',
 })
 export class AmbitoCompetenzaUpdateComponent implements OnInit {
   isSaving = false;
@@ -20,7 +20,7 @@ export class AmbitoCompetenzaUpdateComponent implements OnInit {
     id: [],
     descrizione: [null, [Validators.required]],
     tipo: [],
-    ambitoId: []
+    ambitoId: [],
   });
 
   constructor(
@@ -42,7 +42,7 @@ export class AmbitoCompetenzaUpdateComponent implements OnInit {
       id: ambitoCompetenza.id,
       descrizione: ambitoCompetenza.descrizione,
       tipo: ambitoCompetenza.tipo,
-      ambitoId: ambitoCompetenza.ambitoId
+      ambitoId: ambitoCompetenza.ambitoId,
     });
   }
 
@@ -66,7 +66,7 @@ export class AmbitoCompetenzaUpdateComponent implements OnInit {
       id: this.editForm.get(['id'])!.value,
       descrizione: this.editForm.get(['descrizione'])!.value,
       tipo: this.editForm.get(['tipo'])!.value,
-      ambitoId: this.editForm.get(['ambitoId'])!.value
+      ambitoId: this.editForm.get(['ambitoId'])!.value,
     };
   }
 

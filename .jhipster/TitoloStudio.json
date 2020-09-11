@@ -1,61 +1,51 @@
 {
-    "name": "TitoloStudio",
-    "fields": [
-        {
-            "fieldName": "tipologia",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldName": "descrizione",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldName": "conseguimento",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldName": "anno",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldName": "voto",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "required"
-            ]
-        }
-    ],
-    "relationships": [
-        {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "anagraficaCandidato",
-            "otherEntityRelationshipName": "titoloStudio",
-            "relationshipValidateRules": "required",
-            "relationshipName": "anagrafica",
-            "otherEntityField": "id"
-        }
-    ],
-    "changelogDate": "20200211121400",
-    "javadoc": "Entity TitoloStudio\\n@author Marco Tassinari",
-    "entityTableName": "titolo_studio",
-    "dto": "mapstruct",
-    "pagination": "no",
-    "service": "serviceImpl",
-    "jpaMetamodelFiltering": false,
-    "fluentMethods": true,
-    "readOnly": false,
-    "clientRootFolder": "",
-    "applications": "*"
+  "name": "TitoloStudio",
+  "fields": [
+    {
+      "fieldName": "tipologia",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "descrizione",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "conseguimento",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "anno",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "voto",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "anagraficaCandidato",
+      "otherEntityRelationshipName": "titoloStudio",
+      "relationshipValidateRules": "required",
+      "relationshipName": "anagrafica",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200211121400",
+  "javadoc": "Entity TitoloStudio\\n@author Marco Tassinari",
+  "entityTableName": "titolo_studio",
+  "dto": "mapstruct",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "clientRootFolder": "",
+  "applications": "*"
 }

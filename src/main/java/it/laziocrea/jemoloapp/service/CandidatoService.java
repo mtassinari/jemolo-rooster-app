@@ -31,9 +31,10 @@ public interface CandidatoService {
     /**
      * Get all the CandidatoDTO where AnagraficaCandidato is {@code null}.
      *
-     * @return the list of entities.
+     * @return the {@link List} of entities.
      */
     List<CandidatoDTO> findAllWhereAnagraficaCandidatoIsNull();
+
 
     /**
      * Get the "id" candidato.

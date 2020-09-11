@@ -37,12 +37,6 @@ public class CandidatoServiceImpl implements CandidatoService {
         this.candidatoMapper = candidatoMapper;
     }
 
-    /**
-     * Save a candidato.
-     *
-     * @param candidatoDTO the entity to save.
-     * @return the persisted entity.
-     */
     @Override
     public CandidatoDTO save(CandidatoDTO candidatoDTO) {
         log.debug("Request to save Candidato : {}", candidatoDTO);
@@ -51,12 +45,6 @@ public class CandidatoServiceImpl implements CandidatoService {
         return candidatoMapper.toDto(candidato);
     }
 
-    /**
-     * Get all the candidatoes.
-     *
-     * @param pageable the pagination information.
-     * @return the list of entities.
-     */
     @Override
     @Transactional(readOnly = true)
     public Page<CandidatoDTO> findAll(Pageable pageable) {
@@ -64,6 +52,7 @@ public class CandidatoServiceImpl implements CandidatoService {
         return candidatoRepository.findAll(pageable)
             .map(candidatoMapper::toDto);
     }
+
 
 
     /**
@@ -80,12 +69,6 @@ public class CandidatoServiceImpl implements CandidatoService {
             .collect(Collectors.toCollection(LinkedList::new));
     }
 
-    /**
-     * Get one candidato by id.
-     *
-     * @param id the id of the entity.
-     * @return the entity.
-     */
     @Override
     @Transactional(readOnly = true)
     public Optional<CandidatoDTO> findOne(Long id) {
@@ -94,11 +77,6 @@ public class CandidatoServiceImpl implements CandidatoService {
             .map(candidatoMapper::toDto);
     }
 
-    /**
-     * Delete the candidato by id.
-     *
-     * @param id the id of the entity.
-     */
     @Override
     public void delete(Long id) {
         log.debug("Request to delete Candidato : {}", id);

@@ -4,6 +4,7 @@ import { Resolve, ActivatedRouteSnapshot, Routes, Router } from '@angular/router
 import { Observable, of, EMPTY } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
 
+import { Authority } from 'app/shared/constants/authority.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
 import { IAmbitoCompetenza, AmbitoCompetenza } from 'app/shared/model/ambito-competenza.model';
 import { AmbitoCompetenzaService } from './ambito-competenza.service';
@@ -38,45 +39,45 @@ export const ambitoCompetenzaRoute: Routes = [
     path: '',
     component: AmbitoCompetenzaComponent,
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'jemoloRoosterApp.ambitoCompetenza.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'jemoloRoosterApp.ambitoCompetenza.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
     component: AmbitoCompetenzaDetailComponent,
     resolve: {
-      ambitoCompetenza: AmbitoCompetenzaResolve
+      ambitoCompetenza: AmbitoCompetenzaResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'jemoloRoosterApp.ambitoCompetenza.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'jemoloRoosterApp.ambitoCompetenza.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
     component: AmbitoCompetenzaUpdateComponent,
     resolve: {
-      ambitoCompetenza: AmbitoCompetenzaResolve
+      ambitoCompetenza: AmbitoCompetenzaResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'jemoloRoosterApp.ambitoCompetenza.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'jemoloRoosterApp.ambitoCompetenza.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
     component: AmbitoCompetenzaUpdateComponent,
     resolve: {
-      ambitoCompetenza: AmbitoCompetenzaResolve
+      ambitoCompetenza: AmbitoCompetenzaResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'jemoloRoosterApp.ambitoCompetenza.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'jemoloRoosterApp.ambitoCompetenza.home.title',
     },
-    canActivate: [UserRouteAccessService]
-  }
+    canActivate: [UserRouteAccessService],
+  },
 ];

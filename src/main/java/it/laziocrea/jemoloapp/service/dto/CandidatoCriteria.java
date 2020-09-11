@@ -145,6 +145,7 @@ public class CandidatoCriteria implements Serializable, Criteria {
         );
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "CandidatoCriteria{" +

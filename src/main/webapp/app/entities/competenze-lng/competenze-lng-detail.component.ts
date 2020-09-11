@@ -5,7 +5,7 @@ import { ICompetenzeLng } from 'app/shared/model/competenze-lng.model';
 
 @Component({
   selector: 'jhi-competenze-lng-detail',
-  templateUrl: './competenze-lng-detail.component.html'
+  templateUrl: './competenze-lng-detail.component.html',
 })
 export class CompetenzeLngDetailComponent implements OnInit {
   competenzeLng: ICompetenzeLng | null = null;

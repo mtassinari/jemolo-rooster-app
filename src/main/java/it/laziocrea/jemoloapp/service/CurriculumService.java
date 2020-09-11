@@ -28,6 +28,7 @@ public interface CurriculumService {
      */
     Page<CurriculumDTO> findAll(Pageable pageable);
 
+
     /**
      * Get the "id" curriculum.
      *

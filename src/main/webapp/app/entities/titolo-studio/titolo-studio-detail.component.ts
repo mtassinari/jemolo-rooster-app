@@ -5,7 +5,7 @@ import { ITitoloStudio } from 'app/shared/model/titolo-studio.model';
 
 @Component({
   selector: 'jhi-titolo-studio-detail',
-  templateUrl: './titolo-studio-detail.component.html'
+  templateUrl: './titolo-studio-detail.component.html',
 })
 export class TitoloStudioDetailComponent implements OnInit {
   titoloStudio: ITitoloStudio | null = null;

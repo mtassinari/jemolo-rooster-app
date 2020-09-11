@@ -6,7 +6,7 @@ import { IDichiarazioni } from 'app/shared/model/dichiarazioni.model';
 import { DichiarazioniService } from './dichiarazioni.service';
 
 @Component({
-  templateUrl: './dichiarazioni-delete-dialog.component.html'
+  templateUrl: './dichiarazioni-delete-dialog.component.html',
 })
 export class DichiarazioniDeleteDialogComponent {
   dichiarazioni?: IDichiarazioni;

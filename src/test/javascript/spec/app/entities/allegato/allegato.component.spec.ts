@@ -16,7 +16,7 @@ describe('Component Tests', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [JemoloRoosterAppTestModule],
-        declarations: [AllegatoComponent]
+        declarations: [AllegatoComponent],
       })
         .overrideTemplate(AllegatoComponent, '')
         .compileComponents();
@@ -33,7 +33,7 @@ describe('Component Tests', () => {
         of(
           new HttpResponse({
             body: [new Allegato(123)],
-            headers
+            headers,
           })
         )
       );

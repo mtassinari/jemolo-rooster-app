@@ -59,6 +59,7 @@ public class LinguaService {
             .collect(Collectors.toCollection(LinkedList::new));
     }
 
+
     /**
      * Get one lingua by id.
      *

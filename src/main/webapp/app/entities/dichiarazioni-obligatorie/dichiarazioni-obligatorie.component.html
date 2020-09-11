@@ -18,7 +18,7 @@
         <span jhiTranslate="jemoloRoosterApp.dichiarazioniObligatorie.home.notFound">No dichiarazioniObligatories found</span>
     </div>
 
-    <div class="table-responsive" id="entities" *ngIf="dichiarazioniObligatories?.length > 0">
+    <div class="table-responsive" id="entities" *ngIf="dichiarazioniObligatories && dichiarazioniObligatories.length > 0">
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
                 <tr>

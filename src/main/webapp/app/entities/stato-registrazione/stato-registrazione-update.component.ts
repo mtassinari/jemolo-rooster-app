@@ -10,14 +10,14 @@ import { StatoRegistrazioneService } from './stato-registrazione.service';
 
 @Component({
   selector: 'jhi-stato-registrazione-update',
-  templateUrl: './stato-registrazione-update.component.html'
+  templateUrl: './stato-registrazione-update.component.html',
 })
 export class StatoRegistrazioneUpdateComponent implements OnInit {
   isSaving = false;
 
   editForm = this.fb.group({
     id: [],
-    stato: [null, [Validators.required]]
+    stato: [null, [Validators.required]],
   });
 
   constructor(
@@ -35,7 +35,7 @@ export class StatoRegistrazioneUpdateComponent implements OnInit {
   updateForm(statoRegistrazione: IStatoRegistrazione): void {
     this.editForm.patchValue({
       id: statoRegistrazione.id,
-      stato: statoRegistrazione.stato
+      stato: statoRegistrazione.stato,
     });
   }
 
@@ -57,7 +57,7 @@ export class StatoRegistrazioneUpdateComponent implements OnInit {
     return {
       ...new StatoRegistrazione(),
       id: this.editForm.get(['id'])!.value,
-      stato: this.editForm.get(['stato'])!.value
+      stato: this.editForm.get(['stato'])!.value,
     };
   }
 

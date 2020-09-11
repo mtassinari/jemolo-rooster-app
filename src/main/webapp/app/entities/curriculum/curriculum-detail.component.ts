@@ -5,7 +5,7 @@ import { ICurriculum } from 'app/shared/model/curriculum.model';
 
 @Component({
   selector: 'jhi-curriculum-detail',
-  templateUrl: './curriculum-detail.component.html'
+  templateUrl: './curriculum-detail.component.html',
 })
 export class CurriculumDetailComponent implements OnInit {
   curriculum: ICurriculum | null = null;

@@ -1,41 +1,39 @@
 {
-    "name": "CompetenzeLng",
-    "fields": [
-        {
-            "fieldName": "livello",
-            "fieldType": "Integer",
-            "fieldValidateRules": [
-                "required"
-            ]
-        }
-    ],
-    "relationships": [
-        {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "lingua",
-            "otherEntityRelationshipName": "competenzeLinguistiche",
-            "relationshipValidateRules": "required",
-            "relationshipName": "lingua",
-            "otherEntityField": "id"
-        },
-        {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "anagraficaCandidato",
-            "otherEntityRelationshipName": "competenzeLng",
-            "relationshipValidateRules": "required",
-            "relationshipName": "anagrafica",
-            "otherEntityField": "id"
-        }
-    ],
-    "changelogDate": "20200211121600",
-    "javadoc": "Entity CompetenzeLinguistiche\\n@author Marco Tassinari",
-    "entityTableName": "competenze_lng",
-    "dto": "mapstruct",
-    "pagination": "pagination",
-    "service": "serviceClass",
-    "jpaMetamodelFiltering": false,
-    "fluentMethods": true,
-    "readOnly": false,
-    "clientRootFolder": "",
-    "applications": "*"
+  "name": "CompetenzeLng",
+  "fields": [
+    {
+      "fieldName": "livello",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "lingua",
+      "otherEntityRelationshipName": "competenzeLinguistiche",
+      "relationshipValidateRules": "required",
+      "relationshipName": "lingua",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "anagraficaCandidato",
+      "otherEntityRelationshipName": "competenzeLng",
+      "relationshipValidateRules": "required",
+      "relationshipName": "anagrafica",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200211121600",
+  "javadoc": "Entity CompetenzeLinguistiche\\n@author Marco Tassinari",
+  "entityTableName": "competenze_lng",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "clientRootFolder": "",
+  "applications": "*"
 }

@@ -61,6 +61,7 @@ public class AllegatoService {
     }
 
 
+
     /**
      *  Get all the allegatoes where Curriculum is {@code null}.
      *  @return the list of entities.

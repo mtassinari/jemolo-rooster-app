@@ -1,64 +1,58 @@
 {
-    "name": "Curriculum",
-    "fields": [
-        {
-            "fieldName": "cv",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldName": "size",
-            "fieldType": "Long",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldName": "urlAllegato",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldName": "mimeType",
-            "fieldType": "String"
-        },
-        {
-            "fieldName": "note",
-            "fieldType": "String"
-        }
-    ],
-    "relationships": [
-        {
-            "relationshipType": "one-to-one",
-            "otherEntityName": "allegato",
-            "otherEntityRelationshipName": "curriculum",
-            "relationshipValidateRules": "required",
-            "relationshipName": "attach",
-            "otherEntityField": "id",
-            "ownerSide": true
-        },
-        {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "anagraficaCandidato",
-            "otherEntityRelationshipName": "curriculum",
-            "relationshipValidateRules": "required",
-            "relationshipName": "anagrafica",
-            "otherEntityField": "id"
-        }
-    ],
-    "changelogDate": "20200211121000",
-    "javadoc": "Entity Curriculum\\n@author Marco Tassinari",
-    "entityTableName": "curriculum",
-    "dto": "mapstruct",
-    "pagination": "pagination",
-    "service": "serviceImpl",
-    "jpaMetamodelFiltering": false,
-    "fluentMethods": true,
-    "readOnly": false,
-    "clientRootFolder": "",
-    "applications": "*"
+  "name": "Curriculum",
+  "fields": [
+    {
+      "fieldName": "cv",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "size",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "urlAllegato",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "mimeType",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "note",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "allegato",
+      "otherEntityRelationshipName": "curriculum",
+      "relationshipValidateRules": "required",
+      "relationshipName": "attach",
+      "otherEntityField": "id",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "anagraficaCandidato",
+      "otherEntityRelationshipName": "curriculum",
+      "relationshipValidateRules": "required",
+      "relationshipName": "anagrafica",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200211121000",
+  "javadoc": "Entity Curriculum\\n@author Marco Tassinari",
+  "entityTableName": "curriculum",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "clientRootFolder": "",
+  "applications": "*"
 }

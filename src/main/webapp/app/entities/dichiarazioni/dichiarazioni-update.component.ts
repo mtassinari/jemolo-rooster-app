@@ -10,14 +10,14 @@ import { DichiarazioniService } from './dichiarazioni.service';
 
 @Component({
   selector: 'jhi-dichiarazioni-update',
-  templateUrl: './dichiarazioni-update.component.html'
+  templateUrl: './dichiarazioni-update.component.html',
 })
 export class DichiarazioniUpdateComponent implements OnInit {
   isSaving = false;
 
   editForm = this.fb.group({
     id: [],
-    descrizione: [null, [Validators.required]]
+    descrizione: [null, [Validators.required]],
   });
 
   constructor(protected dichiarazioniService: DichiarazioniService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
@@ -31,7 +31,7 @@ export class DichiarazioniUpdateComponent implements OnInit {
   updateForm(dichiarazioni: IDichiarazioni): void {
     this.editForm.patchValue({
       id: dichiarazioni.id,
-      descrizione: dichiarazioni.descrizione
+      descrizione: dichiarazioni.descrizione,
     });
   }
 
@@ -53,7 +53,7 @@ export class DichiarazioniUpdateComponent implements OnInit {
     return {
       ...new Dichiarazioni(),
       id: this.editForm.get(['id'])!.value,
-      descrizione: this.editForm.get(['descrizione'])!.value
+      descrizione: this.editForm.get(['descrizione'])!.value,
     };
   }
 

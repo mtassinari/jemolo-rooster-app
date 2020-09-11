@@ -16,7 +16,7 @@ type SelectableEntity = ILingua | IAnagraficaCandidato;
 
 @Component({
   selector: 'jhi-competenze-lng-update',
-  templateUrl: './competenze-lng-update.component.html'
+  templateUrl: './competenze-lng-update.component.html',
 })
 export class CompetenzeLngUpdateComponent implements OnInit {
   isSaving = false;
@@ -27,7 +27,7 @@ export class CompetenzeLngUpdateComponent implements OnInit {
     id: [],
     livello: [null, [Validators.required]],
     linguaId: [null, Validators.required],
-    anagraficaId: [null, Validators.required]
+    anagraficaId: [null, Validators.required],
   });
 
   constructor(
@@ -55,7 +55,7 @@ export class CompetenzeLngUpdateComponent implements OnInit {
       id: competenzeLng.id,
       livello: competenzeLng.livello,
       linguaId: competenzeLng.linguaId,
-      anagraficaId: competenzeLng.anagraficaId
+      anagraficaId: competenzeLng.anagraficaId,
     });
   }
 
@@ -79,7 +79,7 @@ export class CompetenzeLngUpdateComponent implements OnInit {
       id: this.editForm.get(['id'])!.value,
       livello: this.editForm.get(['livello'])!.value,
       linguaId: this.editForm.get(['linguaId'])!.value,
-      anagraficaId: this.editForm.get(['anagraficaId'])!.value
+      anagraficaId: this.editForm.get(['anagraficaId'])!.value,
     };
   }
 

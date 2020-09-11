@@ -5,7 +5,7 @@ import { IDichiarazioni } from 'app/shared/model/dichiarazioni.model';
 
 @Component({
   selector: 'jhi-dichiarazioni-detail',
-  templateUrl: './dichiarazioni-detail.component.html'
+  templateUrl: './dichiarazioni-detail.component.html',
 })
 export class DichiarazioniDetailComponent implements OnInit {
   dichiarazioni: IDichiarazioni | null = null;

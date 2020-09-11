@@ -16,7 +16,7 @@ type SelectableEntity = IAnagraficaCandidato | IDichiarazioni;
 
 @Component({
   selector: 'jhi-dichiarazioni-obligatorie-update',
-  templateUrl: './dichiarazioni-obligatorie-update.component.html'
+  templateUrl: './dichiarazioni-obligatorie-update.component.html',
 })
 export class DichiarazioniObligatorieUpdateComponent implements OnInit {
   isSaving = false;
@@ -28,7 +28,7 @@ export class DichiarazioniObligatorieUpdateComponent implements OnInit {
     stato: [null, [Validators.required]],
     dichiarazione: [null, [Validators.required]],
     anagraficaId: [null, Validators.required],
-    dichiarazioniId: [null, Validators.required]
+    dichiarazioniId: [null, Validators.required],
   });
 
   constructor(
@@ -57,7 +57,7 @@ export class DichiarazioniObligatorieUpdateComponent implements OnInit {
       stato: dichiarazioniObligatorie.stato,
       dichiarazione: dichiarazioniObligatorie.dichiarazione,
       anagraficaId: dichiarazioniObligatorie.anagraficaId,
-      dichiarazioniId: dichiarazioniObligatorie.dichiarazioniId
+      dichiarazioniId: dichiarazioniObligatorie.dichiarazioniId,
     });
   }
 
@@ -82,7 +82,7 @@ export class DichiarazioniObligatorieUpdateComponent implements OnInit {
       stato: this.editForm.get(['stato'])!.value,
       dichiarazione: this.editForm.get(['dichiarazione'])!.value,
       anagraficaId: this.editForm.get(['anagraficaId'])!.value,
-      dichiarazioniId: this.editForm.get(['dichiarazioniId'])!.value
+      dichiarazioniId: this.editForm.get(['dichiarazioniId'])!.value,
     };
   }
 

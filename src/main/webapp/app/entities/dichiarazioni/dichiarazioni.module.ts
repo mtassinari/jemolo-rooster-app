@@ -11,6 +11,6 @@ import { dichiarazioniRoute } from './dichiarazioni.route';
 @NgModule({
   imports: [JemoloRoosterAppSharedModule, RouterModule.forChild(dichiarazioniRoute)],
   declarations: [DichiarazioniComponent, DichiarazioniDetailComponent, DichiarazioniUpdateComponent, DichiarazioniDeleteDialogComponent],
-  entryComponents: [DichiarazioniDeleteDialogComponent]
+  entryComponents: [DichiarazioniDeleteDialogComponent],
 })
 export class JemoloRoosterAppDichiarazioniModule {}

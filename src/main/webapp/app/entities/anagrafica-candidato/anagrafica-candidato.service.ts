@@ -54,7 +54,7 @@ export class AnagraficaCandidatoService {
       dataNascita:
         anagraficaCandidato.dataNascita && anagraficaCandidato.dataNascita.isValid()
           ? anagraficaCandidato.dataNascita.format(DATE_FORMAT)
-          : undefined
+          : undefined,
     });
     return copy;
   }

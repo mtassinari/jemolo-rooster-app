@@ -16,7 +16,7 @@ describe('Component Tests', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [JemoloRoosterAppTestModule],
-        declarations: [TitoloStudioComponent]
+        declarations: [TitoloStudioComponent],
       })
         .overrideTemplate(TitoloStudioComponent, '')
         .compileComponents();
@@ -33,7 +33,7 @@ describe('Component Tests', () => {
         of(
           new HttpResponse({
             body: [new TitoloStudio(123)],
-            headers
+            headers,
           })
         )
       );

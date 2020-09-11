@@ -37,10 +37,10 @@ public class AmbitoCompetenza implements Serializable {
     private Set<AmbitoCompetenza> sottoambitos = new HashSet<>();
 
     @ManyToOne
-    @JsonIgnoreProperties("sottoambitos")
+    @JsonIgnoreProperties(value = "sottoambitos", allowSetters = true)
     private AmbitoCompetenza ambito;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
     }
@@ -137,7 +137,7 @@ public class AmbitoCompetenza implements Serializable {
     public void setAmbito(AmbitoCompetenza ambitoCompetenza) {
         this.ambito = ambitoCompetenza;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
     public boolean equals(Object o) {
@@ -155,6 +155,7 @@ public class AmbitoCompetenza implements Serializable {
         return 31;
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "AmbitoCompetenza{" +

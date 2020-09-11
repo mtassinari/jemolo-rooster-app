@@ -13,7 +13,7 @@ describe('Service Tests', () => {
 
     beforeEach(() => {
       TestBed.configureTestingModule({
-        imports: [HttpClientTestingModule]
+        imports: [HttpClientTestingModule],
       });
       expectedResult = null;
       injector = getTestBed();
@@ -37,7 +37,7 @@ describe('Service Tests', () => {
       it('should create a TitoloStudio', () => {
         const returnedFromService = Object.assign(
           {
-            id: 0
+            id: 0,
           },
           elemDefault
         );
@@ -58,7 +58,7 @@ describe('Service Tests', () => {
             descrizione: 'BBBBBB',
             conseguimento: 'BBBBBB',
             anno: 'BBBBBB',
-            voto: 'BBBBBB'
+            voto: 'BBBBBB',
           },
           elemDefault
         );
@@ -79,7 +79,7 @@ describe('Service Tests', () => {
             descrizione: 'BBBBBB',
             conseguimento: 'BBBBBB',
             anno: 'BBBBBB',
-            voto: 'BBBBBB'
+            voto: 'BBBBBB',
           },
           elemDefault
         );

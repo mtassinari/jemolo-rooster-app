@@ -6,7 +6,7 @@ import { IAllegato } from 'app/shared/model/allegato.model';
 import { AllegatoService } from './allegato.service';
 
 @Component({
-  templateUrl: './allegato-delete-dialog.component.html'
+  templateUrl: './allegato-delete-dialog.component.html',
 })
 export class AllegatoDeleteDialogComponent {
   allegato?: IAllegato;

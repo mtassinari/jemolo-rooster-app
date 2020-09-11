@@ -6,7 +6,7 @@ import { IAllegato } from 'app/shared/model/allegato.model';
 
 @Component({
   selector: 'jhi-allegato-detail',
-  templateUrl: './allegato-detail.component.html'
+  templateUrl: './allegato-detail.component.html',
 })
 export class AllegatoDetailComponent implements OnInit {
   allegato: IAllegato | null = null;
@@ -21,7 +21,7 @@ export class AllegatoDetailComponent implements OnInit {
     return this.dataUtils.byteSize(base64String);
   }
 
-  openFile(contentType: string, base64String: string): void {
+  openFile(contentType = '', base64String: string): void {
     this.dataUtils.openFile(contentType, base64String);
   }
 

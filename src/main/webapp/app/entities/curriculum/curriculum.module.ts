@@ -11,6 +11,6 @@ import { curriculumRoute } from './curriculum.route';
 @NgModule({
   imports: [JemoloRoosterAppSharedModule, RouterModule.forChild(curriculumRoute)],
   declarations: [CurriculumComponent, CurriculumDetailComponent, CurriculumUpdateComponent, CurriculumDeleteDialogComponent],
-  entryComponents: [CurriculumDeleteDialogComponent]
+  entryComponents: [CurriculumDeleteDialogComponent],
 })
 export class JemoloRoosterAppCurriculumModule {}

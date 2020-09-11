@@ -45,10 +45,10 @@ public class Candidato implements Serializable {
     private AnagraficaCandidato anagraficaCandidato;
 
     @ManyToOne
-    @JsonIgnoreProperties("candidatoes")
+    @JsonIgnoreProperties(value = "candidatoes", allowSetters = true)
     private StatoRegistrazione statoRegistrazione;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
     }
@@ -134,7 +134,7 @@ public class Candidato implements Serializable {
     public void setStatoRegistrazione(StatoRegistrazione statoRegistrazione) {
         this.statoRegistrazione = statoRegistrazione;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
     public boolean equals(Object o) {
@@ -152,6 +152,7 @@ public class Candidato implements Serializable {
         return 31;
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "Candidato{" +

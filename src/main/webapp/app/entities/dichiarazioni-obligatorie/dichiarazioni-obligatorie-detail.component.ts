@@ -5,7 +5,7 @@ import { IDichiarazioniObligatorie } from 'app/shared/model/dichiarazioni-obliga
 
 @Component({
   selector: 'jhi-dichiarazioni-obligatorie-detail',
-  templateUrl: './dichiarazioni-obligatorie-detail.component.html'
+  templateUrl: './dichiarazioni-obligatorie-detail.component.html',
 })
 export class DichiarazioniObligatorieDetailComponent implements OnInit {
   dichiarazioniObligatorie: IDichiarazioniObligatorie | null = null;

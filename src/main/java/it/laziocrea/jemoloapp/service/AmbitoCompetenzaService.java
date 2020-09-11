@@ -59,6 +59,7 @@ public class AmbitoCompetenzaService {
             .collect(Collectors.toCollection(LinkedList::new));
     }
 
+
     /**
      * Get one ambitoCompetenza by id.
      *

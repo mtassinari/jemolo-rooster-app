@@ -3,7 +3,6 @@ package it.laziocrea.jemoloapp.service.dto;
 import io.swagger.annotations.ApiModel;
 import javax.validation.constraints.*;
 import java.io.Serializable;
-import java.util.Objects;
 import javax.persistence.Lob;
 
 /**
@@ -11,7 +10,7 @@ import javax.persistence.Lob;
  */
 @ApiModel(description = "Entity Allegato\n@author Marco Tassinari")
 public class AllegatoDTO implements Serializable {
-
+    
     private Long id;
 
     
@@ -19,7 +18,7 @@ public class AllegatoDTO implements Serializable {
     private byte[] data;
 
     private String dataContentType;
-
+    
     public Long getId() {
         return id;
     }
@@ -49,22 +48,19 @@ public class AllegatoDTO implements Serializable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof AllegatoDTO)) {
             return false;
         }
 
-        AllegatoDTO allegatoDTO = (AllegatoDTO) o;
-        if (allegatoDTO.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), allegatoDTO.getId());
+        return id != null && id.equals(((AllegatoDTO) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "AllegatoDTO{" +

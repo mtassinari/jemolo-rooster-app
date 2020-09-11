@@ -14,8 +14,8 @@ import { statoRegistrazioneRoute } from './stato-registrazione.route';
     StatoRegistrazioneComponent,
     StatoRegistrazioneDetailComponent,
     StatoRegistrazioneUpdateComponent,
-    StatoRegistrazioneDeleteDialogComponent
+    StatoRegistrazioneDeleteDialogComponent,
   ],
-  entryComponents: [StatoRegistrazioneDeleteDialogComponent]
+  entryComponents: [StatoRegistrazioneDeleteDialogComponent],
 })
 export class JemoloRoosterAppStatoRegistrazioneModule {}

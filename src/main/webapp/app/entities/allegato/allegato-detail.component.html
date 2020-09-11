@@ -11,7 +11,7 @@
                 <dt><span jhiTranslate="jemoloRoosterApp.allegato.data">Data</span></dt>
                 <dd>
                     <div *ngIf="allegato.data">
-                        <a (click)="openFile(allegato.dataContentType!, allegato.data)" jhiTranslate="entity.action.open">open</a>
+                        <a (click)="openFile(allegato.dataContentType, allegato.data)" jhiTranslate="entity.action.open">open</a>
                         {{ allegato.dataContentType }}, {{ byteSize(allegato.data) }}
                     </div>
                 </dd>

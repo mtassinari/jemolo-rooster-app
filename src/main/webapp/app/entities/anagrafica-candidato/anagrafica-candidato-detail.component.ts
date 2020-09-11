@@ -5,7 +5,7 @@ import { IAnagraficaCandidato } from 'app/shared/model/anagrafica-candidato.mode
 
 @Component({
   selector: 'jhi-anagrafica-candidato-detail',
-  templateUrl: './anagrafica-candidato-detail.component.html'
+  templateUrl: './anagrafica-candidato-detail.component.html',
 })
 export class AnagraficaCandidatoDetailComponent implements OnInit {
   anagraficaCandidato: IAnagraficaCandidato | null = null;

@@ -10,7 +10,7 @@ import { LinguaDeleteDialogComponent } from './lingua-delete-dialog.component';
 
 @Component({
   selector: 'jhi-lingua',
-  templateUrl: './lingua.component.html'
+  templateUrl: './lingua.component.html',
 })
 export class LinguaComponent implements OnInit, OnDestroy {
   linguas?: ILingua[];

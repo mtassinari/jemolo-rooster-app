@@ -11,6 +11,6 @@ import { candidatoRoute } from './candidato.route';
 @NgModule({
   imports: [JemoloRoosterAppSharedModule, RouterModule.forChild(candidatoRoute)],
   declarations: [CandidatoComponent, CandidatoDetailComponent, CandidatoUpdateComponent, CandidatoDeleteDialogComponent],
-  entryComponents: [CandidatoDeleteDialogComponent]
+  entryComponents: [CandidatoDeleteDialogComponent],
 })
 export class JemoloRoosterAppCandidatoModule {}

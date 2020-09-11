@@ -10,7 +10,7 @@ import { TitoloStudioDeleteDialogComponent } from './titolo-studio-delete-dialog
 
 @Component({
   selector: 'jhi-titolo-studio',
-  templateUrl: './titolo-studio.component.html'
+  templateUrl: './titolo-studio.component.html',
 })
 export class TitoloStudioComponent implements OnInit, OnDestroy {
   titoloStudios?: ITitoloStudio[];

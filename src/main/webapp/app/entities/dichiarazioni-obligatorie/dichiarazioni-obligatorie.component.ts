@@ -10,7 +10,7 @@ import { DichiarazioniObligatorieDeleteDialogComponent } from './dichiarazioni-o
 
 @Component({
   selector: 'jhi-dichiarazioni-obligatorie',
-  templateUrl: './dichiarazioni-obligatorie.component.html'
+  templateUrl: './dichiarazioni-obligatorie.component.html',
 })
 export class DichiarazioniObligatorieComponent implements OnInit, OnDestroy {
   dichiarazioniObligatories?: IDichiarazioniObligatorie[];

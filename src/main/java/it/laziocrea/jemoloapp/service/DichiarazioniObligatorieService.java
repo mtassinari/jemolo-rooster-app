@@ -25,6 +25,7 @@ public interface DichiarazioniObligatorieService {
      */
     List<DichiarazioniObligatorieDTO> findAll();
 
+
     /**
      * Get the "id" dichiarazioniObligatorie.
      *

@@ -1,34 +1,32 @@
 {
-    "name": "Allegato",
-    "fields": [
-        {
-            "fieldName": "data",
-            "fieldType": "byte[]",
-            "fieldTypeBlobContent": "any",
-            "fieldValidateRules": [
-                "required"
-            ]
-        }
-    ],
-    "relationships": [
-        {
-            "relationshipType": "one-to-one",
-            "otherEntityName": "curriculum",
-            "otherEntityRelationshipName": "attach",
-            "relationshipValidateRules": "required",
-            "relationshipName": "curriculum",
-            "ownerSide": false
-        }
-    ],
-    "changelogDate": "20200211121100",
-    "javadoc": "Entity Allegato\\n@author Marco Tassinari",
-    "entityTableName": "allegato",
-    "dto": "mapstruct",
-    "pagination": "no",
-    "service": "serviceClass",
-    "jpaMetamodelFiltering": false,
-    "fluentMethods": true,
-    "readOnly": false,
-    "clientRootFolder": "",
-    "applications": "*"
+  "name": "Allegato",
+  "fields": [
+    {
+      "fieldName": "data",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "curriculum",
+      "otherEntityRelationshipName": "attach",
+      "relationshipValidateRules": "required",
+      "relationshipName": "curriculum",
+      "ownerSide": false
+    }
+  ],
+  "changelogDate": "20200211121100",
+  "javadoc": "Entity Allegato\\n@author Marco Tassinari",
+  "entityTableName": "allegato",
+  "dto": "mapstruct",
+  "pagination": "no",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "clientRootFolder": "",
+  "applications": "*"
 }

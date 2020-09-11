@@ -11,5 +11,4 @@ import org.springframework.stereotype.Repository;
 @SuppressWarnings("unused")
 @Repository
 public interface LinguaRepository extends JpaRepository<Lingua, Long> {
-
 }

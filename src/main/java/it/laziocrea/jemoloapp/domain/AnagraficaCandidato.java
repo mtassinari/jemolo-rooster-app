@@ -107,7 +107,7 @@ public class AnagraficaCandidato implements Serializable {
     @OneToMany(mappedBy = "anagrafica")
     private Set<DichiarazioniObligatorie> dichiarazionis = new HashSet<>();
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
     }
@@ -461,7 +461,7 @@ public class AnagraficaCandidato implements Serializable {
     public void setDichiarazionis(Set<DichiarazioniObligatorie> dichiarazioniObligatories) {
         this.dichiarazionis = dichiarazioniObligatories;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
     public boolean equals(Object o) {
@@ -479,6 +479,7 @@ public class AnagraficaCandidato implements Serializable {
         return 31;
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "AnagraficaCandidato{" +

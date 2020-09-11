@@ -4,6 +4,7 @@ import { Resolve, ActivatedRouteSnapshot, Routes, Router } from '@angular/router
 import { Observable, of, EMPTY } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
 
+import { Authority } from 'app/shared/constants/authority.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
 import { IStatoRegistrazione, StatoRegistrazione } from 'app/shared/model/stato-registrazione.model';
 import { StatoRegistrazioneService } from './stato-registrazione.service';
@@ -38,45 +39,45 @@ export const statoRegistrazioneRoute: Routes = [
     path: '',
     component: StatoRegistrazioneComponent,
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'jemoloRoosterApp.statoRegistrazione.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'jemoloRoosterApp.statoRegistrazione.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
     component: StatoRegistrazioneDetailComponent,
     resolve: {
-      statoRegistrazione: StatoRegistrazioneResolve
+      statoRegistrazione: StatoRegistrazioneResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'jemoloRoosterApp.statoRegistrazione.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'jemoloRoosterApp.statoRegistrazione.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
     component: StatoRegistrazioneUpdateComponent,
     resolve: {
-      statoRegistrazione: StatoRegistrazioneResolve
+      statoRegistrazione: StatoRegistrazioneResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'jemoloRoosterApp.statoRegistrazione.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'jemoloRoosterApp.statoRegistrazione.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
     component: StatoRegistrazioneUpdateComponent,
     resolve: {
-      statoRegistrazione: StatoRegistrazioneResolve
+      statoRegistrazione: StatoRegistrazioneResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'jemoloRoosterApp.statoRegistrazione.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'jemoloRoosterApp.statoRegistrazione.home.title',
     },
-    canActivate: [UserRouteAccessService]
-  }
+    canActivate: [UserRouteAccessService],
+  },
 ];

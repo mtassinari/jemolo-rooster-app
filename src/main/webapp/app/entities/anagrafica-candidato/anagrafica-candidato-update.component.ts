@@ -13,7 +13,7 @@ import { CandidatoService } from 'app/entities/candidato/candidato.service';
 
 @Component({
   selector: 'jhi-anagrafica-candidato-update',
-  templateUrl: './anagrafica-candidato-update.component.html'
+  templateUrl: './anagrafica-candidato-update.component.html',
 })
 export class AnagraficaCandidatoUpdateComponent implements OnInit {
   isSaving = false;
@@ -30,8 +30,8 @@ export class AnagraficaCandidatoUpdateComponent implements OnInit {
       null,
       [
         Validators.required,
-        Validators.pattern('^[a-zA-Z]{6}[0-9]{2}[abcdehlmprstABCDEHLMPRST]{1}[0-9]{2}([a-zA-Z]{1}[0-9]{3})[a-zA-Z]{1}$')
-      ]
+        Validators.pattern('^[a-zA-Z]{6}[0-9]{2}[abcdehlmprstABCDEHLMPRST]{1}[0-9]{2}([a-zA-Z]{1}[0-9]{3})[a-zA-Z]{1}$'),
+      ],
     ],
     professione: [null, [Validators.required]],
     partitaIva: [null, [Validators.pattern('^[0-9]{11}$')]],
@@ -44,7 +44,7 @@ export class AnagraficaCandidatoUpdateComponent implements OnInit {
     comuneResidenza: [null, [Validators.required]],
     provinciaResidenza: [null, [Validators.required]],
     note: [],
-    candidatoId: [null, Validators.required]
+    candidatoId: [null, Validators.required],
   });
 
   constructor(
@@ -101,7 +101,7 @@ export class AnagraficaCandidatoUpdateComponent implements OnInit {
       comuneResidenza: anagraficaCandidato.comuneResidenza,
       provinciaResidenza: anagraficaCandidato.provinciaResidenza,
       note: anagraficaCandidato.note,
-      candidatoId: anagraficaCandidato.candidatoId
+      candidatoId: anagraficaCandidato.candidatoId,
     });
   }
 
@@ -139,7 +139,7 @@ export class AnagraficaCandidatoUpdateComponent implements OnInit {
       comuneResidenza: this.editForm.get(['comuneResidenza'])!.value,
       provinciaResidenza: this.editForm.get(['provinciaResidenza'])!.value,
       note: this.editForm.get(['note'])!.value,
-      candidatoId: this.editForm.get(['candidatoId'])!.value
+      candidatoId: this.editForm.get(['candidatoId'])!.value,
     };
   }
 

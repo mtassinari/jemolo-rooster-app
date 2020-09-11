@@ -28,6 +28,7 @@ public interface AnagraficaCandidatoService {
      */
     Page<AnagraficaCandidatoDTO> findAll(Pageable pageable);
 
+
     /**
      * Get the "id" anagraficaCandidato.
      *

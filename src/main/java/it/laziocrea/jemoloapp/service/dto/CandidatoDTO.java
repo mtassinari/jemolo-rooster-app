@@ -3,14 +3,13 @@ package it.laziocrea.jemoloapp.service.dto;
 import io.swagger.annotations.ApiModel;
 import javax.validation.constraints.*;
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * A DTO for the {@link it.laziocrea.jemoloapp.domain.Candidato} entity.
  */
 @ApiModel(description = "Entity Candidato\n@author Marco Tassinari")
 public class CandidatoDTO implements Serializable {
-
+    
     private Long id;
 
     @NotNull
@@ -29,7 +28,7 @@ public class CandidatoDTO implements Serializable {
 
 
     private Long statoRegistrazioneId;
-
+    
     public Long getId() {
         return id;
     }
@@ -83,22 +82,19 @@ public class CandidatoDTO implements Serializable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof CandidatoDTO)) {
             return false;
         }
 
-        CandidatoDTO candidatoDTO = (CandidatoDTO) o;
-        if (candidatoDTO.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), candidatoDTO.getId());
+        return id != null && id.equals(((CandidatoDTO) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "CandidatoDTO{" +

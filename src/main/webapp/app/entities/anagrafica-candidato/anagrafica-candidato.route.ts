@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { Resolve, ActivatedRouteSnapshot, Routes, Router } from '@angular/router';
-import { JhiResolvePagingParams } from 'ng-jhipster';
 import { Observable, of, EMPTY } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
 
+import { Authority } from 'app/shared/constants/authority.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
 import { IAnagraficaCandidato, AnagraficaCandidato } from 'app/shared/model/anagrafica-candidato.model';
 import { AnagraficaCandidatoService } from './anagrafica-candidato.service';
@@ -38,50 +38,47 @@ export const anagraficaCandidatoRoute: Routes = [
   {
     path: '',
     component: AnagraficaCandidatoComponent,
-    resolve: {
-      pagingParams: JhiResolvePagingParams
-    },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: [Authority.USER],
       defaultSort: 'id,asc',
-      pageTitle: 'jemoloRoosterApp.anagraficaCandidato.home.title'
+      pageTitle: 'jemoloRoosterApp.anagraficaCandidato.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
     component: AnagraficaCandidatoDetailComponent,
     resolve: {
-      anagraficaCandidato: AnagraficaCandidatoResolve
+      anagraficaCandidato: AnagraficaCandidatoResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'jemoloRoosterApp.anagraficaCandidato.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'jemoloRoosterApp.anagraficaCandidato.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
     component: AnagraficaCandidatoUpdateComponent,
     resolve: {
-      anagraficaCandidato: AnagraficaCandidatoResolve
+      anagraficaCandidato: AnagraficaCandidatoResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'jemoloRoosterApp.anagraficaCandidato.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'jemoloRoosterApp.anagraficaCandidato.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
     component: AnagraficaCandidatoUpdateComponent,
     resolve: {
-      anagraficaCandidato: AnagraficaCandidatoResolve
+      anagraficaCandidato: AnagraficaCandidatoResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'jemoloRoosterApp.anagraficaCandidato.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'jemoloRoosterApp.anagraficaCandidato.home.title',
     },
-    canActivate: [UserRouteAccessService]
-  }
+    canActivate: [UserRouteAccessService],
+  },
 ];

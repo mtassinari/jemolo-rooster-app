@@ -4,6 +4,7 @@ import { Resolve, ActivatedRouteSnapshot, Routes, Router } from '@angular/router
 import { Observable, of, EMPTY } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
 
+import { Authority } from 'app/shared/constants/authority.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
 import { ITitoloStudio, TitoloStudio } from 'app/shared/model/titolo-studio.model';
 import { TitoloStudioService } from './titolo-studio.service';
@@ -38,45 +39,45 @@ export const titoloStudioRoute: Routes = [
     path: '',
     component: TitoloStudioComponent,
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'jemoloRoosterApp.titoloStudio.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'jemoloRoosterApp.titoloStudio.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
     component: TitoloStudioDetailComponent,
     resolve: {
-      titoloStudio: TitoloStudioResolve
+      titoloStudio: TitoloStudioResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'jemoloRoosterApp.titoloStudio.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'jemoloRoosterApp.titoloStudio.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
     component: TitoloStudioUpdateComponent,
     resolve: {
-      titoloStudio: TitoloStudioResolve
+      titoloStudio: TitoloStudioResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'jemoloRoosterApp.titoloStudio.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'jemoloRoosterApp.titoloStudio.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
     component: TitoloStudioUpdateComponent,
     resolve: {
-      titoloStudio: TitoloStudioResolve
+      titoloStudio: TitoloStudioResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'jemoloRoosterApp.titoloStudio.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'jemoloRoosterApp.titoloStudio.home.title',
     },
-    canActivate: [UserRouteAccessService]
-  }
+    canActivate: [UserRouteAccessService],
+  },
 ];

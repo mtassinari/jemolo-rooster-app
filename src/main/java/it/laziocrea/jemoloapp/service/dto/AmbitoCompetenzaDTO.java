@@ -3,14 +3,13 @@ package it.laziocrea.jemoloapp.service.dto;
 import io.swagger.annotations.ApiModel;
 import javax.validation.constraints.*;
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * A DTO for the {@link it.laziocrea.jemoloapp.domain.AmbitoCompetenza} entity.
  */
 @ApiModel(description = "Entity AreaCompetenza\n@author Marco Tassinari")
 public class AmbitoCompetenzaDTO implements Serializable {
-
+    
     private Long id;
 
     @NotNull
@@ -20,7 +19,7 @@ public class AmbitoCompetenzaDTO implements Serializable {
 
 
     private Long ambitoId;
-
+    
     public Long getId() {
         return id;
     }
@@ -58,22 +57,19 @@ public class AmbitoCompetenzaDTO implements Serializable {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof AmbitoCompetenzaDTO)) {
             return false;
         }
 
-        AmbitoCompetenzaDTO ambitoCompetenzaDTO = (AmbitoCompetenzaDTO) o;
-        if (ambitoCompetenzaDTO.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), ambitoCompetenzaDTO.getId());
+        return id != null && id.equals(((AmbitoCompetenzaDTO) o).id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return 31;
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "AmbitoCompetenzaDTO{" +

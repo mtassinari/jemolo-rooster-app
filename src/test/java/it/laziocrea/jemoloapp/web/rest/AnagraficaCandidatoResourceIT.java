@@ -12,31 +12,26 @@ import it.laziocrea.jemoloapp.repository.AnagraficaCandidatoRepository;
 import it.laziocrea.jemoloapp.service.AnagraficaCandidatoService;
 import it.laziocrea.jemoloapp.service.dto.AnagraficaCandidatoDTO;
 import it.laziocrea.jemoloapp.service.mapper.AnagraficaCandidatoMapper;
-import it.laziocrea.jemoloapp.web.rest.errors.ExceptionTranslator;
 import it.laziocrea.jemoloapp.service.dto.AnagraficaCandidatoCriteria;
 import it.laziocrea.jemoloapp.service.AnagraficaCandidatoQueryService;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.Validator;
-
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.List;
 
-import static it.laziocrea.jemoloapp.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -44,6 +39,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Integration tests for the {@link AnagraficaCandidatoResource} REST controller.
  */
 @SpringBootTest(classes = JemoloRoosterApp.class)
+@AutoConfigureMockMvc
+@WithMockUser
 public class AnagraficaCandidatoResourceIT {
 
     private static final String DEFAULT_COGNOME = "AAAAAAAAAA";
@@ -108,35 +105,12 @@ public class AnagraficaCandidatoResourceIT {
     private AnagraficaCandidatoQueryService anagraficaCandidatoQueryService;
 
     @Autowired
-    private MappingJackson2HttpMessageConverter jacksonMessageConverter;
-
-    @Autowired
-    private PageableHandlerMethodArgumentResolver pageableArgumentResolver;
-
-    @Autowired
-    private ExceptionTranslator exceptionTranslator;
-
-    @Autowired
     private EntityManager em;
 
     @Autowired
-    private Validator validator;
-
     private MockMvc restAnagraficaCandidatoMockMvc;
 
     private AnagraficaCandidato anagraficaCandidato;
-
-    @BeforeEach
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
-        final AnagraficaCandidatoResource anagraficaCandidatoResource = new AnagraficaCandidatoResource(anagraficaCandidatoService, anagraficaCandidatoQueryService);
-        this.restAnagraficaCandidatoMockMvc = MockMvcBuilders.standaloneSetup(anagraficaCandidatoResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
-            .setControllerAdvice(exceptionTranslator)
-            .setConversionService(createFormattingConversionService())
-            .setMessageConverters(jacksonMessageConverter)
-            .setValidator(validator).build();
-    }
 
     /**
      * Create an entity for this test.
@@ -220,11 +194,10 @@ public class AnagraficaCandidatoResourceIT {
     @Transactional
     public void createAnagraficaCandidato() throws Exception {
         int databaseSizeBeforeCreate = anagraficaCandidatoRepository.findAll().size();
-
         // Create the AnagraficaCandidato
         AnagraficaCandidatoDTO anagraficaCandidatoDTO = anagraficaCandidatoMapper.toDto(anagraficaCandidato);
-        restAnagraficaCandidatoMockMvc.perform(post("/api/anagrafica-candidatoes")
-            .contentType(TestUtil.APPLICATION_JSON)
+        restAnagraficaCandidatoMockMvc.perform(post("/api/anagrafica-candidatoes").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(anagraficaCandidatoDTO)))
             .andExpect(status().isCreated());
 
@@ -260,8 +233,8 @@ public class AnagraficaCandidatoResourceIT {
         AnagraficaCandidatoDTO anagraficaCandidatoDTO = anagraficaCandidatoMapper.toDto(anagraficaCandidato);
 
         // An entity with an existing ID cannot be created, so this API call must fail
-        restAnagraficaCandidatoMockMvc.perform(post("/api/anagrafica-candidatoes")
-            .contentType(TestUtil.APPLICATION_JSON)
+        restAnagraficaCandidatoMockMvc.perform(post("/api/anagrafica-candidatoes").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(anagraficaCandidatoDTO)))
             .andExpect(status().isBadRequest());
 
@@ -281,8 +254,9 @@ public class AnagraficaCandidatoResourceIT {
         // Create the AnagraficaCandidato, which fails.
         AnagraficaCandidatoDTO anagraficaCandidatoDTO = anagraficaCandidatoMapper.toDto(anagraficaCandidato);
 
-        restAnagraficaCandidatoMockMvc.perform(post("/api/anagrafica-candidatoes")
-            .contentType(TestUtil.APPLICATION_JSON)
+
+        restAnagraficaCandidatoMockMvc.perform(post("/api/anagrafica-candidatoes").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(anagraficaCandidatoDTO)))
             .andExpect(status().isBadRequest());
 
@@ -300,8 +274,9 @@ public class AnagraficaCandidatoResourceIT {
         // Create the AnagraficaCandidato, which fails.
         AnagraficaCandidatoDTO anagraficaCandidatoDTO = anagraficaCandidatoMapper.toDto(anagraficaCandidato);
 
-        restAnagraficaCandidatoMockMvc.perform(post("/api/anagrafica-candidatoes")
-            .contentType(TestUtil.APPLICATION_JSON)
+
+        restAnagraficaCandidatoMockMvc.perform(post("/api/anagrafica-candidatoes").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(anagraficaCandidatoDTO)))
             .andExpect(status().isBadRequest());
 
@@ -319,8 +294,9 @@ public class AnagraficaCandidatoResourceIT {
         // Create the AnagraficaCandidato, which fails.
         AnagraficaCandidatoDTO anagraficaCandidatoDTO = anagraficaCandidatoMapper.toDto(anagraficaCandidato);
 
-        restAnagraficaCandidatoMockMvc.perform(post("/api/anagrafica-candidatoes")
-            .contentType(TestUtil.APPLICATION_JSON)
+
+        restAnagraficaCandidatoMockMvc.perform(post("/api/anagrafica-candidatoes").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(anagraficaCandidatoDTO)))
             .andExpect(status().isBadRequest());
 
@@ -338,8 +314,9 @@ public class AnagraficaCandidatoResourceIT {
         // Create the AnagraficaCandidato, which fails.
         AnagraficaCandidatoDTO anagraficaCandidatoDTO = anagraficaCandidatoMapper.toDto(anagraficaCandidato);
 
-        restAnagraficaCandidatoMockMvc.perform(post("/api/anagrafica-candidatoes")
-            .contentType(TestUtil.APPLICATION_JSON)
+
+        restAnagraficaCandidatoMockMvc.perform(post("/api/anagrafica-candidatoes").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(anagraficaCandidatoDTO)))
             .andExpect(status().isBadRequest());
 
@@ -357,8 +334,9 @@ public class AnagraficaCandidatoResourceIT {
         // Create the AnagraficaCandidato, which fails.
         AnagraficaCandidatoDTO anagraficaCandidatoDTO = anagraficaCandidatoMapper.toDto(anagraficaCandidato);
 
-        restAnagraficaCandidatoMockMvc.perform(post("/api/anagrafica-candidatoes")
-            .contentType(TestUtil.APPLICATION_JSON)
+
+        restAnagraficaCandidatoMockMvc.perform(post("/api/anagrafica-candidatoes").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(anagraficaCandidatoDTO)))
             .andExpect(status().isBadRequest());
 
@@ -376,8 +354,9 @@ public class AnagraficaCandidatoResourceIT {
         // Create the AnagraficaCandidato, which fails.
         AnagraficaCandidatoDTO anagraficaCandidatoDTO = anagraficaCandidatoMapper.toDto(anagraficaCandidato);
 
-        restAnagraficaCandidatoMockMvc.perform(post("/api/anagrafica-candidatoes")
-            .contentType(TestUtil.APPLICATION_JSON)
+
+        restAnagraficaCandidatoMockMvc.perform(post("/api/anagrafica-candidatoes").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(anagraficaCandidatoDTO)))
             .andExpect(status().isBadRequest());
 
@@ -395,8 +374,9 @@ public class AnagraficaCandidatoResourceIT {
         // Create the AnagraficaCandidato, which fails.
         AnagraficaCandidatoDTO anagraficaCandidatoDTO = anagraficaCandidatoMapper.toDto(anagraficaCandidato);
 
-        restAnagraficaCandidatoMockMvc.perform(post("/api/anagrafica-candidatoes")
-            .contentType(TestUtil.APPLICATION_JSON)
+
+        restAnagraficaCandidatoMockMvc.perform(post("/api/anagrafica-candidatoes").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(anagraficaCandidatoDTO)))
             .andExpect(status().isBadRequest());
 
@@ -414,8 +394,9 @@ public class AnagraficaCandidatoResourceIT {
         // Create the AnagraficaCandidato, which fails.
         AnagraficaCandidatoDTO anagraficaCandidatoDTO = anagraficaCandidatoMapper.toDto(anagraficaCandidato);
 
-        restAnagraficaCandidatoMockMvc.perform(post("/api/anagrafica-candidatoes")
-            .contentType(TestUtil.APPLICATION_JSON)
+
+        restAnagraficaCandidatoMockMvc.perform(post("/api/anagrafica-candidatoes").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(anagraficaCandidatoDTO)))
             .andExpect(status().isBadRequest());
 
@@ -433,8 +414,9 @@ public class AnagraficaCandidatoResourceIT {
         // Create the AnagraficaCandidato, which fails.
         AnagraficaCandidatoDTO anagraficaCandidatoDTO = anagraficaCandidatoMapper.toDto(anagraficaCandidato);
 
-        restAnagraficaCandidatoMockMvc.perform(post("/api/anagrafica-candidatoes")
-            .contentType(TestUtil.APPLICATION_JSON)
+
+        restAnagraficaCandidatoMockMvc.perform(post("/api/anagrafica-candidatoes").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(anagraficaCandidatoDTO)))
             .andExpect(status().isBadRequest());
 
@@ -452,8 +434,9 @@ public class AnagraficaCandidatoResourceIT {
         // Create the AnagraficaCandidato, which fails.
         AnagraficaCandidatoDTO anagraficaCandidatoDTO = anagraficaCandidatoMapper.toDto(anagraficaCandidato);
 
-        restAnagraficaCandidatoMockMvc.perform(post("/api/anagrafica-candidatoes")
-            .contentType(TestUtil.APPLICATION_JSON)
+
+        restAnagraficaCandidatoMockMvc.perform(post("/api/anagrafica-candidatoes").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(anagraficaCandidatoDTO)))
             .andExpect(status().isBadRequest());
 
@@ -471,8 +454,9 @@ public class AnagraficaCandidatoResourceIT {
         // Create the AnagraficaCandidato, which fails.
         AnagraficaCandidatoDTO anagraficaCandidatoDTO = anagraficaCandidatoMapper.toDto(anagraficaCandidato);
 
-        restAnagraficaCandidatoMockMvc.perform(post("/api/anagrafica-candidatoes")
-            .contentType(TestUtil.APPLICATION_JSON)
+
+        restAnagraficaCandidatoMockMvc.perform(post("/api/anagrafica-candidatoes").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(anagraficaCandidatoDTO)))
             .andExpect(status().isBadRequest());
 
@@ -490,8 +474,9 @@ public class AnagraficaCandidatoResourceIT {
         // Create the AnagraficaCandidato, which fails.
         AnagraficaCandidatoDTO anagraficaCandidatoDTO = anagraficaCandidatoMapper.toDto(anagraficaCandidato);
 
-        restAnagraficaCandidatoMockMvc.perform(post("/api/anagrafica-candidatoes")
-            .contentType(TestUtil.APPLICATION_JSON)
+
+        restAnagraficaCandidatoMockMvc.perform(post("/api/anagrafica-candidatoes").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(anagraficaCandidatoDTO)))
             .andExpect(status().isBadRequest());
 
@@ -2016,7 +2001,6 @@ public class AnagraficaCandidatoResourceIT {
             .andExpect(content().string("0"));
     }
 
-
     @Test
     @Transactional
     public void getNonExistingAnagraficaCandidato() throws Exception {
@@ -2056,8 +2040,8 @@ public class AnagraficaCandidatoResourceIT {
             .note(UPDATED_NOTE);
         AnagraficaCandidatoDTO anagraficaCandidatoDTO = anagraficaCandidatoMapper.toDto(updatedAnagraficaCandidato);
 
-        restAnagraficaCandidatoMockMvc.perform(put("/api/anagrafica-candidatoes")
-            .contentType(TestUtil.APPLICATION_JSON)
+        restAnagraficaCandidatoMockMvc.perform(put("/api/anagrafica-candidatoes").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(anagraficaCandidatoDTO)))
             .andExpect(status().isOk());
 
@@ -2092,8 +2076,8 @@ public class AnagraficaCandidatoResourceIT {
         AnagraficaCandidatoDTO anagraficaCandidatoDTO = anagraficaCandidatoMapper.toDto(anagraficaCandidato);
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
-        restAnagraficaCandidatoMockMvc.perform(put("/api/anagrafica-candidatoes")
-            .contentType(TestUtil.APPLICATION_JSON)
+        restAnagraficaCandidatoMockMvc.perform(put("/api/anagrafica-candidatoes").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(anagraficaCandidatoDTO)))
             .andExpect(status().isBadRequest());
 
@@ -2111,8 +2095,8 @@ public class AnagraficaCandidatoResourceIT {
         int databaseSizeBeforeDelete = anagraficaCandidatoRepository.findAll().size();
 
         // Delete the anagraficaCandidato
-        restAnagraficaCandidatoMockMvc.perform(delete("/api/anagrafica-candidatoes/{id}", anagraficaCandidato.getId())
-            .accept(TestUtil.APPLICATION_JSON))
+        restAnagraficaCandidatoMockMvc.perform(delete("/api/anagrafica-candidatoes/{id}", anagraficaCandidato.getId()).with(csrf())
+            .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isNoContent());
 
         // Validate the database contains one less item

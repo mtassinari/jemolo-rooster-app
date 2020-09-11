@@ -58,6 +58,7 @@ public class CompetenzeLngService {
             .map(competenzeLngMapper::toDto);
     }
 
+
     /**
      * Get one competenzeLng by id.
      *

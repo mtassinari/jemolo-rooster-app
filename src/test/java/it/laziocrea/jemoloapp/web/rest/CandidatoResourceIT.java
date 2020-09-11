@@ -8,29 +8,24 @@ import it.laziocrea.jemoloapp.repository.CandidatoRepository;
 import it.laziocrea.jemoloapp.service.CandidatoService;
 import it.laziocrea.jemoloapp.service.dto.CandidatoDTO;
 import it.laziocrea.jemoloapp.service.mapper.CandidatoMapper;
-import it.laziocrea.jemoloapp.web.rest.errors.ExceptionTranslator;
 import it.laziocrea.jemoloapp.service.dto.CandidatoCriteria;
 import it.laziocrea.jemoloapp.service.CandidatoQueryService;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.Validator;
-
 import javax.persistence.EntityManager;
 import java.util.List;
 
-import static it.laziocrea.jemoloapp.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -38,6 +33,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Integration tests for the {@link CandidatoResource} REST controller.
  */
 @SpringBootTest(classes = JemoloRoosterApp.class)
+@AutoConfigureMockMvc
+@WithMockUser
 public class CandidatoResourceIT {
 
     private static final String DEFAULT_NOME = "AAAAAAAAAA";
@@ -65,35 +62,12 @@ public class CandidatoResourceIT {
     private CandidatoQueryService candidatoQueryService;
 
     @Autowired
-    private MappingJackson2HttpMessageConverter jacksonMessageConverter;
-
-    @Autowired
-    private PageableHandlerMethodArgumentResolver pageableArgumentResolver;
-
-    @Autowired
-    private ExceptionTranslator exceptionTranslator;
-
-    @Autowired
     private EntityManager em;
 
     @Autowired
-    private Validator validator;
-
     private MockMvc restCandidatoMockMvc;
 
     private Candidato candidato;
-
-    @BeforeEach
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
-        final CandidatoResource candidatoResource = new CandidatoResource(candidatoService, candidatoQueryService);
-        this.restCandidatoMockMvc = MockMvcBuilders.standaloneSetup(candidatoResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
-            .setControllerAdvice(exceptionTranslator)
-            .setConversionService(createFormattingConversionService())
-            .setMessageConverters(jacksonMessageConverter)
-            .setValidator(validator).build();
-    }
 
     /**
      * Create an entity for this test.
@@ -133,11 +107,10 @@ public class CandidatoResourceIT {
     @Transactional
     public void createCandidato() throws Exception {
         int databaseSizeBeforeCreate = candidatoRepository.findAll().size();
-
         // Create the Candidato
         CandidatoDTO candidatoDTO = candidatoMapper.toDto(candidato);
-        restCandidatoMockMvc.perform(post("/api/candidatoes")
-            .contentType(TestUtil.APPLICATION_JSON)
+        restCandidatoMockMvc.perform(post("/api/candidatoes").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(candidatoDTO)))
             .andExpect(status().isCreated());
 
@@ -161,8 +134,8 @@ public class CandidatoResourceIT {
         CandidatoDTO candidatoDTO = candidatoMapper.toDto(candidato);
 
         // An entity with an existing ID cannot be created, so this API call must fail
-        restCandidatoMockMvc.perform(post("/api/candidatoes")
-            .contentType(TestUtil.APPLICATION_JSON)
+        restCandidatoMockMvc.perform(post("/api/candidatoes").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(candidatoDTO)))
             .andExpect(status().isBadRequest());
 
@@ -182,8 +155,9 @@ public class CandidatoResourceIT {
         // Create the Candidato, which fails.
         CandidatoDTO candidatoDTO = candidatoMapper.toDto(candidato);
 
-        restCandidatoMockMvc.perform(post("/api/candidatoes")
-            .contentType(TestUtil.APPLICATION_JSON)
+
+        restCandidatoMockMvc.perform(post("/api/candidatoes").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(candidatoDTO)))
             .andExpect(status().isBadRequest());
 
@@ -201,8 +175,9 @@ public class CandidatoResourceIT {
         // Create the Candidato, which fails.
         CandidatoDTO candidatoDTO = candidatoMapper.toDto(candidato);
 
-        restCandidatoMockMvc.perform(post("/api/candidatoes")
-            .contentType(TestUtil.APPLICATION_JSON)
+
+        restCandidatoMockMvc.perform(post("/api/candidatoes").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(candidatoDTO)))
             .andExpect(status().isBadRequest());
 
@@ -220,8 +195,9 @@ public class CandidatoResourceIT {
         // Create the Candidato, which fails.
         CandidatoDTO candidatoDTO = candidatoMapper.toDto(candidato);
 
-        restCandidatoMockMvc.perform(post("/api/candidatoes")
-            .contentType(TestUtil.APPLICATION_JSON)
+
+        restCandidatoMockMvc.perform(post("/api/candidatoes").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(candidatoDTO)))
             .andExpect(status().isBadRequest());
 
@@ -239,8 +215,9 @@ public class CandidatoResourceIT {
         // Create the Candidato, which fails.
         CandidatoDTO candidatoDTO = candidatoMapper.toDto(candidato);
 
-        restCandidatoMockMvc.perform(post("/api/candidatoes")
-            .contentType(TestUtil.APPLICATION_JSON)
+
+        restCandidatoMockMvc.perform(post("/api/candidatoes").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(candidatoDTO)))
             .andExpect(status().isBadRequest());
 
@@ -691,7 +668,6 @@ public class CandidatoResourceIT {
             .andExpect(content().string("0"));
     }
 
-
     @Test
     @Transactional
     public void getNonExistingCandidato() throws Exception {
@@ -719,8 +695,8 @@ public class CandidatoResourceIT {
             .eMail(UPDATED_E_MAIL);
         CandidatoDTO candidatoDTO = candidatoMapper.toDto(updatedCandidato);
 
-        restCandidatoMockMvc.perform(put("/api/candidatoes")
-            .contentType(TestUtil.APPLICATION_JSON)
+        restCandidatoMockMvc.perform(put("/api/candidatoes").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(candidatoDTO)))
             .andExpect(status().isOk());
 
@@ -743,8 +719,8 @@ public class CandidatoResourceIT {
         CandidatoDTO candidatoDTO = candidatoMapper.toDto(candidato);
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
-        restCandidatoMockMvc.perform(put("/api/candidatoes")
-            .contentType(TestUtil.APPLICATION_JSON)
+        restCandidatoMockMvc.perform(put("/api/candidatoes").with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(candidatoDTO)))
             .andExpect(status().isBadRequest());
 
@@ -762,8 +738,8 @@ public class CandidatoResourceIT {
         int databaseSizeBeforeDelete = candidatoRepository.findAll().size();
 
         // Delete the candidato
-        restCandidatoMockMvc.perform(delete("/api/candidatoes/{id}", candidato.getId())
-            .accept(TestUtil.APPLICATION_JSON))
+        restCandidatoMockMvc.perform(delete("/api/candidatoes/{id}", candidato.getId()).with(csrf())
+            .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isNoContent());
 
         // Validate the database contains one less item
